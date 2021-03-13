@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryblue"
+    tools:context=".cookSelection.frame21">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/back21"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="34dp"
+        app:cardBackgroundColor="@color/secondaryblue"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="31dp"
+        android:fontFamily="@font/nb"
+        android:text="SKIP"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/back21"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/nb"
+        android:text="Its your turn, make a move (be quick)"
+        android:textColor="@color/black"
+        android:textSize="32sp" />
+
+    <com.sinaseyfi.advancedcardview.AdvancedCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/here"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="14dp"
+        app:background_Color="@color/secondaryblue"
+        app:cornerRadius_TopLeft="60dp"
+        app:cornerRadius_TopRight="60dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"
+                    android:visibility="invisible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cookrecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginEnd="17dp"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.sinaseyfi.advancedcardview.AdvancedCardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/changepref"
+        android:layout_width="222dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/nb"
+            android:text="Change Preferences"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

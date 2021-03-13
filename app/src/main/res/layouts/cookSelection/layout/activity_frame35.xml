@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryblue"
+    tools:context=".cookSelection.Frame35">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nb"
+        android:text="Help?"
+        android:textColor="#979797"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/yo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="17dp"
+        android:fontFamily="@font/nb"
+        android:text="Yo! We have generated this for your safety."
+        android:textColor="@color/black"
+        android:textSize="32sp" />
+
+    <com.sinaseyfi.advancedcardview.AdvancedCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/yo"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        app:background_Color="@color/secondaryblue"
+        app:cornerRadius_TopLeft="60dp"
+        app:cornerRadius_TopRight="60dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/nb"
+                    android:text="Details"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/trialdetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/details"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="25dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="0dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:id="@+id/cookdetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="18dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/photocard"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                app:cardCornerRadius="22dp"
+                                app:cardElevation="0dp">
+
+                                <ImageView
+                                    android:id="@+id/photo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    tools:src="@drawable/ic_launcher_background" />
+
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:id="@+id/code"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nl"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    tools:text="Super-Code" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nb"
+                                    android:textColor="#FFC542"
+                                    android:textSize="28sp"
+                                    tools:text="2423" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="13dp"
+                                android:layout_toStartOf="@id/code"
+                                android:layout_toEndOf="@id/photocard"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nl"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    tools:text="Superman" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:fontFamily="@font/nb"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    tools:text="Hinata Shoyo" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/food"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/cookdetails"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="21dp"
+                            android:layout_marginEnd="18dp"
+                            android:fontFamily="@font/nl"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            tools:text="Starter\n\n   Paneer Chili x 2\n   Salad and Paapad x 1\n\nMain Course\n\n   Butter Chicker x 1" />
+
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/food"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="21dp"
+                            android:layout_marginEnd="18dp"
+                            android:fontFamily="@font/nl"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            tools:text="25th July  12 : 30 PM" />
+
+                        <TextView
+                            android:id="@+id/address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/time"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginEnd="18dp"
+                            android:layout_marginBottom="14dp"
+                            android:fontFamily="@font/nl"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            tools:text="Estancia 3144, Chennai" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/editmenucard"
+                    android:layout_width="188dp"
+                    android:layout_height="36dp"
+                    android:layout_below="@id/trialdetails"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="18dp"
+                    app:cardBackgroundColor="#FFC542"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="186dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/nl"
+                            android:text="Edit Menu"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/things"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editmenucard"
+                    android:layout_alignStart="@id/details"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/nb"
+                    android:text="Things to do before?"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/things"
+                    android:layout_marginStart="42dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="42dp"
+                    android:fontFamily="@font/nl"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley." />
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </com.sinaseyfi.advancedcardview.AdvancedCardView>
+
+</RelativeLayout>
