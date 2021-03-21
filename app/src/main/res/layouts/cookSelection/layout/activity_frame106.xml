@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryblue"
+    tools:context=".cookSelection.Frame106">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/back106"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="34dp"
+        app:cardBackgroundColor="@color/secondaryblue"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/sdt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/back106"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nb"
+        android:text="Select date and time"
+        android:textColor="@color/black"
+        android:textSize="32sp" />
+
+    <com.sinaseyfi.advancedcardview.AdvancedCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/sdt"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="14dp"
+        app:background_Color="#F9F9F9"
+        app:cornerRadius_TopLeft="60dp"
+        app:cornerRadius_TopRight="60dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/calendar_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardCornerRadius="30dp">
+
+                    <com.archit.calendardaterangepicker.customviews.DateRangeCalendarView
+                        android:id="@+id/calendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:paddingStart="16dp"
+                        android:paddingTop="15dp"
+                        android:paddingEnd="16dp"
+                        app:date_selection_mode="single"
+                        app:default_date_color="@color/black"
+                        app:disable_date_color="#ABABAB"
+                        app:selected_date_circle_color="@color/yellow"
+                        app:selected_date_color="@color/black"
+                        app:text_size_date="4sp"
+                        app:text_size_title="21sp"
+                        app:text_size_week="13sp"
+                        app:title_color="@color/black"
+                        app:week_color="@color/black" />
+
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/calendar_card"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="96dp">
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/hour_picker"
+                        android:layout_width="55dp"
+                        android:layout_height="121dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/picker_background"
+                        app:np_dividerThickness="0dp"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_max="23"
+                        app:np_min="0"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/black"
+                        app:np_selectedTextSize="25sp"
+                        app:np_selectedTypeface="@font/nb"
+                        app:np_textColor="@color/black"
+                        app:np_textSize="20dp"
+                        app:np_value="23" />
+
+                    <TextView
+                        android:id="@+id/hrs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="9dp"
+                        android:layout_toEndOf="@id/hour_picker"
+                        android:fontFamily="@font/nb"
+                        android:letterSpacing="0.03"
+                        android:text="hours"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/minute_picker"
+                        android:layout_width="55dp"
+                        android:layout_height="121dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="30dp"
+                        android:layout_toEndOf="@id/hrs"
+                        android:background="@drawable/picker_background"
+                        app:np_dividerThickness="0dp"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_max="59"
+                        app:np_min="0"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/black"
+                        app:np_selectedTextSize="25sp"
+                        app:np_selectedTypeface="@font/nb"
+                        app:np_textColor="@color/black"
+                        app:np_textSize="20dp"
+                        app:np_value="58" />
+
+                    <TextView
+                        android:id="@+id/mins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="9dp"
+                        android:layout_toEndOf="@id/minute_picker"
+                        android:fontFamily="@font/nb"
+                        android:letterSpacing="0.03"
+                        android:text="mins"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </com.sinaseyfi.advancedcardview.AdvancedCardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/next106"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/nb"
+            android:text="CONFIRM"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

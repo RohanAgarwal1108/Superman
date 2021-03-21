@@ -89,7 +89,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="78dp"
+                    android:layout_height="64dp"
                     android:visibility="invisible" />
 
             </LinearLayout>
@@ -109,14 +109,25 @@
         app:cardCornerRadius="40dp"
         app:cardElevation="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="220dp"
+            android:layout_height="54dp"
             android:layout_gravity="center"
-            android:fontFamily="@font/nb"
-            android:text="Change Preferences"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nb"
+                android:text="Change Preferences"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.cardview.widget.CardView>
 

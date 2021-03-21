@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.superman.UserPreference.CookDetails;
 import com.superman.databinding.ActivityFrame23Binding;
 
 public class Frame23 extends AppCompatActivity implements View.OnClickListener {

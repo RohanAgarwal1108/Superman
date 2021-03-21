@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
-import com.superman.UserPreference.CookDetails;
 import com.superman.Utilities.CookItemClickListener;
 import com.superman.Utilities.CustomItemClickListener1;
-import com.superman.authentication.User;
 import com.superman.common.MainActivity;
 import com.superman.databinding.ActivityFrame21Binding;
 
@@ -97,7 +95,7 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
 
     private Task<List<HashMap<String, Object>>> getCooks() {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", User.user.getUid());
+        data.put("uid", "YSVTJLyCFLS8Yqw5lpETTK3LR563");//todo
         return MainActivity.mFunctions
                 .getHttpsCallable("getCooks")
                 .call(data)
@@ -143,8 +141,8 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     @Override
     public void onClick(View v) {
         if (v == binding.changepref) {
-            this.onBackPressed();
-            this.onBackPressed();
+            finish();
+            finish();
         } else if (v == binding.skip) {
             //todo
         }

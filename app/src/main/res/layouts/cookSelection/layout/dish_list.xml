@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dishes"
+    android:layout_width="match_parent"
+    android:layout_height="238dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="154dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="2dp">
+
+        <TextView
+            android:id="@+id/dishtxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="74dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/nb"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text="Butter Chicken" />
+
+    </androidx.cardview.widget.CardView>
+
+    <com.sinaseyfi.advancedcardview.AdvancedCardView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="2dp"
+        app:cornerRadius="40dp">
+
+        <ImageView
+            android:id="@+id/dishimg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_launcher_background" />
+
+    </com.sinaseyfi.advancedcardview.AdvancedCardView>
+
+</RelativeLayout>

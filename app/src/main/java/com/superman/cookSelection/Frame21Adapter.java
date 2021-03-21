@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.superman.R;
-import com.superman.UserPreference.CookDetails;
 import com.superman.Utilities.CookItemClickListener;
 import com.superman.Utilities.CustomItemClickListener1;
 

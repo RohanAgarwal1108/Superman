@@ -92,7 +92,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
     private Task<HashMap<String, Object>> setPreferences() {
         Map<String, Object> data = new HashMap<>();
         data.put("uid", User.user.getUid());
-        data.put("currentStay", "Chennai");
+        data.put("currentCity", "Chennai");
         data.put("cuisine", getCuisines());
         data.put("sex", User.user.getCookgender());
         data.put("cooks", User.user.getMealtype());

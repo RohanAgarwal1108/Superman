@@ -49,7 +49,7 @@
         app:cornerRadius_TopLeft="60dp"
         app:cornerRadius_TopRight="60dp">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
@@ -81,6 +81,7 @@
                     android:layout_marginEnd="13dp">
 
                     <TextView
+                        android:padding="2dp"
                         android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -92,6 +93,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:padding="2dp"
                         android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,6 +106,8 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/ampm"
+                        android:padding="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@id/time"
@@ -128,7 +132,10 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <RelativeLayout
+                <androidx.cardview.widget.CardView
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -137,25 +144,36 @@
                     android:layout_marginTop="17dp"
                     android:layout_marginEnd="28dp">
 
-                    <ImageView
-                        android:id="@+id/gps"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_gps" />
-
-                    <TextView
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_toStartOf="@id/gps"
-                        android:fontFamily="@font/nl"
-                        android:text="25- BLA, Next to Forum Mall,  Estancia, Chennai"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:background="@color/white"
+                        android:padding="16dp">
 
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/gps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_gps" />
+
+                        <EditText
+                            android:id="@+id/address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:layout_toStartOf="@id/gps"
+                            android:fontFamily="@font/nl"
+                            android:layout_centerVertical="true"
+                            android:background="@null"
+                            android:hint="Estancia Flat no. 420"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/howhead"
@@ -179,6 +197,8 @@
                     android:orientation="vertical">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:overScrollMode="never"
+                        android:scrollbars="none"
                         android:id="@+id/finalizedrecycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -266,6 +286,7 @@
                     app:cardElevation="0dp">
 
                     <EditText
+                        android:id="@+id/notes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -283,12 +304,12 @@
 
             </RelativeLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </com.sinaseyfi.advancedcardview.AdvancedCardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/next34"
+        android:id="@+id/book34"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
@@ -304,7 +325,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/nb"
-            android:text="NEXT"
+            android:text="BOOK TRIAL"
             android:textColor="@color/white"
             android:textSize="28sp" />
 

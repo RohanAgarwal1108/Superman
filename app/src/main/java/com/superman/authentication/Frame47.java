@@ -18,8 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,16 +37,16 @@ import java.util.Map;
 
 public class Frame47 extends AppCompatActivity implements View.OnClickListener {
     private static final int RC_PHOTO_PICKER = 1;
-    private final String[] states = {/*
-            "Andhra Pradesh             ","Arunachal Pradesh          ","Assam                      ",
-            "Bihar                      ","Chandigarh                 ","Chhattisgarh               ","Daman & Diu                ",
-            "Delhi                      ","Goa                        ","Gujarat                    ","Haryana                    ",
-            "Himachal Pradesh           ","Jammu & Kashmir            ","Jharkhand                  ","Karnataka                  ",
-            "Kerala                     ","Ladakh                     ","Lakshadweep                ","Madhya Pradesh             ",
-            "Maharashtra                ","Manipur                    ","Meghalaya                  ","Mizoram                    ",
-            "Nagaland                   ","Odisha                     ","Puducherry                 ","Punjab                     ",
-            "Rajasthan                  ","Sikkim                     ","Tamil Nadu                 ","Telangana                  ",
-            "Tripura                    ","Uttarakhand                ","Uttar Pradesh              ","West Bengal                "*/"Tamil N"};
+    private final String[] states = {
+            "Andhra Pradesh             ", "Arunachal Pradesh          ", "Assam                      ",
+            "Bihar                      ", "Chandigarh                 ", "Chhattisgarh               ", "Daman & Diu                ",
+            "Delhi                      ", "Goa                        ", "Gujarat                    ", "Haryana                    ",
+            "Himachal Pradesh           ", "Jammu & Kashmir            ", "Jharkhand                  ", "Karnataka                  ",
+            "Kerala                     ", "Ladakh                     ", "Lakshadweep                ", "Madhya Pradesh             ",
+            "Maharashtra                ", "Manipur                    ", "Meghalaya                  ", "Mizoram                    ",
+            "Nagaland                   ", "Odisha                     ", "Puducherry                 ", "Punjab                     ",
+            "Rajasthan                  ", "Sikkim                     ", "Tamil Nadu                 ", "Telangana                  ",
+            "Tripura                    ", "Uttarakhand                ", "Uttar Pradesh              ", "West Bengal                "};
     Uri selectedImageUri;
     StorageReference storageRef;
     StorageReference ppRef;
@@ -157,23 +155,12 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
 
     private void postUserData() {
         UploadTask uploadTask = ppRef.putBytes(imagebytes);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ppRef.getDownloadUrl()
-                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                photourl = uri.toString();
-                                createUser();
-                            }
-                        });
-            }
-        });
+        uploadTask.addOnFailureListener(exception -> {
+        }).addOnSuccessListener(taskSnapshot -> ppRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    photourl = uri.toString();
+                    createUser();
+                }));
     }
 
     private void createUser() {

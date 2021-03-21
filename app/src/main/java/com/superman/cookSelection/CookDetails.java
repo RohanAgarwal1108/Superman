@@ -1,4 +1,4 @@
-package com.superman.UserPreference;
+package com.superman.cookSelection;
 
 import java.util.List;
 
@@ -36,6 +36,7 @@ public class CookDetails {
         this.name = name;
         this.cookID = cookID;
         this.booked = booked;
+
     }
 
     public int getRating() {
