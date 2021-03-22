@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
 import com.superman.Utilities.CustomItemClickListener;
+import com.superman.Utilities.LogoutDailog;
 import com.superman.authentication.User;
 import com.superman.databinding.ActivityFrame28Binding;
 
@@ -93,13 +94,11 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         //for later use
         //nb = Typeface.createFromAsset(getAssets(), "fonts/nb.otf");
         //nl = Typeface.createFromAsset(getAssets(), "fonts/nl.otf");
-        binding.city.setText(User.user.getCity());
         String fullname = User.user.getName();
         int i = fullname.indexOf(' ');
         String name = i == -1 ? fullname : fullname.substring(0, i);
-        String str = "Hi " + name + ", let’s find you your Superman!";
+        String str = "Hi " + name + ", so need a supercook that";
         binding.hello.setText(str);
-        disableNext();
     }
 
     @Override
@@ -116,7 +115,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
             setCookGender(1);
         } else if (v == binding.whatlin.getChildAt(2)) {
             setCookGender(2);
-        } else if (v == binding.next28 && binding.next28.getAlpha() == 1) {
+        } else if (v == binding.next28 && binding.next28.getCardBackgroundColor() == getColorStateList(R.color.black)) {
             if (mealtype == 0) {
                 User.user.setMealtype("Veg");
             } else if (mealtype == 1) {
@@ -138,7 +137,6 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
                 }
             }
             User.user.setLanguages(al);
-            User.user.setCity(binding.city.getText().toString());
             Intent intent = new Intent(Frame28.this, Frame19.class);
             startActivity(intent);
         }
@@ -185,14 +183,25 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void disableNext() {
-        binding.next28.setAlpha(0.5f);
+        binding.next28.setCardBackgroundColor(getColor(R.color.disabledbutton));
     }
 
     private void enableNext() {
-        binding.next28.setAlpha(1);
+
+        binding.next28.setCardBackgroundColor(getColor(R.color.black));
     }
 
-/**for later use*/
+    @Override
+    public void onBackPressed() {
+        openDialog();
+    }
+
+    private void openDialog() {
+        LogoutDailog logoutDialog = new LogoutDailog();
+        logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+    }
+
+    /*for later use*/
 /*
     private void getLocationPermission() {
         if (ContextCompat.checkSelfPermission(Frame28.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

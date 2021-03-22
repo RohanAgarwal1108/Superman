@@ -1,14 +1,19 @@
 package com.superman.authentication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.superman.R;
+import com.superman.Utilities.KeyboardUtil;
+import com.superman.Utilities.LogoutDailog;
 import com.superman.databinding.ActivityFrame39Binding;
 
 public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnClickListener {
@@ -22,7 +27,7 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
         setContentView(binding.getRoot());
         binding.phoneedit.addTextChangedListener(this);
         binding.next39.setOnClickListener(v -> {
-            if (binding.next39.getAlpha() == 1 && isNumberCorrect()) {
+            if (binding.next39.getCardBackgroundColor() == getColorStateList(R.color.black) && isNumberCorrect()) {
                 Intent intent = new Intent(Frame39.this, Frame38.class);
                 intent.putExtra("phoneno", binding.phoneedit.getText().toString().trim());
                 startActivity(intent);
@@ -31,7 +36,8 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
 
         binding.pp.setOnClickListener(this);
         binding.tac.setOnClickListener(this);
-        disableNext();
+        binding.nh.setOnClickListener(this);
+        findViewById(android.R.id.content).setFocusableInTouchMode(true);
     }
 
     private boolean isNumberCorrect() {
@@ -72,11 +78,11 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
     }
 
     private void enableNext() {
-        binding.next39.setAlpha(1);
+        binding.next39.setCardBackgroundColor(getColor(R.color.black));
     }
 
     private void disableNext() {
-        binding.next39.setAlpha(0.5f);
+        binding.next39.setCardBackgroundColor(getColor(R.color.disabledbutton));
     }
 
     @Override
@@ -89,6 +95,34 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
             Intent intent = new Intent(Frame39.this, Webview.class);
             intent.putExtra("url", "www.privacypolicies.eule.in");
             startActivity(intent);
+        } else if (v == binding.nh) {
+            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Superman! I need help!";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            i.setPackage("com.whatsapp");
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            } else {
+                i.setPackage(null);
+            }
+            startActivity(i);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        openDialog();
+    }
+
+    private void openDialog() {
+        LogoutDailog logoutDialog = new LogoutDailog();
+        logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        KeyboardUtil keyboardUtil = new KeyboardUtil(this, ev);
+        keyboardUtil.touchEvent();
+        return super.dispatchTouchEvent(ev);
     }
 }

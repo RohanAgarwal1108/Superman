@@ -43,17 +43,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/back21"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
         android:fontFamily="@font/nb"
         android:text="Its your turn, make a move (be quick)"
         android:textColor="@color/black"
         android:textSize="32sp" />
 
+    <TextView
+        android:id="@+id/showing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/here"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/nl"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:text="Showing 25 SuperCooks" />
+
     <com.sinaseyfi.advancedcardview.AdvancedCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/here"
+        android:layout_below="@id/showing"
         android:layout_marginStart="14dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="14dp"

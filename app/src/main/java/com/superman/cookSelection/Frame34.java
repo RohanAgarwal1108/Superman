@@ -2,7 +2,9 @@ package com.superman.cookSelection;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -11,11 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.functions.FirebaseFunctionsException;
+import com.superman.R;
 import com.superman.UserPreference.Lang_FoodPOJO;
 import com.superman.Utilities.CustomItemClickListener;
 import com.superman.Utilities.DateFormatter;
+import com.superman.Utilities.KeyboardUtil;
+import com.superman.Utilities.MyProgressDialog;
+import com.superman.authentication.User;
 import com.superman.common.MainActivity;
+import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame34Binding;
 
 import java.util.ArrayList;
@@ -23,7 +29,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Frame34 extends AppCompatActivity implements View.OnClickListener, CustomItemClickListener {
+public class Frame34 extends AppCompatActivity implements View.OnClickListener, CustomItemClickListener, TextWatcher {
     public static HashMap<String, ArrayList<Lang_FoodPOJO>> alldishes;
     private ActivityFrame34Binding binding;
     private Bundle extras;
@@ -35,6 +41,7 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
     private RecyclerView.LayoutManager layoutManager;
     private String[] keys;
     private String timeforslot;
+    private MyProgressDialog myProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +124,7 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         binding.choose.setOnClickListener(this);
         binding.timedetails.setOnClickListener(this);
         binding.book34.setOnClickListener(this);
+        binding.address.addTextChangedListener(this);
     }
 
     @Override
@@ -130,19 +138,21 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
             Intent intent = new Intent(Frame34.this, Frame106.class);
             startActivityForResult(intent, 1);
         } else if (v == binding.book34) {
-            bookTrial();
+            if (binding.book34.getCardBackgroundColor() == getColorStateList(R.color.black)) {
+                bookTrial();
+            }
         }
     }
 
     private void bookTrial() {
+        myProgressDialog = new MyProgressDialog();
+        myProgressDialog.showDialog(this);
         scheduleTrial()
                 .addOnCompleteListener(task -> {
+                    myProgressDialog.dismissDialog();
                     if (!task.isSuccessful()) {
-                        Exception e = task.getException();
-                        if (e instanceof FirebaseFunctionsException) {
-                            Log.e("hugui", String.valueOf(e));
-                        }
-                        Log.e("hugui", String.valueOf(e));
+                        Intent intent = new Intent(Frame34.this, Reconnect.class);
+                        startActivity(intent);
                     } else {
                         try {
                             HashMap<String, Object> data = task.getResult();
@@ -158,6 +168,7 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
                                 intent.putExtra("time", timeforslot);
                                 intent.putExtra("index", index);
                                 intent.putExtra("details", details);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
                         } catch (Exception e) {
@@ -171,7 +182,7 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         Map<String, Object> data = new HashMap<>();
         data.put("cookID", frame21.cookDetails.get(index).getCookID());
         data.put("slot", getSlot());
-        data.put("uid", "YSVTJLyCFLS8Yqw5lpETTK3LR563");//todo User.user.getUid());
+        data.put("uid", User.user.getUid());
         data.put("address", binding.address.getText().toString());
         data.put("notes", binding.notes.getText().toString());
         data.put("meal", getMeal());
@@ -260,5 +271,39 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
             setTimeforUser(str);
             timeforslot = str;
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (s.toString().isEmpty()) {
+            disableBook();
+        } else {
+            enableBook();
+        }
+    }
+
+    private void enableBook() {
+        binding.book34.setCardBackgroundColor(getColor(R.color.black));
+    }
+
+    private void disableBook() {
+        binding.book34.setCardBackgroundColor(getColor(R.color.disabledbutton));
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        KeyboardUtil keyboardUtil = new KeyboardUtil(this, ev);
+        keyboardUtil.touchEvent();
+        return super.dispatchTouchEvent(ev);
     }
 }

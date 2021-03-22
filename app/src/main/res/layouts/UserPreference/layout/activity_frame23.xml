@@ -322,27 +322,4 @@
 
     </ScrollView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/next23"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="24dp"
-        app:cardBackgroundColor="@color/black"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="0dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/nb"
-            android:text="Let's cook"
-            android:textColor="@color/white"
-            android:textSize="28sp" />
-
-    </androidx.cardview.widget.CardView>
-
 </RelativeLayout>

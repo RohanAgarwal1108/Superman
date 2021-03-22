@@ -1,11 +1,12 @@
 package com.superman.cookSelection;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
@@ -16,7 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
 import com.superman.Utilities.CookItemClickListener;
 import com.superman.Utilities.CustomItemClickListener1;
+import com.superman.Utilities.MyProgressDialog;
+import com.superman.authentication.User;
 import com.superman.common.MainActivity;
+import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame21Binding;
 
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private MyProgressDialog myProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +48,34 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     }
 
     private void queryCooks() {
+        myProgressDialog = new MyProgressDialog();
+        myProgressDialog.showDialog(this);
         getCooks()
                 .addOnCompleteListener(task -> {
+                    myProgressDialog.dismissDialog();
                     if (!task.isSuccessful()) {
+                        int flag = 0;
                         Exception e = task.getException();
                         if (e instanceof FirebaseFunctionsException) {
+                            flag = 1;
                             FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
                             FirebaseFunctionsException.Code code = ffe.getCode();
                             if (code == FirebaseFunctionsException.Code.NOT_FOUND) {
+                                //todo
+                                //com.superman E/bijb: com.google.firebase.functions.FirebaseFunctionsException: No cooks found that matches your preference try changing something.
+                            } else {
+                                Intent intent = new Intent(frame21.this, Reconnect.class);
+                                startActivityForResult(intent, 1);
                             }
                         }
-                        //todo
-                        //com.superman E/bijb: com.google.firebase.functions.FirebaseFunctionsException: No cooks found that matches your preference try changing something.
+                        if (flag == 0) {
+                            Intent intent = new Intent(frame21.this, Reconnect.class);
+                            startActivityForResult(intent, 1);
+                        }
                     } else {
                         List<HashMap<String, Object>> results = task.getResult();
-                        Log.e("res", results.toString());
                         try {
+                            binding.showing.setText("Showing " + results.size() + " SuperCooks");
                             for (int i = 0; i < results.size(); i++) {
                                 HashMap<String, Object> result = results.get(i);
                                 String city = (String) result.get("city");
@@ -93,9 +110,19 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                 });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            queryCooks();
+        } else if (requestCode == 1 && resultCode != RESULT_OK) {
+            finish();
+        }
+    }
+
     private Task<List<HashMap<String, Object>>> getCooks() {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", "YSVTJLyCFLS8Yqw5lpETTK3LR563");//todo
+        data.put("uid", User.user.getUid());
         return MainActivity.mFunctions
                 .getHttpsCallable("getCooks")
                 .call(data)
@@ -141,7 +168,8 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     @Override
     public void onClick(View v) {
         if (v == binding.changepref) {
-            finish();
+            Intent intent = new Intent();
+            setResult(Activity.RESULT_OK, intent);
             finish();
         } else if (v == binding.skip) {
             //todo

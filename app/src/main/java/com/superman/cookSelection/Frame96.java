@@ -15,7 +15,7 @@ import com.superman.Utilities.CustomItemClickListener;
 import com.superman.Utilities.CustomItemClickListener1;
 import com.superman.databinding.ActivityFrame96Binding;
 
-public class Frame96 extends AppCompatActivity implements CustomItemClickListener, CustomItemClickListener1 {
+public class Frame96 extends AppCompatActivity implements CustomItemClickListener, CustomItemClickListener1, View.OnClickListener {
     public static int index = 0;
     String[] keys;
     private ActivityFrame96Binding binding;
@@ -38,6 +38,9 @@ public class Frame96 extends AppCompatActivity implements CustomItemClickListene
 
         setupRecyclers();
         toggleBottomSheet();
+
+        binding.buttonlin.setOnClickListener(this);
+        findViewById(R.id.bottom_sheet).setOnClickListener(this);
     }
 
     private void toggleBottomSheet() {
@@ -92,5 +95,12 @@ public class Frame96 extends AppCompatActivity implements CustomItemClickListene
 
     private void makeToast() {
         Toast.makeText(Frame96.this, "Cannot choose more than 3 items!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == binding.buttonlin) {
+            this.onBackPressed();
+        }
     }
 }

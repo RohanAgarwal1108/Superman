@@ -1,10 +1,12 @@
 package com.superman.authentication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,9 +20,12 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.superman.R;
 import com.superman.UserPreference.Frame28;
 import com.superman.Utilities.GenericKeyEvent;
 import com.superman.Utilities.GenericTextWatcher;
+import com.superman.Utilities.KeyboardUtil;
+import com.superman.Utilities.MyProgressDialog;
 import com.superman.common.MainActivity;
 import com.superman.databinding.ActivityFrame38Binding;
 
@@ -39,6 +44,8 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     private ActivityFrame38Binding binding;
     private String phno;
     private String Uid;
+    private int flag = 1;
+    private MyProgressDialog myProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,6 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
         setOTPListeners();
         initFireBaseCallbacks();
         sendOTP();
-        disableNext();
     }
 
     private void setOTPListeners() {
@@ -77,6 +83,8 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void sendOTP() {
+        myProgressDialog = new MyProgressDialog();
+        myProgressDialog.showDialog(this);
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber("+91" + phno)
@@ -99,6 +107,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                         Uid = task.getResult().getUser().getUid();
                         getUserbyPhone();
                     } else {
+                        myProgressDialog.dismissDialog();
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             makeToast("Invalid credentials!", Toast.LENGTH_SHORT);
                         }
@@ -109,6 +118,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     private void getUserbyPhone() {
         checkPhone(phno)
                 .addOnCompleteListener(task -> {
+                    myProgressDialog.dismissDialog();
                     if (!task.isSuccessful()) {
                         Exception e = task.getException();
                         if (e instanceof FirebaseFunctionsException) {
@@ -131,7 +141,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                         HashMap<String, Object> data = (HashMap<String, Object>) result.get("data");
                         String uid = (String) data.get("uid");
                         String city = (String) data.get("city");
-                        String number = (String) data.get("number");
+                        String name = (String) data.get("name");
                         boolean preferences = (boolean) data.get("preferences");
                         if (preferences) {
 
@@ -139,6 +149,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                             User.user.setNumber(phno);
                             User.user.setRegisteredUser(true);
                             User.user.setUid(uid);
+                            User.user.setName(name);
                             Intent intent = new Intent(this, Frame28.class);
                             startActivity(intent);
                         }
@@ -157,12 +168,17 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
+                flag = 2;
+                myProgressDialog.dismissDialog();
+                makeToast("OTP could'nt be sent. Please try again!", Toast.LENGTH_SHORT);
             }
 
             @Override
             public void onCodeSent(String verificationId,
                                    PhoneAuthProvider.ForceResendingToken token) {
-                makeToast("Code Sent", Toast.LENGTH_SHORT);
+                myProgressDialog.dismissDialog();
+                flag = 1;
+                makeToast("OTP Sent", Toast.LENGTH_SHORT);
                 mVerificationId = verificationId;
                 mResendToken = token;
                 changeResend();
@@ -218,6 +234,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
         binding.back38.setOnClickListener(this);
         binding.resend.setOnClickListener(this);
         binding.next38.setOnClickListener(this);
+        binding.nh.setOnClickListener(this);
     }
 
     @Override
@@ -229,9 +246,25 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                 sendOTP();
             }
         } else if (v == binding.next38) {
-            if (binding.next38.getAlpha() == 1) {
-                firebaseOTPCheck();
+            if (binding.next38.getCardBackgroundColor() == getColorStateList(R.color.black)) {
+                if (flag == 1) {
+                    myProgressDialog.showDialog(this);
+                    firebaseOTPCheck();
+                } else if (flag == 2) {
+                    makeToast("OTP could'nt be sent. Please try again!", Toast.LENGTH_SHORT);
+                }
             }
+        } else if (v == binding.nh) {
+            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Superman! I need help!";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            i.setPackage("com.whatsapp");
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            } else {
+                i.setPackage(null);
+            }
+            startActivity(i);
         }
     }
 
@@ -258,11 +291,11 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void enableNext() {
-        binding.next38.setAlpha(1);
+        binding.next38.setCardBackgroundColor(getColor(R.color.black));
     }
 
     private void disableNext() {
-        binding.next38.setAlpha(0.5f);
+        binding.next38.setCardBackgroundColor(getColor(R.color.disabledbutton));
     }
 
     private Task<HashMap<String, Object>> checkPhone(String text) {
@@ -272,5 +305,12 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                 .getHttpsCallable("checkPhone")
                 .call(data)
                 .continueWith(task -> (HashMap<String, Object>) task.getResult().getData());
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        KeyboardUtil keyboardUtil = new KeyboardUtil(this, ev);
+        keyboardUtil.touchEvent();
+        return super.dispatchTouchEvent(ev);
     }
 }

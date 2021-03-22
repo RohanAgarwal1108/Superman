@@ -1,14 +1,18 @@
 package com.superman.cookSelection;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 import com.superman.Utilities.DateFormatter;
+import com.superman.Utilities.LogoutDailog;
 import com.superman.databinding.ActivityFrame35Binding;
 
-public class Frame35 extends AppCompatActivity {
+public class Frame35 extends AppCompatActivity implements View.OnClickListener {
     private ActivityFrame35Binding binding;
     private Bundle extras;
 
@@ -31,6 +35,12 @@ public class Frame35 extends AppCompatActivity {
         binding.time.setText(getFormattedTime());
         binding.address.setText(extras.getString("address"));
         binding.ttd.setText(extras.getString("details"));
+
+        setupListeners();
+    }
+
+    private void setupListeners() {
+        binding.help.setOnClickListener(this);
     }
 
     private String getFormattedTime() {
@@ -51,5 +61,31 @@ public class Frame35 extends AppCompatActivity {
             }
         }
         return str;
+    }
+
+    @Override
+    public void onBackPressed() {
+        openDialog();
+    }
+
+    private void openDialog() {
+        LogoutDailog logoutDialog = new LogoutDailog();
+        logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == binding.help) {
+            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Superman! I need help!";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            i.setPackage("com.whatsapp");
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            } else {
+                i.setPackage(null);
+            }
+            startActivity(i);
+        }
     }
 }

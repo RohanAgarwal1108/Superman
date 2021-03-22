@@ -2,9 +2,9 @@ package com.superman.UserPreference;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,8 +13,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
 import com.superman.R;
 import com.superman.Utilities.CustomItemClickListener;
+import com.superman.Utilities.MyProgressDialog;
 import com.superman.authentication.User;
 import com.superman.common.MainActivity;
+import com.superman.common.Reconnect;
 import com.superman.cookSelection.frame21;
 import com.superman.databinding.ActivityFrame19Binding;
 
@@ -29,6 +31,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Lang_FoodPOJO> cuisines;
+    private MyProgressDialog myProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,6 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         setContentView(binding.getRoot());
         setListeners();
         setUpRecyler();
-        disableNext();
     }
 
     private void setUpRecyler() {
@@ -64,7 +66,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        if (v == binding.next19 && binding.next19.getAlpha() == 1) {
+        if (v == binding.next19 && binding.next19.getCardBackgroundColor() == getColorStateList(R.color.black)) {
             preferences();
         } else if (v == binding.back19) {
             this.onBackPressed();
@@ -72,21 +74,32 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void preferences() {
+        myProgressDialog = new MyProgressDialog();
+        myProgressDialog.showDialog(this);
         setPreferences()
                 .addOnCompleteListener(task -> {
+                    myProgressDialog.dismissDialog();
                     if (!task.isSuccessful()) {
                         Exception e = task.getException();
                         if (e instanceof FirebaseFunctionsException) {
                             FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
                             FirebaseFunctionsException.Code code = ffe.getCode();
-                            Log.e("Error", String.valueOf(code));
                         }
-                        Log.e("error", String.valueOf(e));
+                        Intent intent = new Intent(Frame19.this, Reconnect.class);
+                        startActivity(intent);
                     } else {
                         Intent intent = new Intent(Frame19.this, frame21.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            finish();
+        }
     }
 
     private Task<HashMap<String, Object>> setPreferences() {
@@ -131,10 +144,10 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void disableNext() {
-        binding.next19.setAlpha(0.5f);
+        binding.next19.setCardBackgroundColor(getColor(R.color.disabledbutton));
     }
 
     private void enableNext() {
-        binding.next19.setAlpha(1);
+        binding.next19.setCardBackgroundColor(getColor(R.color.black));
     }
 }

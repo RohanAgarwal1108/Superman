@@ -34,7 +34,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         android:fontFamily="@font/nb"
-        android:text="Let’s schedule a trial to please your taste buds!"
+        android:text="Let’s schedule a trail and get cookin’"
         android:textColor="@color/black"
         android:textSize="32sp" />
 
@@ -316,7 +316,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="24dp"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="@color/disabledbutton"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp">
 

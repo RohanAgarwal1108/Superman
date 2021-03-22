@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,7 +25,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.superman.UserPreference.Frame28;
+import com.superman.Utilities.KeyboardUtil;
+import com.superman.Utilities.MyProgressDialog;
 import com.superman.common.MainActivity;
+import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame47Binding;
 
 import org.json.JSONObject;
@@ -55,6 +59,7 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
     Toast toast;
     private ActivityFrame47Binding binding;
     private Bitmap bitmap;
+    private MyProgressDialog myProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,8 +159,13 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void postUserData() {
+        myProgressDialog = new MyProgressDialog();
+        myProgressDialog.showDialog(this);
         UploadTask uploadTask = ppRef.putBytes(imagebytes);
         uploadTask.addOnFailureListener(exception -> {
+            myProgressDialog.dismissDialog();
+            Intent intent = new Intent(Frame47.this, Reconnect.class);
+            startActivityForResult(intent, 2);
         }).addOnSuccessListener(taskSnapshot -> ppRef.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
                     photourl = uri.toString();
@@ -166,20 +176,25 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
     private void createUser() {
         registerUser()
                 .addOnCompleteListener(task -> {
+                    myProgressDialog.dismissDialog();
                     if (!task.isSuccessful()) {
                         Exception e = task.getException();
                         if (e instanceof FirebaseFunctionsException) {
                             FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
                             FirebaseFunctionsException.Code code = ffe.getCode();
                         }
+                        Intent intent = new Intent(Frame47.this, Reconnect.class);
+                        startActivityForResult(intent, 3);
                     } else {
                         User.user.setName(binding.nameedit.getText().toString());
                         User.user.setCity(binding.city.getText().toString());
                         Intent intent = new Intent(Frame47.this, Frame28.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }
                 });
     }
+
 
     private Task<HashMap<String, Object>> registerUser() {
         Map<String, Object> data = new HashMap<>();
@@ -209,6 +224,11 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
             imagebytes = out.toByteArray();
             bitmap = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
             binding.dp.setImageBitmap(bitmap);
+        } else if (requestCode == 2 && requestCode == RESULT_OK) {
+            postUserData();
+        } else if (requestCode == 3 && resultCode == RESULT_OK) {
+            myProgressDialog.showDialog(this);
+            createUser();
         }
     }
 
@@ -222,5 +242,12 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        KeyboardUtil keyboardUtil = new KeyboardUtil(this, ev);
+        keyboardUtil.touchEvent();
+        return super.dispatchTouchEvent(ev);
     }
 }

@@ -41,7 +41,6 @@ public class Frame23 extends AppCompatActivity implements View.OnClickListener {
         setupUI();
 
         binding.cross.setOnClickListener(this);
-        binding.next23.setOnClickListener(this);
     }
 
     private void setupUI() {
@@ -108,7 +107,7 @@ public class Frame23 extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == binding.cross || v == binding.next23) {
+        if (v == binding.cross) {
             this.onBackPressed();
         }
     }

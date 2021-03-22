@@ -81,7 +81,7 @@
         android:fontFamily="@font/nb"
         android:textColor="@color/black"
         android:textSize="30sp"
-        tools:text="Hi Midoriya, let’s find you your Superman!" />
+        tools:text="Hi Midoriya, so need a supercook that " />
 
     <com.sinaseyfi.advancedcardview.AdvancedCardView
         android:layout_width="match_parent"
@@ -373,9 +373,10 @@
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="48dp"
+        app:cardBackgroundColor="@color/disabledbutton"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="24dp"
-        app:cardBackgroundColor="@color/black"
+        app:cardElevation="0dp"
         app:cardCornerRadius="20dp">
 
         <TextView
