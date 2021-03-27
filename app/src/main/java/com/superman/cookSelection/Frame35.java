@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 import com.superman.Utilities.DateFormatter;
 import com.superman.Utilities.LogoutDailog;
 import com.superman.databinding.ActivityFrame35Binding;
+import com.superman.home.Frame101;
 
 public class Frame35 extends AppCompatActivity implements View.OnClickListener {
     private ActivityFrame35Binding binding;
@@ -41,6 +42,7 @@ public class Frame35 extends AppCompatActivity implements View.OnClickListener {
 
     private void setupListeners() {
         binding.help.setOnClickListener(this);
+        binding.next35.setOnClickListener(this);
     }
 
     private String getFormattedTime() {
@@ -54,6 +56,9 @@ public class Frame35 extends AppCompatActivity implements View.OnClickListener {
         String str = "";
         for (int i = 0; i < SelectedDishes.selectedDishes.size(); i++) {
             SelectedDishes selectedDish = SelectedDishes.selectedDishes.get(i);
+            if (i == 0) {
+                str += "Meal\n\n";
+            }
             if (i != 0 || i != SelectedDishes.selectedDishes.size() - 1) {
                 str += "  " + selectedDish.getName() + " x " + selectedDish.getQuantity();
             } else {
@@ -76,7 +81,7 @@ public class Frame35 extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == binding.help) {
-            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Superman! I need help!";
+            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Supercook! I need help!";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             i.setPackage("com.whatsapp");
@@ -86,6 +91,9 @@ public class Frame35 extends AppCompatActivity implements View.OnClickListener {
                 i.setPackage(null);
             }
             startActivity(i);
+        } else if (v == binding.next35) {
+            Intent intent = new Intent(Frame35.this, Frame101.class);
+            startActivity(intent);
         }
     }
 }

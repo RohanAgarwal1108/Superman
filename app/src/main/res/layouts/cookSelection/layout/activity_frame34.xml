@@ -36,7 +36,7 @@
         android:fontFamily="@font/nb"
         android:text="Let’s schedule a trail and get cookin’"
         android:textColor="@color/black"
-        android:textSize="32sp" />
+        android:textSize="26sp" />
 
     <com.sinaseyfi.advancedcardview.AdvancedCardView
         android:layout_width="match_parent"
@@ -280,7 +280,7 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="17dp"
                     android:layout_marginEnd="28dp"
-                    android:layout_marginBottom="112dp"
+                    android:layout_marginBottom="87dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="0dp">
@@ -311,13 +311,13 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/book34"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
         app:cardBackgroundColor="@color/disabledbutton"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="15dp"
         app:cardElevation="0dp">
 
         <TextView
@@ -327,7 +327,7 @@
             android:fontFamily="@font/nb"
             android:text="BOOK TRIAL"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="24sp" />
 
     </androidx.cardview.widget.CardView>
 

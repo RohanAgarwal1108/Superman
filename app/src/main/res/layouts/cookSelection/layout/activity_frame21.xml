@@ -35,7 +35,7 @@
         android:fontFamily="@font/nb"
         android:text="SKIP"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/here"
@@ -48,7 +48,7 @@
         android:fontFamily="@font/nb"
         android:text="Its your turn, make a move (be quick)"
         android:textColor="@color/black"
-        android:textSize="32sp" />
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/showing"
@@ -60,7 +60,7 @@
         android:layout_marginEnd="40dp"
         android:fontFamily="@font/nl"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         tools:text="Showing 25 SuperCooks" />
 
     <com.sinaseyfi.advancedcardview.AdvancedCardView
@@ -102,7 +102,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
+                    android:layout_height="58dp"
                     android:visibility="invisible" />
 
             </LinearLayout>
@@ -114,7 +114,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/changepref"
         android:layout_width="222dp"
-        android:layout_height="56dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp"
@@ -124,7 +124,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="220dp"
-            android:layout_height="54dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="40dp"

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cuisinecard"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
-    android:layout_marginStart="9dp"
+    android:layout_height="235dp"
+    android:layout_marginStart="14dp"
     android:layout_marginTop="25dp"
-    android:layout_marginEnd="9dp"
+    android:layout_marginEnd="14dp"
     android:layout_marginBottom="25dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="20dp"
@@ -20,10 +20,10 @@
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
-            app:cardCornerRadius="55dp"
+            app:cardCornerRadius="50dp"
             app:cardElevation="0dp">
 
             <ImageView
@@ -42,7 +42,7 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/nb"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             tools:text="Chinese" />
 
     </LinearLayout>

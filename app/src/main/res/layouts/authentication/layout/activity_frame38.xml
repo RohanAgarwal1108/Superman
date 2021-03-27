@@ -35,7 +35,7 @@
         android:fontFamily="@font/nb"
         android:text="Enter code sent to"
         android:textColor="@color/black"
-        android:textSize="34sp" />
+        android:textSize="26sp" />
 
     <LinearLayout
         android:id="@+id/phone"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nb"
             android:textColor="@color/black"
-            android:textSize="34sp"
+            android:textSize="26sp"
             tools:text="4204204200" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:fontFamily="@font/nl"
             android:text="(edit)"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -188,7 +188,7 @@
             android:fontFamily="@font/nl"
             android:text="Didn’t receive? "
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/resend"
@@ -197,7 +197,7 @@
             android:fontFamily="@font/nb"
             android:text="Resend"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -211,19 +211,19 @@
         android:fontFamily="@font/nb"
         android:text="Need help?"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/next38"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
         app:cardBackgroundColor="@color/disabledbutton"
         app:cardElevation="0dp"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -232,7 +232,7 @@
             android:fontFamily="@font/nb"
             android:text="NEXT"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="24sp" />
 
     </androidx.cardview.widget.CardView>
 

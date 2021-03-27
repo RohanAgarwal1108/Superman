@@ -31,8 +31,6 @@ import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame47Binding;
 
-import org.json.JSONObject;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -206,7 +204,6 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         data.put("uid", User.user.getUid());
         data.put("preferences", false);
         data.put("city", binding.city.getText().toString());
-        data.put("preferenceData", new JSONObject());
         return MainActivity.mFunctions
                 .getHttpsCallable("registerUser")
                 .call(data)

@@ -51,8 +51,8 @@
                 android:layout_marginTop="238dp"
                 android:layout_marginEnd="14dp"
                 app:background_Color="@color/secondaryblue"
-                app:cornerRadius_TopLeft="60dp"
-                app:cornerRadius_TopRight="60dp">
+                app:cornerRadius_TopLeft="50dp"
+                app:cornerRadius_TopRight="50dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                         android:fontFamily="@font/nb"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="36sp"
+                        android:textSize="26sp"
                         tools:text="Asahi-san" />
 
                     <LinearLayout
@@ -86,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nl"
                             android:textColor="@color/black"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
                             tools:text="4.2" />
 
                         <ImageView
@@ -209,7 +209,7 @@
                         android:fontFamily="@font/nb"
                         android:text="Can Speak"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/canspeak"
@@ -230,7 +230,7 @@
                         android:fontFamily="@font/nb"
                         android:text="Can Cook"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/can1recycler"
@@ -277,7 +277,7 @@
                         android:fontFamily="@font/nb"
                         android:text="Some Pictures"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/photos"
@@ -298,7 +298,7 @@
                         android:fontFamily="@font/nb"
                         android:text="Background"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/background"
@@ -311,7 +311,7 @@
                         android:layout_marginBottom="112dp"
                         android:fontFamily="@font/nl"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         tools:text="From Banglore east, known for exceptional chinese cuisine." />
 
                 </RelativeLayout>

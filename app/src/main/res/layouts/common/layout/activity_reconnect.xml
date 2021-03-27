@@ -32,9 +32,9 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="13dp"
         android:fontFamily="@font/nb"
-        android:text="Woops!"
+        android:text="Whoops!"
         android:textColor="@color/black"
-        android:textSize="36sp" />
+        android:textSize="26sp" />
 
     <ImageView
         android:id="@+id/reconnsvg"
@@ -48,26 +48,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/reconnsvg"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginEnd="64dp"
         android:fontFamily="@font/nl"
         android:text="Looks like your are offline or something went wrong."
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/reconn"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="34dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="34dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
         app:cardBackgroundColor="@color/black"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="15dp"
         app:cardElevation="0dp">
 
         <TextView
@@ -77,7 +77,7 @@
             android:fontFamily="@font/nb"
             android:text="RECONNECT"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="24sp" />
 
     </androidx.cardview.widget.CardView>
 

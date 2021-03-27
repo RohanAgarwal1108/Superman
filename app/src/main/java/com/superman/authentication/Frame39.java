@@ -96,7 +96,7 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
             intent.putExtra("url", "www.privacypolicies.eule.in");
             startActivity(intent);
         } else if (v == binding.nh) {
-            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Superman! I need help!";
+            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Supercook! I need help!";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             i.setPackage("com.whatsapp");

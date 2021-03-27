@@ -27,6 +27,7 @@ import com.superman.Utilities.GenericTextWatcher;
 import com.superman.Utilities.KeyboardUtil;
 import com.superman.Utilities.MyProgressDialog;
 import com.superman.common.MainActivity;
+import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame38Binding;
 
 import java.util.HashMap;
@@ -131,7 +132,13 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                                 User.user.setUid(Uid);
                                 Intent intent = new Intent(Frame38.this, Frame47.class);
                                 startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(Frame38.this, Reconnect.class);
+                                startActivity(intent);
                             }
+                        } else {
+                            Intent intent = new Intent(Frame38.this, Reconnect.class);
+                            startActivity(intent);
                         }
                     } else {
                         User.initUser();
@@ -164,13 +171,15 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
+                myProgressDialog.dismissDialog();
+                binding.next38.performClick();
             }
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 flag = 2;
                 myProgressDialog.dismissDialog();
-                makeToast("OTP could'nt be sent. Please try again!", Toast.LENGTH_SHORT);
+                makeToast("OTP couldn't be sent. Please try again!", Toast.LENGTH_SHORT);
             }
 
             @Override
@@ -255,7 +264,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                 }
             }
         } else if (v == binding.nh) {
-            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Superman! I need help!";
+            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Supercook! I need help!";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             i.setPackage("com.whatsapp");

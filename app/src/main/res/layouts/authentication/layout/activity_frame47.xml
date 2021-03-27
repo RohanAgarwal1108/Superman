@@ -39,7 +39,7 @@
             android:fontFamily="@font/nb"
             android:text="Details"
             android:textColor="@color/black"
-            android:textSize="36sp" />
+            android:textSize="26sp" />
 
         <com.sinaseyfi.advancedcardview.AdvancedCardView
             android:id="@+id/card"
@@ -151,7 +151,7 @@
                         android:fontFamily="@font/nb"
                         android:text="Name"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/name"
@@ -179,7 +179,7 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="#C4C4C4"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -193,7 +193,7 @@
                         android:fontFamily="@font/nb"
                         android:text="Where do you belong to?"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <Spinner
                         android:id="@+id/spinner"
@@ -233,7 +233,7 @@
                                 android:singleLine="true"
                                 android:textColor="@color/black"
                                 android:textColorHint="#C4C4C4"
-                                android:textSize="18sp" />
+                                android:textSize="16sp" />
 
                             <ImageView
                                 android:id="@+id/spinnericon"
@@ -258,7 +258,7 @@
                         android:fontFamily="@font/nb"
                         android:text="City"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/pincode"
@@ -286,21 +286,21 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="#C4C4C4"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/next47"
                         android:layout_width="match_parent"
-                        android:layout_height="64dp"
                         android:layout_below="@+id/pincode"
-                        android:layout_marginStart="34dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="34dp"
-                        android:layout_marginBottom="24dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
                         app:cardBackgroundColor="@color/black"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="15dp"
                         app:cardElevation="0dp">
 
                         <TextView
@@ -310,7 +310,7 @@
                             android:fontFamily="@font/nb"
                             android:text="NEXT"
                             android:textColor="@color/white"
-                            android:textSize="28sp" />
+                            android:textSize="24sp" />
 
                     </androidx.cardview.widget.CardView>
 
