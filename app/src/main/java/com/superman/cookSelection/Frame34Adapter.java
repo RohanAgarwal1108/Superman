@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
-import com.superman.Utilities.CustomItemClickListener;
+import com.superman.utilities.CustomItemClickListener;
 
 import java.util.ArrayList;
 

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
 import com.superman.UserPreference.Lang_FoodPOJO;
-import com.superman.Utilities.CustomItemClickListener;
+import com.superman.utilities.CustomItemClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;

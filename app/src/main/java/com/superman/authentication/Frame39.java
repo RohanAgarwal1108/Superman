@@ -12,9 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.superman.R;
-import com.superman.Utilities.KeyboardUtil;
-import com.superman.Utilities.LogoutDailog;
 import com.superman.databinding.ActivityFrame39Binding;
+import com.superman.utilities.KeyboardUtil;
+import com.superman.utilities.LogoutDailog;
 
 public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnClickListener {
     private ActivityFrame39Binding binding;

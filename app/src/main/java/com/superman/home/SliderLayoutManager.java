@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
-import com.superman.Utilities.CustomItemClickListener;
-import com.superman.Utilities.ScreenUtils;
+import com.superman.utilities.CustomItemClickListener;
+import com.superman.utilities.ScreenUtils;
 
 public class SliderLayoutManager extends LinearLayoutManager {
 
@@ -59,8 +59,6 @@ public class SliderLayoutManager extends LinearLayoutManager {
 
     @Override
     public void onScrollStateChanged(int state) {
-        super.onScrollStateChanged(state);
-
         if (state == RecyclerView.SCROLL_STATE_IDLE) {
             int recyclerViewCenterX = getRecyclerViewCenterX();
             int minDistance = recyclerView.getWidth();
@@ -76,6 +74,7 @@ public class SliderLayoutManager extends LinearLayoutManager {
             }
             customItemClickListener.onCustomItemClick(position);
         }
+        super.onScrollStateChanged(state);
     }
 
     private int getRecyclerViewCenterX() {

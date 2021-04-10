@@ -7,7 +7,7 @@
     android:background="@color/primaryblue"
     tools:context=".home.Frame101">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
@@ -116,18 +116,56 @@
                         android:textSize="18sp"
                         tools:text="8:45" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/breakrecycler"
+                    <HorizontalScrollView
+                        android:id="@+id/breaklin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/breaktime"
                         android:layout_marginTop="25dp"
-                        tools:itemCount="7" />
+                        android:overScrollMode="never"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="15dp"
+                                android:layout_height="match_parent"
+                                android:visibility="invisible" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/breakrecycler"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:overScrollMode="never"
+                                android:scrollbars="none"
+                                tools:itemCount="7" />
+
+                            <FrameLayout
+                                android:layout_width="151dp"
+                                android:layout_height="188dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="30dp"
+                                android:background="@drawable/dash_bordor">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_add" />
+
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/breakrecycler"
+                        android:layout_below="@id/breaklin"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="34dp"
                         android:fontFamily="@font/nb"
@@ -139,7 +177,7 @@
                         android:id="@+id/lunchtime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/breakrecycler"
+                        android:layout_below="@id/breaklin"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="34dp"
                         android:layout_marginEnd="20dp"
@@ -148,18 +186,56 @@
                         android:textSize="18sp"
                         tools:text="8:45" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/lunchrecycler"
+                    <HorizontalScrollView
+                        android:id="@+id/lunchlin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/lunchtime"
                         android:layout_marginTop="25dp"
-                        tools:itemCount="7" />
+                        android:overScrollMode="never"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="15dp"
+                                android:layout_height="match_parent"
+                                android:visibility="invisible" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/lunchrecycler"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:overScrollMode="never"
+                                android:scrollbars="none"
+                                tools:itemCount="7" />
+
+                            <FrameLayout
+                                android:layout_width="151dp"
+                                android:layout_height="188dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="30dp"
+                                android:background="@drawable/dash_bordor">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_add" />
+
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/lunchrecycler"
+                        android:layout_below="@id/lunchlin"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="34dp"
                         android:fontFamily="@font/nb"
@@ -171,7 +247,7 @@
                         android:id="@+id/dinnertime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/lunchrecycler"
+                        android:layout_below="@id/lunchlin"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="34dp"
                         android:layout_marginEnd="20dp"
@@ -180,14 +256,52 @@
                         android:textSize="18sp"
                         tools:text="8:45" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/dinnerrecycler"
+                    <HorizontalScrollView
+                        android:id="@+id/dinnerlin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/dinnertime"
                         android:layout_marginTop="25dp"
-                        android:layout_marginBottom="58dp"
-                        tools:itemCount="7" />
+                        android:layout_marginBottom="60dp"
+                        android:overScrollMode="never"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="15dp"
+                                android:layout_height="match_parent"
+                                android:visibility="invisible" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/dinnerrecycler"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:overScrollMode="never"
+                                android:scrollbars="none"
+                                tools:itemCount="7" />
+
+                            <FrameLayout
+                                android:layout_width="151dp"
+                                android:layout_height="188dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="30dp"
+                                android:background="@drawable/dash_bordor">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_add" />
+
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
 
                 </RelativeLayout>
 
@@ -195,6 +309,6 @@
 
         </RelativeLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

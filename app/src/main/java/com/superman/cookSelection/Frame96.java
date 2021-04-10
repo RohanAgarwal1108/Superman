@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sinaseyfi.advancedcardview.AdvancedCardView;
 import com.superman.R;
-import com.superman.Utilities.CustomItemClickListener;
-import com.superman.Utilities.CustomItemClickListener1;
 import com.superman.databinding.ActivityFrame96Binding;
+import com.superman.utilities.CustomItemClickListener;
+import com.superman.utilities.CustomItemClickListener1;
 
 public class Frame96 extends AppCompatActivity implements CustomItemClickListener, CustomItemClickListener1, View.OnClickListener {
     public static int index = 0;

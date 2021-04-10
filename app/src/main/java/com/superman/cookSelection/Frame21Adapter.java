@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.superman.R;
-import com.superman.Utilities.CookItemClickListener;
-import com.superman.Utilities.CustomItemClickListener1;
+import com.superman.utilities.CookItemClickListener;
+import com.superman.utilities.CustomItemClickListener1;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
-import com.superman.Utilities.CustomItemClickListener2;
+import com.superman.utilities.CustomItemClickListener2;
 
 import java.util.ArrayList;
 

@@ -22,13 +22,13 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.functions.FirebaseFunctionsException;
 import com.superman.R;
 import com.superman.UserPreference.Frame28;
-import com.superman.Utilities.GenericKeyEvent;
-import com.superman.Utilities.GenericTextWatcher;
-import com.superman.Utilities.KeyboardUtil;
-import com.superman.Utilities.MyProgressDialog;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame38Binding;
+import com.superman.utilities.GenericKeyEvent;
+import com.superman.utilities.GenericTextWatcher;
+import com.superman.utilities.KeyboardUtil;
+import com.superman.utilities.MyProgressDialog;
 
 import java.util.HashMap;
 import java.util.Map;

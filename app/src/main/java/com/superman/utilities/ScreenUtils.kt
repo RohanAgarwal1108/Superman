@@ -1,4 +1,4 @@
-package com.superman.Utilities
+package com.superman.utilities
 
 import android.content.Context
 import android.util.DisplayMetrics

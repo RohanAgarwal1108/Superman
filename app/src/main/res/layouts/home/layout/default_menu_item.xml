@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="151dp"
+    android:layout_height="188dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp">
+
+    <com.sinaseyfi.advancedcardview.AdvancedCardView
+        android:id="@+id/foodimgcard"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="1dp"
+        app:cornerRadius="47.5dp">
+
+        <ImageView
+            android:id="@+id/mealimg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@drawable/ic_launcher_background" />
+
+    </com.sinaseyfi.advancedcardview.AdvancedCardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="140.5dp"
+        android:layout_alignParentBottom="true"
+        android:elevation="0dp"
+        app:cardBackgroundColor="#EDF1FA"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="63.5dp">
+
+            <TextView
+                android:id="@+id/mealtxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/nb"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:text="Paneer Malai Tikka" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

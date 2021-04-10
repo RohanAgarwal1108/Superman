@@ -25,11 +25,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.superman.UserPreference.Frame28;
-import com.superman.Utilities.KeyboardUtil;
-import com.superman.Utilities.MyProgressDialog;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame47Binding;
+import com.superman.utilities.KeyboardUtil;
+import com.superman.utilities.MyProgressDialog;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

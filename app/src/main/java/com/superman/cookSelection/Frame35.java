@@ -8,10 +8,10 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
-import com.superman.Utilities.DateFormatter;
-import com.superman.Utilities.LogoutDailog;
 import com.superman.databinding.ActivityFrame35Binding;
 import com.superman.home.Frame101;
+import com.superman.utilities.DateFormatter;
+import com.superman.utilities.LogoutDailog;
 
 public class Frame35 extends AppCompatActivity implements View.OnClickListener {
     private ActivityFrame35Binding binding;

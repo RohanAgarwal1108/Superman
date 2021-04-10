@@ -1,4 +1,4 @@
-package com.superman.Utilities;
+package com.superman.utilities;
 
 public interface CustomItemClickListener {
     void onCustomItemClick(int index);

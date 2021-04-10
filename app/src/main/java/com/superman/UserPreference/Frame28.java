@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
-import com.superman.Utilities.CustomItemClickListener;
-import com.superman.Utilities.LogoutDailog;
 import com.superman.authentication.User;
 import com.superman.databinding.ActivityFrame28Binding;
+import com.superman.utilities.CustomItemClickListener;
+import com.superman.utilities.LogoutDailog;
 
 import java.util.ArrayList;
 import java.util.List;
