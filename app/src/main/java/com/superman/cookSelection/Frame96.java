@@ -28,7 +28,7 @@ public class Frame96 extends AppCompatActivity implements CustomItemClickListene
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.LayoutManager layoutManager1;
     private RecyclerView.LayoutManager layoutManager2;
-
+    private final int TOTAL_SELECTIONS = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +59,13 @@ public class Frame96 extends AppCompatActivity implements CustomItemClickListene
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new Frame96Adapter(this, this, Frame34.alldishes);
+        mAdapter = new Frame96Adapter(this, this, Frame34.alldishes, 0);
         recyclerView.setAdapter(mAdapter);
 
         recyclerView1 = findViewById(R.id.dishes);
         layoutManager1 = new GridLayoutManager(this, 2);
         recyclerView1.setLayoutManager(layoutManager1);
-        mAdapter1 = new Frame96Adapter1(this, Frame34.alldishes.get(keys[index]), this);
+        mAdapter1 = new Frame96Adapter1(this, Frame34.alldishes.get(keys[index]), this, TOTAL_SELECTIONS, 0);
         recyclerView1.setAdapter(mAdapter1);
 
         recyclerView2 = findViewById(R.id.quantityrecycler);

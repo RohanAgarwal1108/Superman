@@ -17,17 +17,22 @@ import com.superman.UserPreference.Lang_FoodPOJO;
 import com.superman.utilities.CustomItemClickListener1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Frame96Adapter1 extends RecyclerView.Adapter<Frame96Adapter1.ViewHolder> {
     private final Context mContext;
     private final CustomItemClickListener1 listener1;
     private ArrayList<Lang_FoodPOJO> dishes;
+    private final int selections;
+    private final int i;
 
-    public Frame96Adapter1(Context context, ArrayList<Lang_FoodPOJO> dishes, CustomItemClickListener1 customItemClickListener1) {
+    public Frame96Adapter1(Context context, ArrayList<Lang_FoodPOJO> dishes, CustomItemClickListener1 customItemClickListener1, int selections, int i) {
         mContext = context;
         listener1 = customItemClickListener1;
         this.dishes = new ArrayList<>();
         this.dishes.addAll(dishes);
+        this.selections = selections;
+        this.i = i;
     }
 
     @NonNull
@@ -49,20 +54,30 @@ public class Frame96Adapter1 extends RecyclerView.Adapter<Frame96Adapter1.ViewHo
         }
         holder.dishes1.setOnClickListener(v -> {
             int clickedPosition = position;
+            List<SelectedDishes> myselected;
+            if (i == 0) {
+                myselected = SelectedDishes.selectedDishes;
+            } else if (i == 10) {
+                listener1.onCustomItemClick1(clickedPosition, 1);
+                return;
+            } else {
+                myselected = SelectedDishes.mealSelectedDishes[i - 1];
+            }
+
             if (dishes.get(clickedPosition).isSelected()) {
-                for (int i = 0; i < SelectedDishes.selectedDishes.size(); i++) {
-                    SelectedDishes selectedDish = SelectedDishes.selectedDishes.get(i);
+                for (int i = 0; i < myselected.size(); i++) {
+                    SelectedDishes selectedDish = myselected.get(i);
                     if (selectedDish.getName().equals(dish.getLanguage())) {
-                        SelectedDishes.selectedDishes.remove(i);
+                        myselected.remove(i);
                         break;
                     }
                 }
                 dishes.get(clickedPosition).setSelected(!dishes.get(clickedPosition).isSelected());
                 listener1.onCustomItemClick1(clickedPosition, 0);
             } else {
-                if (SelectedDishes.selectedDishes.size() != 3) {
+                if (myselected.size() != selections) {
                     dishes.get(clickedPosition).setSelected(!dishes.get(clickedPosition).isSelected());
-                    SelectedDishes.selectedDishes.add(new SelectedDishes(dish.getLanguage(), 1));
+                    myselected.add(new SelectedDishes(dish.getLanguage(), 1));
                     listener1.onCustomItemClick1(clickedPosition, 0);
                 } else {
                     listener1.onCustomItemClick1(clickedPosition, 1);

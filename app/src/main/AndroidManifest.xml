@@ -14,6 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Superman">
+        <activity android:name=".home.Frame116"></activity>
+        <activity android:name=".home.Frame112" />
+        <activity android:name=".home.Frame111" />
+        <activity android:name=".home.TailoredMeal" />
+        <activity android:name=".home.Frame110" />
+        <activity android:name=".home.UserProfile" />
         <activity android:name=".home.Frame101">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,9 +61,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".authentication.Frame39"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".common.MainActivity"
             android:screenOrientation="portrait" />

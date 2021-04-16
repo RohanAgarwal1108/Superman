@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
 import com.superman.UserPreference.Lang_FoodPOJO;
+import com.superman.home.Frame110;
+import com.superman.home.Frame111;
+import com.superman.home.Frame112;
+import com.superman.home.Frame116;
 import com.superman.utilities.CustomItemClickListener;
 
 import java.util.ArrayList;
@@ -23,11 +27,13 @@ public class Frame96Adapter extends RecyclerView.Adapter<Frame96Adapter.ViewHold
     private final String[] dataset;
     private final CustomItemClickListener listener;
     private final Context mContext;
+    private final int tracker;
 
-    public Frame96Adapter(Context context, CustomItemClickListener listener, HashMap<String, ArrayList<Lang_FoodPOJO>> alldishes) {
+    public Frame96Adapter(Context context, CustomItemClickListener listener, HashMap<String, ArrayList<Lang_FoodPOJO>> alldishes, int tracker) {
         dataset = alldishes.keySet().toArray(new String[0]);
         this.listener = listener;
         mContext = context;
+        this.tracker = tracker;
     }
 
     @NonNull
@@ -42,7 +48,7 @@ public class Frame96Adapter extends RecyclerView.Adapter<Frame96Adapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull Frame96Adapter.ViewHolder holder, int position) {
         String cuisine = dataset[position];
-        if (Frame96.index == position) {
+        if ((tracker == 0 ? Frame96.index : tracker == 1 ? Frame110.index : tracker == 2 ? Frame111.index : tracker == 4 ? Frame116.index : Frame112.index) == position) {
             holder.background.setCardBackgroundColor(mContext.getColor(R.color.yellow));
         } else {
             holder.background.setCardBackgroundColor(mContext.getColor(R.color.white));

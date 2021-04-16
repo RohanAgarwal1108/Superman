@@ -1,5 +1,6 @@
 package com.superman.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,6 +17,7 @@ import com.superman.common.MainActivity;
 import com.superman.databinding.ActivityFrame101Binding;
 import com.superman.utilities.CustomItemClickListener;
 import com.superman.utilities.CustomItemClickListener2;
+import com.superman.utilities.CustomItemClickListener3;
 import com.superman.utilities.ScreenUtils;
 
 import java.text.SimpleDateFormat;
@@ -25,15 +27,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Frame101 extends AppCompatActivity implements CustomItemClickListener2, CustomItemClickListener {
+public class Frame101 extends AppCompatActivity implements CustomItemClickListener2, CustomItemClickListener, View.OnClickListener, CustomItemClickListener3 {
     private ActivityFrame101Binding binding;
     private ArrayList<CardsPOJO> cardsPOJOS;
     private Frame101Adapter adapter;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private SliderLayoutManager sliderLayoutManager;
-    public static HashMap<String, Object> defaultmenu;
-    public static String day;
+    private HashMap<String, Object> defaultmenu;
+    private String day;
     private RecyclerView breakrecycler;
     private RecyclerView.Adapter mAdapter1;
     private RecyclerView.LayoutManager layoutManager1;
@@ -55,6 +57,13 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
         setupMainCard();
         setupWeekRecycler();
         setHome();
+        setListeners();
+    }
+
+    private void setListeners() {
+        binding.startnow.setOnClickListener(this);
+        binding.ppcard.setOnClickListener(this);
+        binding.noclick.setOnClickListener(this);
     }
 
     private void setupWeekRecycler() {
@@ -172,21 +181,21 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
         breakrecycler.setHasFixedSize(true);
         layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         breakrecycler.setLayoutManager(layoutManager1);
-        mAdapter1 = new MealAdapter(0, this);
+        mAdapter1 = new MealAdapter(0, this, defaultmenu, day, this);
         breakrecycler.setAdapter(mAdapter1);
 
         lunchrecycler = binding.lunchrecycler;
         lunchrecycler.setHasFixedSize(true);
         layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         lunchrecycler.setLayoutManager(layoutManager2);
-        mAdapter2 = new MealAdapter(1, this);
+        mAdapter2 = new MealAdapter(1, this, defaultmenu, day, this);
         lunchrecycler.setAdapter(mAdapter2);
 
         dinnerrecycler = binding.dinnerrecycler;
         dinnerrecycler.setHasFixedSize(true);
         layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         dinnerrecycler.setLayoutManager(layoutManager3);
-        mAdapter3 = new MealAdapter(2, this);
+        mAdapter3 = new MealAdapter(2, this, defaultmenu, day, this);
         dinnerrecycler.setAdapter(mAdapter3);
 
         mAdapter1.notifyDataSetChanged();
@@ -213,6 +222,9 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
     public void onCustomItemClick(int index) {
         if (!day.equals(dow.get(index))) {
             day = dow.get(index);
+            ((MealAdapter) mAdapter1).dayChanger(day);
+            ((MealAdapter) mAdapter2).dayChanger(day);
+            ((MealAdapter) mAdapter3).dayChanger(day);
             mAdapter1.notifyDataSetChanged();
             mAdapter2.notifyDataSetChanged();
             mAdapter3.notifyDataSetChanged();
@@ -221,5 +233,21 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
     }
 
     private void setTime() {
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == binding.ppcard) {
+            Intent intent = new Intent(Frame101.this, UserProfile.class);
+            startActivity(intent);
+        } else if (v == binding.startnow) {
+            Intent intent = new Intent(Frame101.this, Frame110.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onCustomItemClick(int index, int i, boolean add) {
+
     }
 }

@@ -16,10 +16,17 @@ import java.util.ArrayList;
 public class Frame101DOWAdapter extends RecyclerView.Adapter<Frame101DOWAdapter.ViewHolder> {
     private final ArrayList<String> dates;
     private final CustomItemClickListener2 customItemClickListener;
+    String s;
 
     public Frame101DOWAdapter(CustomItemClickListener2 listener, ArrayList<String> dates) {
         customItemClickListener = listener;
         this.dates = dates;
+    }
+
+    public Frame101DOWAdapter(CustomItemClickListener2 listener, ArrayList<String> dates, String s) {
+        customItemClickListener = listener;
+        this.dates = dates;
+        this.s = s;
     }
 
     @NonNull
@@ -34,8 +41,12 @@ public class Frame101DOWAdapter extends RecyclerView.Adapter<Frame101DOWAdapter.
     @Override
     public void onBindViewHolder(@NonNull Frame101DOWAdapter.ViewHolder holder, int position) {
         String date = dates.get(position);
-        holder.date.setText(date.substring(0, 2));
-        holder.day.setText(date.substring(2));
+        if (s == null) {
+            holder.date.setText(date.substring(0, 2));
+            holder.day.setText(date.substring(2));
+        } else {
+            holder.dow1.setText(date.substring(2));
+        }
     }
 
     @Override
@@ -51,12 +62,14 @@ public class Frame101DOWAdapter extends RecyclerView.Adapter<Frame101DOWAdapter.
         private final View view;
         private final TextView day;
         private final TextView date;
+        private final TextView dow1;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
             day = view.findViewById(R.id.day);
             date = view.findViewById(R.id.date);
+            dow1 = view.findViewById(R.id.dow1);
             view.setOnClickListener(this);
         }
 

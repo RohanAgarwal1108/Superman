@@ -10,6 +10,7 @@ import com.superman.R;
 public class MainActivity extends AppCompatActivity {
     public static FirebaseFunctions mFunctions = FirebaseFunctions.getInstance("us-central1");
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
