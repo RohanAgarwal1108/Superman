@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -25,11 +28,14 @@ import com.superman.UserPreference.Frame28;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame38Binding;
+import com.superman.home.Frame101;
 import com.superman.utilities.GenericKeyEvent;
 import com.superman.utilities.GenericTextWatcher;
 import com.superman.utilities.KeyboardUtil;
 import com.superman.utilities.MyProgressDialog;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -47,6 +53,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     private String Uid;
     private int flag = 1;
     private MyProgressDialog myProgressDialog;
+    private PhoneAuthCredential credential;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,12 +108,11 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
      * Checking the otp with firebase
      */
     private void firebaseOTPCheck() {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, etOtp);
+        credential = PhoneAuthProvider.getCredential(mVerificationId, etOtp);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Uid = task.getResult().getUser().getUid();
-                        getUserbyPhone();
+                        signInWithPhoneAuthCredential(credential);
                     } else {
                         myProgressDialog.dismissDialog();
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -114,6 +120,32 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                         }
                     }
                 });
+    }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = task.getResult().getUser();
+                        Uid = user.getUid();
+                        getUserbyPhone();
+                    } else {
+                        myProgressDialog.dismissDialog();
+                        Intent intent = new Intent(Frame38.this, Reconnect.class);
+                        startActivityForResult(intent, 1);
+                    }
+                });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            if (credential != null) {
+                myProgressDialog.showDialog(Frame38.this);
+                signInWithPhoneAuthCredential(credential);
+            }
+        }
     }
 
     private void getUserbyPhone() {
@@ -126,10 +158,15 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                             FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
                             FirebaseFunctionsException.Code code = ffe.getCode();
                             if (code == FirebaseFunctionsException.Code.NOT_FOUND) {
-                                User.initUser();
-                                User.user.setNumber(phno);
-                                User.user.setRegisteredUser(false);
-                                User.user.setUid(Uid);
+                                try {
+                                    MainActivity.putValues(MainActivity.ALIAS2, "details", getApplicationContext());
+                                    MainActivity.putValues(MainActivity.ALIAS1, phno, getApplicationContext());
+                                    MainActivity.putValues(MainActivity.ALIAS4, Uid, getApplicationContext());
+                                } catch (GeneralSecurityException | IOException generalSecurityException) {
+                                    generalSecurityException.printStackTrace();
+                                    makeToast("An Error occurred! Please try later.", Toast.LENGTH_SHORT);
+                                    return;
+                                }
                                 Intent intent = new Intent(Frame38.this, Frame47.class);
                                 startActivity(intent);
                             } else {
@@ -141,22 +178,32 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                             startActivity(intent);
                         }
                     } else {
-                        User.initUser();
-                        User.user.setNumber(phno);
-                        User.user.setRegisteredUser(true);
                         HashMap<String, Object> result = task.getResult();
                         HashMap<String, Object> data = (HashMap<String, Object>) result.get("data");
                         String uid = (String) data.get("uid");
                         String city = (String) data.get("city");
                         String name = (String) data.get("name");
+                        try {
+                            MainActivity.putValues(MainActivity.ALIAS4, uid, getApplicationContext());
+                            MainActivity.putValues(MainActivity.ALIAS3, name, getApplicationContext());
+                            MainActivity.putValues(MainActivity.ALIAS1, phno, getApplicationContext());
+                        } catch (GeneralSecurityException | IOException e) {
+                            e.printStackTrace();
+                            makeToast("An Error occurred! Please try again.", Toast.LENGTH_SHORT);
+                            return;
+                        }
                         boolean preferences = (boolean) data.get("preferences");
                         if (preferences) {
-
+                            try {
+                                MainActivity.putValues(MainActivity.ALIAS2, "preferences", getApplicationContext());
+                            } catch (GeneralSecurityException | IOException e) {
+                                e.printStackTrace();
+                                makeToast("An Error occurred! Please try again.", Toast.LENGTH_SHORT);
+                                return;
+                            }
+                            Intent intent = new Intent(this, Frame101.class);
+                            startActivity(intent);
                         } else {
-                            User.user.setNumber(phno);
-                            User.user.setRegisteredUser(true);
-                            User.user.setUid(uid);
-                            User.user.setName(name);
                             Intent intent = new Intent(this, Frame28.class);
                             startActivity(intent);
                         }
@@ -310,6 +357,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     private Task<HashMap<String, Object>> checkPhone(String text) {
         Map<String, Object> data = new HashMap<>();
         data.put("phoneNo", text);
+        Log.e("data", String.valueOf(data));
         return MainActivity.mFunctions
                 .getHttpsCallable("checkPhone")
                 .call(data)

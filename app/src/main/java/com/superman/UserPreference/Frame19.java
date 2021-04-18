@@ -18,8 +18,11 @@ import com.superman.common.Reconnect;
 import com.superman.cookSelection.frame21;
 import com.superman.databinding.ActivityFrame19Binding;
 import com.superman.utilities.CustomItemClickListener;
+import com.superman.utilities.ExtraUtils;
 import com.superman.utilities.MyProgressDialog;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,13 +70,18 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if (v == binding.next19 && binding.next19.getCardBackgroundColor() == getColorStateList(R.color.black)) {
-            preferences();
+            try {
+                preferences();
+            } catch (GeneralSecurityException | IOException e) {
+                e.printStackTrace();
+                ExtraUtils.makeToast(Frame19.this, "An Error occurred! Please try later");
+            }
         } else if (v == binding.back19) {
             this.onBackPressed();
         }
     }
 
-    private void preferences() {
+    private void preferences() throws GeneralSecurityException, IOException {
         myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(this);
         setPreferences()
@@ -88,6 +96,13 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
                         Intent intent = new Intent(Frame19.this, Reconnect.class);
                         startActivity(intent);
                     } else {
+                        try {
+                            MainActivity.putValues(MainActivity.ALIAS2, "preferences", getApplicationContext());
+                        } catch (GeneralSecurityException | IOException e) {
+                            e.printStackTrace();
+                            ExtraUtils.makeToast(Frame19.this, "An Error occurred! Please try again.");
+                            return;
+                        }
                         Intent intent = new Intent(Frame19.this, frame21.class);
                         startActivityForResult(intent, 1);
                     }
@@ -102,9 +117,9 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
-    private Task<HashMap<String, Object>> setPreferences() {
+    private Task<HashMap<String, Object>> setPreferences() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", User.user.getUid());
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
         data.put("currentCity", "Chennai");
         data.put("cuisine", getCuisines());
         data.put("sex", User.user.getCookgender());

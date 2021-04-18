@@ -76,33 +76,11 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
             return 0;
         } else if (mymenu.containsKey(day)) {
             HashMap<String, String> mealdetails = (HashMap<String, String>) mymenu.get(day);
-            if (mealtime == 0 && mealdetails.containsKey("Breakfast") && mealdetails.get("Breakfast").length() != 0) {
-                char comma = ',';
-                int count = 0;
-                for (int j = 0; j < mealdetails.get("Breakfast").length(); j++) {
-                    if (mealdetails.get("Breakfast").charAt(j) == comma) {
-                        count++;
-                    }
-                }
-                return count + 1;
-            } else if (mealtime == 1 && mealdetails.containsKey("Lunch") && mealdetails.get("Lunch").length() != 0) {
-                char comma = ',';
-                int count = 0;
-                for (int j = 0; j < mealdetails.get("Lunch").length(); j++) {
-                    if (mealdetails.get("Lunch").charAt(j) == comma) {
-                        count++;
-                    }
-                }
-                return count + 1;
-            } else if (mealtime == 2 && mealdetails.containsKey("Dinner") && mealdetails.get("Dinner").length() != 0) {
-                char comma = ',';
-                int count = 0;
-                for (int j = 0; j < mealdetails.get("Dinner").length(); j++) {
-                    if (mealdetails.get("Dinner").charAt(j) == comma) {
-                        count++;
-                    }
-                }
-                return count + 1;
+            String[] times = {"Breakfast", "Lunch", "Dinner"};
+            if (mealtime >= 0 && mealtime <= 2 && mealdetails.containsKey(times[mealtime]) && mealdetails.get(times[mealtime]).length() != 0) {
+                String str = mealdetails.get(times[mealtime]);
+                String[] str1 = str.split(",");
+                return str1.length;
             } else {
                 return 0;
             }

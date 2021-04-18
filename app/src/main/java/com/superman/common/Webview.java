@@ -1,4 +1,4 @@
-package com.superman.authentication;
+package com.superman.common;
 
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -6,14 +6,18 @@ import android.webkit.WebView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.superman.R;
+import com.superman.databinding.ActivityWebviewBinding;
 
 public class Webview extends AppCompatActivity {
     Bundle extras;
+    ActivityWebviewBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview);
+        binding = ActivityWebviewBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         extras = getIntent().getExtras();
 
         String url = extras.getString("url");
@@ -21,5 +25,7 @@ public class Webview extends AppCompatActivity {
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(url);
+
+        binding.backweb.setOnClickListener(v -> onBackPressed());
     }
 }

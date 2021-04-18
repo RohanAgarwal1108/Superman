@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
-import com.superman.authentication.User;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame21Binding;
@@ -23,6 +22,8 @@ import com.superman.utilities.CookItemClickListener;
 import com.superman.utilities.CustomItemClickListener1;
 import com.superman.utilities.MyProgressDialog;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +45,15 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
         setContentView(binding.getRoot());
         setListeners();
         setUpRecyler();
-        queryCooks();
+        try {
+            queryCooks();
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            myProgressDialog.dismissDialog();
+        }
     }
 
-    private void queryCooks() {
+    private void queryCooks() throws GeneralSecurityException, IOException {
         myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(this);
         getCooks()
@@ -114,15 +120,19 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            queryCooks();
+            try {
+                queryCooks();
+            } catch (GeneralSecurityException | IOException e) {
+                e.printStackTrace();
+            }
         } else if (requestCode == 1 && resultCode != RESULT_OK) {
             finish();
         }
     }
 
-    private Task<List<HashMap<String, Object>>> getCooks() {
+    private Task<List<HashMap<String, Object>>> getCooks() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", User.user.getUid());
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
         return MainActivity.mFunctions
                 .getHttpsCallable("getCooks")
                 .call(data)

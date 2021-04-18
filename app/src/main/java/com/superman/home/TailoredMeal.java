@@ -198,11 +198,17 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
                         }
                     });
         } else if (v == binding.add1) {
-            add(0);
+            if (binding.add1.getAlpha() == 1) {
+                add(0);
+            }
         } else if (v == binding.add2) {
-            add(1);
+            if (binding.add2.getAlpha() == 1) {
+                add(1);
+            }
         } else if (v == binding.add3) {
-            add(2);
+            if (binding.add3.getAlpha() == 1) {
+                add(2);
+            }
         }
     }
 
@@ -217,14 +223,37 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
         if (resultCode == RESULT_OK) {
             if (requestCode == 0 || requestCode == 1 || requestCode == 2) {
                 String mealtime = requestCode == 0 ? "Breakfast" : requestCode == 1 ? "Lunch" : "Dinner";
-                ((HashMap<String, String>) defaultmenu.get(day))
-                        .put(mealtime, ((HashMap<String, String>) defaultmenu.get(day))
-                                .get(mealtime) + "," + data.getStringExtra("result"));
-                ((HashMap<String, String>) defaultmenu.get(day))
-                        .put(mealtime + "Quantity", ((HashMap<String, String>) defaultmenu.get(day))
-                                .get(mealtime + "Quantity") + ",1");
-                (requestCode == 0 ? mAdapter1 : requestCode == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
+
+                String tc = ((HashMap<String, String>) defaultmenu.get(day)).get(mealtime);
+
+                String mealtoadd = data.getStringExtra("result");
+
+                if (!tc.contains(mealtoadd)) {
+                    ((HashMap<String, String>) defaultmenu.get(day))
+                            .put(mealtime, tc + "," + mealtoadd);
+
+                    ((HashMap<String, String>) defaultmenu.get(day))
+                            .put(mealtime + "Quantity", ((HashMap<String, String>) defaultmenu.get(day))
+                                    .get(mealtime + "Quantity") + ",1");
+
+                    (requestCode == 0 ? mAdapter1 : requestCode == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
+
+                    toggleAdd(requestCode, mealtime);
+                }
             }
+        }
+    }
+
+    private void toggleAdd(int requestCode, String mealtime) {
+        String[] number = ((HashMap<String, String>) defaultmenu.get(day)).get(mealtime + "Quantity").split(",");
+        if (requestCode < 0) {
+            if (number.length < 5) {
+                (requestCode == -1 ? binding.add1 : requestCode == -2 ? binding.add2 : binding.add3).setAlpha(1);
+            }
+            return;
+        }
+        if (number.length == 5) {
+            (requestCode == 0 ? binding.add1 : requestCode == 1 ? binding.add2 : binding.add3).setAlpha(0.5f);
         }
     }
 
@@ -319,6 +348,7 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
                     (i == 0 ? mAdapter1 : i == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
                 }
             }
+            toggleAdd((i * -1) - 1, whichmeal);
         }
     }
 

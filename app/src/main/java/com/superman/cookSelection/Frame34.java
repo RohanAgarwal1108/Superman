@@ -15,15 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.Task;
 import com.superman.R;
 import com.superman.UserPreference.Lang_FoodPOJO;
-import com.superman.authentication.User;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame34Binding;
 import com.superman.utilities.CustomItemClickListener;
 import com.superman.utilities.DateFormatter;
+import com.superman.utilities.ExtraUtils;
 import com.superman.utilities.KeyboardUtil;
 import com.superman.utilities.MyProgressDialog;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -139,12 +141,18 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
             startActivityForResult(intent, 1);
         } else if (v == binding.book34) {
             if (binding.book34.getCardBackgroundColor() == getColorStateList(R.color.black)) {
-                bookTrial();
+                try {
+                    bookTrial();
+                } catch (GeneralSecurityException | IOException e) {
+                    e.printStackTrace();
+                    ExtraUtils.makeToast(Frame34.this, "An Error occurred! Please try again.");
+                    myProgressDialog.dismissDialog();
+                }
             }
         }
     }
 
-    private void bookTrial() {
+    private void bookTrial() throws GeneralSecurityException, IOException {
         myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(this);
         scheduleTrial()
@@ -178,11 +186,11 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
                 });
     }
 
-    private Task<HashMap<String, Object>> scheduleTrial() {
+    private Task<HashMap<String, Object>> scheduleTrial() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("cookID", frame21.cookDetails.get(index).getCookID());
         data.put("slot", getSlot());
-        data.put("uid", User.user.getUid());
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
         data.put("address", binding.address.getText().toString());
         data.put("notes", binding.notes.getText().toString());
         data.put("meal", getMeal());

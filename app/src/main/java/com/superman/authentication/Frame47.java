@@ -28,12 +28,14 @@ import com.superman.UserPreference.Frame28;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame47Binding;
+import com.superman.utilities.ExtraUtils;
 import com.superman.utilities.KeyboardUtil;
 import com.superman.utilities.MyProgressDialog;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,14 +67,20 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         binding = ActivityFrame47Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         storageRef = FirebaseStorage.getInstance().getReference();
-        ppRef = storageRef.child(getRefforImage());
+        try {
+            ppRef = storageRef.child(getRefforImage());
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            ExtraUtils.makeToast(Frame47.this, "An Error occurred! Please try again.");
+            finishAffinity();
+        }
         setListeners();
         setSpinner();
         binding.state.setText("");
     }
 
-    private String getRefforImage() {
-        String str = User.user.getUid();
+    private String getRefforImage() throws GeneralSecurityException, IOException {
+        String str = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4);
         return "images/ProfilePic_" + str + ".jpeg";
     }
 
@@ -172,36 +180,48 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void createUser() {
-        registerUser()
-                .addOnCompleteListener(task -> {
-                    myProgressDialog.dismissDialog();
-                    if (!task.isSuccessful()) {
-                        Exception e = task.getException();
-                        if (e instanceof FirebaseFunctionsException) {
-                            FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
-                            FirebaseFunctionsException.Code code = ffe.getCode();
+        try {
+            registerUser()
+                    .addOnCompleteListener(task -> {
+                        myProgressDialog.dismissDialog();
+                        if (!task.isSuccessful()) {
+                            Exception e = task.getException();
+                            if (e instanceof FirebaseFunctionsException) {
+                                FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
+                                FirebaseFunctionsException.Code code = ffe.getCode();
+                            }
+                            Intent intent = new Intent(Frame47.this, Reconnect.class);
+                            startActivityForResult(intent, 3);
+                        } else {
+                            //User.user.setCity(binding.city.getText().toString());
+                            try {
+                                MainActivity.removeValue(getApplicationContext(), new String[]{MainActivity.ALIAS1});
+                                MainActivity.putValues(MainActivity.ALIAS2, "midpref", getApplicationContext());
+                                MainActivity.putValues(MainActivity.ALIAS3, binding.nameedit.getText().toString().trim(), getApplicationContext());
+                            } catch (GeneralSecurityException | IOException e) {
+                                e.printStackTrace();
+                            }
+                            Intent intent = new Intent(Frame47.this, Frame28.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
                         }
-                        Intent intent = new Intent(Frame47.this, Reconnect.class);
-                        startActivityForResult(intent, 3);
-                    } else {
-                        User.user.setName(binding.nameedit.getText().toString());
-                        User.user.setCity(binding.city.getText().toString());
-                        Intent intent = new Intent(Frame47.this, Frame28.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-                });
+                    });
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            myProgressDialog.dismissDialog();
+            makeToast("An Error occurred! Please try later.");
+        }
     }
 
 
-    private Task<HashMap<String, Object>> registerUser() {
+    private Task<HashMap<String, Object>> registerUser() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("pictureUrl", photourl);
         data.put("name", binding.nameedit.getText().toString());
-        data.put("phoneNo", User.user.getNumber());
+        data.put("phoneNo", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS1));
         data.put("from", binding.state.getText().toString());
         data.put("fcmToken", "");
-        data.put("uid", User.user.getUid());
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
         data.put("preferences", false);
         data.put("city", binding.city.getText().toString());
         return MainActivity.mFunctions

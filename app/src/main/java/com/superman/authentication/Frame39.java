@@ -12,9 +12,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.superman.R;
+import com.superman.common.MainActivity;
+import com.superman.common.Webview;
 import com.superman.databinding.ActivityFrame39Binding;
 import com.superman.utilities.KeyboardUtil;
 import com.superman.utilities.LogoutDailog;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnClickListener {
     private ActivityFrame39Binding binding;
@@ -38,6 +43,16 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
         binding.tac.setOnClickListener(this);
         binding.nh.setOnClickListener(this);
         findViewById(android.R.id.content).setFocusableInTouchMode(true);
+        removeKeys();
+    }
+
+    private void removeKeys() {
+        try {
+            MainActivity.removeValue(Frame39.this, new String[]{MainActivity.ALIAS1, MainActivity.ALIAS2, MainActivity.ALIAS3});
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            finishAffinity();
+        }
     }
 
     private boolean isNumberCorrect() {

@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
 import com.superman.authentication.User;
+import com.superman.common.MainActivity;
 import com.superman.databinding.ActivityFrame28Binding;
 import com.superman.utilities.CustomItemClickListener;
 import com.superman.utilities.LogoutDailog;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +97,13 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         //for later use
         //nb = Typeface.createFromAsset(getAssets(), "fonts/nb.otf");
         //nl = Typeface.createFromAsset(getAssets(), "fonts/nl.otf");
-        String fullname = User.user.getName();
+        String fullname;
+        try {
+            fullname = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS3);
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            fullname = "Guest";
+        }
         int i = fullname.indexOf(' ');
         String name = i == -1 ? fullname : fullname.substring(0, i);
         String str = "Hi " + name + ", so need a supercook that";
@@ -116,6 +125,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         } else if (v == binding.whatlin.getChildAt(2)) {
             setCookGender(2);
         } else if (v == binding.next28 && binding.next28.getCardBackgroundColor() == getColorStateList(R.color.black)) {
+            User.initUser();
             if (mealtype == 0) {
                 User.user.setMealtype("Veg");
             } else if (mealtype == 1) {
