@@ -40,6 +40,7 @@ public class Frame116 extends AppCompatActivity implements CustomItemClickListen
         setContentView(binding.getRoot());
         makeAllDishes();
         setupRecyclers();
+        binding.back116.setOnClickListener(v -> onBackPressed());
     }
 
     private void setupRecyclers() {

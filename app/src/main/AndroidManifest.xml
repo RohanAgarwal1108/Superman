@@ -9,63 +9,103 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_supercooklogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Superman">
-        <activity android:name=".home.Frame116" />
-        <activity android:name=".home.Frame112" />
-        <activity android:name=".home.Frame111" />
-        <activity android:name=".home.TailoredMeal" />
-        <activity android:name=".home.Frame110" />
-        <activity android:name=".home.UserProfile" />
-        <activity android:name=".home.Frame101">
-        </activity>
-        <activity android:name=".common.Reconnect" />
-        <activity android:name=".cookSelection.Frame106" />
+
+        <activity
+            android:name=".home.Frame116"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.Frame112"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.Frame111"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.TailoredMeal"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.Frame110"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.UserProfile"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.Frame101"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".common.Reconnect"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".cookSelection.Frame106"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".cookSelection.Frame96"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".common.Webview"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".cookSelection.Frame35"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".cookSelection.Frame34"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".cookSelection.Frame23"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".cookSelection.frame21"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".UserPreference.Frame19"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".UserPreference.Frame28"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".authentication.Frame47"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".authentication.Frame38"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".authentication.Frame39"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".common.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
+
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
     </application>
 
 </manifest>

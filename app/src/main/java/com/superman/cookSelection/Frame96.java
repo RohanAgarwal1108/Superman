@@ -41,6 +41,7 @@ public class Frame96 extends AppCompatActivity implements CustomItemClickListene
 
         binding.buttonlin.setOnClickListener(this);
         findViewById(R.id.bottom_sheet).setOnClickListener(this);
+        binding.back96.setOnClickListener(this);
     }
 
     private void toggleBottomSheet() {
@@ -99,7 +100,7 @@ public class Frame96 extends AppCompatActivity implements CustomItemClickListene
 
     @Override
     public void onClick(View v) {
-        if (v == binding.buttonlin) {
+        if (v == binding.buttonlin || v == binding.back96) {
             this.onBackPressed();
         }
     }

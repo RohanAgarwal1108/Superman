@@ -146,6 +146,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         cuisines.get(index).setSelected(!cuisines.get(index).isSelected());
         mAdapter.notifyDataSetChanged();
         toggleNext();
+        changeSelected();
     }
 
     private void toggleNext() {
@@ -164,5 +165,16 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
 
     private void enableNext() {
         binding.next19.setCardBackgroundColor(getColor(R.color.black));
+    }
+
+    private void changeSelected() {
+        int counter = 0;
+        int total = cuisines.size();
+        for (Lang_FoodPOJO cuisine : cuisines) {
+            if (cuisine.isSelected()) {
+                counter++;
+            }
+        }
+        binding.selected.setText("(" + counter + "/" + total + ") Selected");
     }
 }

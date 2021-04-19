@@ -37,7 +37,7 @@
             android:layout_marginStart="32dp"
             android:layout_toEndOf="@id/backweb"
             android:fontFamily="@font/nb"
-            android:text="Supercook"
+            android:text="SuperCook"
             android:textColor="@color/black"
             android:textSize="20sp" />
 

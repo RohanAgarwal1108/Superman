@@ -1,5 +1,6 @@
 package com.superman.home;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,12 +9,18 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.superman.R;
 import com.superman.authentication.Frame39;
+import com.superman.common.MainActivity;
 import com.superman.common.Webview;
 import com.superman.databinding.ActivityUserProfileBinding;
+import com.superman.utilities.ExtraUtils;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
-    ActivityUserProfileBinding binding;
+    public static ActivityUserProfileBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,17 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         binding.tc.setOnClickListener(this);
         binding.pp.setOnClickListener(this);
         binding.logout.setOnClickListener(this);
+        binding.backuserprof.setOnClickListener(this);
+
+        try {
+            binding.name.setText(MainActivity.getValue(UserProfile.this, MainActivity.ALIAS3));
+        } catch (GeneralSecurityException | IOException e) {
+            binding.name.setText("Guest");
+        }
+
+        if (ExtraUtils.profilepic != null) {
+            binding.userimg.setImageBitmap(ExtraUtils.profilepic);
+        }
     }
 
     @Override
@@ -45,11 +63,27 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             //todo
             startWhatsapp("todo");
         } else if (v == binding.logout) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(UserProfile.this, Frame39.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            openDialog();
+        } else if (v == binding.backuserprof) {
+            this.onBackPressed();
         }
+    }
+
+    private void openDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserProfile.this, R.style.MyAlertDialogTheme);
+        builder.setMessage("Are you sure you want to sign-out?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(UserProfile.this, Frame39.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                })
+                .setNegativeButton("No", ((dialog, which) -> {
+                    dialog.dismiss();
+                }));
+        AlertDialog alert = builder.create();
+        alert.setTitle("");
+        alert.show();
     }
 
     private void startWhatsapp(String str) {

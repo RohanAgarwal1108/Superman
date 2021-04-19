@@ -33,6 +33,8 @@ public class Frame106 extends AppCompatActivity {
                 finish();
             }
         });
+
+        binding.back106.setOnClickListener(v -> onBackPressed());
     }
 
     private String getUserTime() {

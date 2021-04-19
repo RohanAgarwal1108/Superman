@@ -50,6 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/userimg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -67,6 +68,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nb"
@@ -327,7 +329,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="23dp"
                             android:fontFamily="@font/nb"
-                            android:text="About US"
+                            android:text="About Us"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -424,7 +426,7 @@
                     android:layout_height="50dp"
                     android:layout_marginStart="27dp"
                     android:layout_marginEnd="27dp"
-                    android:layout_marginBottom="35dp"
+                    android:layout_marginBottom="28dp"
                     app:cardBackgroundColor="@color/black"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="0dp">
@@ -453,7 +455,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="11dp"
                     android:layout_marginBottom="12dp"
                     android:orientation="horizontal">
 

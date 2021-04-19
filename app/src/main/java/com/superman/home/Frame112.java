@@ -42,6 +42,7 @@ public class Frame112 extends AppCompatActivity implements CustomItemClickListen
 
         setupRecyclers();
         binding.next110.setOnClickListener(this);
+        binding.back112.setOnClickListener(this);
     }
 
     private void setupRecyclers() {
@@ -68,6 +69,8 @@ public class Frame112 extends AppCompatActivity implements CustomItemClickListen
                 Intent intent = new Intent(Frame112.this, TailoredMeal.class);
                 startActivity(intent);
             }
+        } else if (v == binding.back112) {
+            this.onBackPressed();
         }
     }
 

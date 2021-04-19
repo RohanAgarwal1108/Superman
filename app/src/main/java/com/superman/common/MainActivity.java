@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
 
@@ -77,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.mattblack));
         setContentView(R.layout.activity_main);
-        checkSignedInUser();
+        new Handler().postDelayed(this::checkSignedInUser, 3 * 1000);
     }
 
     private void checkSignedInUser() {
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (str.equals("preferences")) {
                     Intent intent = new Intent(MainActivity.this, Frame101.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else if (str.equals("midpref")) {
                     Intent intent = new Intent(MainActivity.this, Frame28.class);
@@ -109,5 +113,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Frame39.class);
             startActivity(intent);
         }
+        finish();
     }
 }

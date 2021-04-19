@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_cook_def" />
 
         </androidx.cardview.widget.CardView>
 

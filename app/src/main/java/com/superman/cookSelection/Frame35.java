@@ -93,6 +93,7 @@ public class Frame35 extends AppCompatActivity implements View.OnClickListener {
             startActivity(i);
         } else if (v == binding.next35) {
             Intent intent = new Intent(Frame35.this, Frame101.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
     }

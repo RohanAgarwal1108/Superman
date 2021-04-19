@@ -128,7 +128,7 @@
                     android:layout_marginTop="23dp"
                     android:layout_marginEnd="28dp"
                     android:fontFamily="@font/nb"
-                    android:text="Where shall we send our superman?"
+                    android:text="Where shall we send our supercook?"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -167,7 +167,7 @@
                             android:fontFamily="@font/nl"
                             android:layout_centerVertical="true"
                             android:background="@null"
-                            android:hint="Estancia Flat no. 420"
+                            android:hint="Eg. Estancia Flat no. 420"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
@@ -295,7 +295,7 @@
                         android:layout_marginBottom="16dp"
                         android:background="@null"
                         android:fontFamily="@font/nb"
-                        android:hint="Yeah, even superman needs instructions!"
+                        android:hint="Yeah, even supercook needs instructions!"
                         android:textColor="@color/black"
                         android:textColorHint="#C4C4C4"
                         android:textSize="18sp" />

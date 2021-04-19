@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
@@ -112,7 +111,9 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        signInWithPhoneAuthCredential(credential);
+                        FirebaseUser user = task.getResult().getUser();
+                        Uid = user.getUid();
+                        getUserbyPhone();
                     } else {
                         myProgressDialog.dismissDialog();
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -120,32 +121,6 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                         }
                     }
                 });
-    }
-
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = task.getResult().getUser();
-                        Uid = user.getUid();
-                        getUserbyPhone();
-                    } else {
-                        myProgressDialog.dismissDialog();
-                        Intent intent = new Intent(Frame38.this, Reconnect.class);
-                        startActivityForResult(intent, 1);
-                    }
-                });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            if (credential != null) {
-                myProgressDialog.showDialog(Frame38.this);
-                signInWithPhoneAuthCredential(credential);
-            }
-        }
     }
 
     private void getUserbyPhone() {
@@ -170,10 +145,12 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                                 Intent intent = new Intent(Frame38.this, Frame47.class);
                                 startActivity(intent);
                             } else {
+                                Log.e("uguh", "jguh");
                                 Intent intent = new Intent(Frame38.this, Reconnect.class);
                                 startActivity(intent);
                             }
                         } else {
+                            Log.e("ugujbkjh", "jguh");
                             Intent intent = new Intent(Frame38.this, Reconnect.class);
                             startActivity(intent);
                         }
@@ -202,6 +179,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                                 return;
                             }
                             Intent intent = new Intent(this, Frame101.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         } else {
                             Intent intent = new Intent(this, Frame28.class);

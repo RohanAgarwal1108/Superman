@@ -21,9 +21,12 @@ import com.superman.databinding.ActivityTailoredMealBinding;
 import com.superman.utilities.CustomItemClickListener;
 import com.superman.utilities.CustomItemClickListener2;
 import com.superman.utilities.CustomItemClickListener3;
+import com.superman.utilities.ExtraUtils;
 import com.superman.utilities.MyProgressDialog;
 import com.superman.utilities.ScreenUtils;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -115,6 +118,7 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
         binding.add1.setOnClickListener(this);
         binding.add2.setOnClickListener(this);
         binding.add3.setOnClickListener(this);
+        binding.backtailored.setOnClickListener(this);
         binding.confirm.setOnClickListener(this);
     }
 
@@ -185,18 +189,24 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
         if (v == binding.confirm) {
             myProgressDialog = new MyProgressDialog();
             myProgressDialog.showDialog(this);
-            setDefaultMeals()
-                    .addOnCompleteListener(task -> {
-                        myProgressDialog.dismissDialog();
-                        if (!task.isSuccessful()) {
-                            Intent intent = new Intent(TailoredMeal.this, Reconnect.class);
-                            startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(TailoredMeal.this, Frame101.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                        }
-                    });
+            try {
+                setDefaultMeals()
+                        .addOnCompleteListener(task -> {
+                            myProgressDialog.dismissDialog();
+                            if (!task.isSuccessful()) {
+                                Intent intent = new Intent(TailoredMeal.this, Reconnect.class);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(TailoredMeal.this, Frame101.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        });
+            } catch (GeneralSecurityException | IOException e) {
+                e.printStackTrace();
+                myProgressDialog.dismissDialog();
+                ExtraUtils.makeToast(TailoredMeal.this, "An Error occurred! Please try later.");
+            }
         } else if (v == binding.add1) {
             if (binding.add1.getAlpha() == 1) {
                 add(0);
@@ -209,6 +219,8 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
             if (binding.add3.getAlpha() == 1) {
                 add(2);
             }
+        } else if (v == binding.backtailored) {
+            this.onBackPressed();
         }
     }
 
@@ -257,9 +269,9 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
         }
     }
 
-    private Task<HashMap<String, Object>> setDefaultMeals() {
+    private Task<HashMap<String, Object>> setDefaultMeals() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", "Al1Ynrrtp4RDXX6f9fSMrzuCCob2");//User.user.getUid());
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
         for (int i = 1; i <= 7; i++) {
             String day = Frame101.getDayOfWeek(i);
             data.put(day, defaultmenu.get(day));

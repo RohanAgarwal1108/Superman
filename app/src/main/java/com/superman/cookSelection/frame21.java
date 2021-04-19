@@ -18,6 +18,7 @@ import com.google.firebase.functions.FirebaseFunctionsException;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame21Binding;
+import com.superman.home.Frame101;
 import com.superman.utilities.CookItemClickListener;
 import com.superman.utilities.CustomItemClickListener1;
 import com.superman.utilities.MyProgressDialog;
@@ -81,7 +82,12 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                     } else {
                         List<HashMap<String, Object>> results = task.getResult();
                         try {
-                            binding.showing.setText("Showing " + results.size() + " SuperCooks");
+                            int size = results.size();
+                            if (size <= 1) {
+                                binding.showing.setText("Showing " + results.size() + " SuperCook");
+                            } else {
+                                binding.showing.setText("Showing " + results.size() + " SuperCooks");
+                            }
                             for (int i = 0; i < results.size(); i++) {
                                 HashMap<String, Object> result = results.get(i);
                                 String city = (String) result.get("city");
@@ -152,6 +158,7 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     private void setListeners() {
         binding.changepref.setOnClickListener(this);
         binding.skip.setOnClickListener(this);
+        binding.back21.setOnClickListener(this);
     }
 
     @Override
@@ -182,7 +189,11 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
             setResult(Activity.RESULT_OK, intent);
             finish();
         } else if (v == binding.skip) {
-            //todo
+            Intent intent = new Intent(frame21.this, Frame101.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        } else if (v == binding.back21) {
+            this.onBackPressed();
         }
     }
 }

@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.functions.FirebaseFunctionsException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -138,7 +139,10 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         } else if (isDetailFilled() && v == binding.next47) {
             postUserData();
         } else if (v == binding.back47) {
-            this.onBackPressed();
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(Frame47.this, Frame39.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
     }
 
