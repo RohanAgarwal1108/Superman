@@ -23,6 +23,10 @@ public class Webview extends AppCompatActivity {
         String url = extras.getString("url");
         WebView webView = findViewById(R.id.webview);
 
+        if (extras.containsKey("title")) {
+            binding.title.setText(extras.getString("title"));
+        }
+
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(url);
 

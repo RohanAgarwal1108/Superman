@@ -53,7 +53,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     private void setUpRecyler() {
         makeArrayList();
         recyclerView = findViewById(R.id.speakrecycler);
-        layoutManager = new GridLayoutManager(this, 4);
+        layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new Frame28Adapter(this, languages, this);
         recyclerView.setAdapter(mAdapter);
@@ -61,28 +61,12 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
 
     private void makeArrayList() {
         languages = new ArrayList<>();
-        languages.add(new Lang_FoodPOJO("Assamese", false));
-        languages.add(new Lang_FoodPOJO("Bengali", false));
-        languages.add(new Lang_FoodPOJO("Bodo", false));
-        languages.add(new Lang_FoodPOJO("Dogri", false));
-        languages.add(new Lang_FoodPOJO("Gujarati", false));
+        languages.add(new Lang_FoodPOJO("Bangla", false));
         languages.add(new Lang_FoodPOJO("Hindi", false));
-        languages.add(new Lang_FoodPOJO("Kannada", false));
-        languages.add(new Lang_FoodPOJO("Kashmiri", false));
-        languages.add(new Lang_FoodPOJO("Konkani", false));
-        languages.add(new Lang_FoodPOJO("Maithili", false));
-        languages.add(new Lang_FoodPOJO("Malayalam", false));
-        languages.add(new Lang_FoodPOJO("Manipuri", false));
-        languages.add(new Lang_FoodPOJO("Marathi", false));
-        languages.add(new Lang_FoodPOJO("Nepali", false));
-        languages.add(new Lang_FoodPOJO("Oriya", false));
         languages.add(new Lang_FoodPOJO("Punjabi", false));
-        languages.add(new Lang_FoodPOJO("Sanskrit", false));
-        languages.add(new Lang_FoodPOJO("Santhali", false));
-        languages.add(new Lang_FoodPOJO("Sindhi", false));
         languages.add(new Lang_FoodPOJO("Tamil", false));
         languages.add(new Lang_FoodPOJO("Telugu", false));
-        languages.add(new Lang_FoodPOJO("Urdu", false));
+        languages.add(new Lang_FoodPOJO("Kannada", false));
     }
 
     private void setListeners() {

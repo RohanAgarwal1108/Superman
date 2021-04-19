@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -45,6 +46,7 @@ public class Frame28Adapter extends RecyclerView.Adapter<Frame28Adapter.ViewHold
         }
         //todo
         holder.langsrc.setImageResource(R.drawable.hindi);
+        holder.lang.setText(langFoodPOJO.getLanguage());
     }
 
     @Override
@@ -60,6 +62,7 @@ public class Frame28Adapter extends RecyclerView.Adapter<Frame28Adapter.ViewHold
         public final View view;
         private final CardView langcard;
         private final ImageView langsrc;
+        private final TextView lang;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +70,7 @@ public class Frame28Adapter extends RecyclerView.Adapter<Frame28Adapter.ViewHold
             langcard = view.findViewById(R.id.langcard);
             langsrc = view.findViewById(R.id.langsrc);
             langcard.setOnClickListener(this);
+            lang = view.findViewById(R.id.lang);
         }
 
         @Override

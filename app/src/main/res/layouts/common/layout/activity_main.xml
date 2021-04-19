@@ -32,7 +32,7 @@
                 android:letterSpacing="-0.12"
                 android:text="Super"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
                 android:letterSpacing="-0.12"
                 android:text="Cook"
                 android:textColor="@color/yellow"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
 
         </LinearLayout>
 

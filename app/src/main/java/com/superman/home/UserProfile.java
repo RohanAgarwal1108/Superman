@@ -50,13 +50,14 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == binding.faq) {
-            startWebView("faq.eule.in");
+            startWebView("faq.eule.in", "FAQs");
         } else if (v == binding.au) {
-            startWebView("about.eule.in");
+            startWebView("about.eule.in", "About Us");
         } else if (v == binding.tc) {
-            startWebView("tc.eule.in");
+            startWebView("tc.eule.in", "Terms and Conditions");
         } else if (v == binding.pp) {
-            startWebView("privacypolicy.eule.in");
+            startWebView("privacypolicy.eule.in", "Privacy Policy" +
+                    "");
         } else if (v == binding.hc) {
             startWhatsapp("Hey I am facing trouble with <please put here>");
         } else if (v == binding.swf) {
@@ -99,9 +100,11 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         startActivity(i);
     }
 
-    private void startWebView(String str) {
+    private void startWebView(String str, String title) {
         Intent intent = new Intent(UserProfile.this, Webview.class);
         intent.putExtra("url", str);
+
+        intent.putExtra("title", title);
         startActivity(intent);
     }
 }

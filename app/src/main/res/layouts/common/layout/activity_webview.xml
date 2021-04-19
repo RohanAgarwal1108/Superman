@@ -14,8 +14,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backweb"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="18dp"
             app:cardBackgroundColor="@color/secondaryblue"
@@ -31,6 +31,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

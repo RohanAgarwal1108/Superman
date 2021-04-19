@@ -29,8 +29,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/back111"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="34dp"
                 app:cardBackgroundColor="@color/secondaryblue"
@@ -56,7 +56,7 @@
                 android:fontFamily="@font/nb"
                 android:text="What do you usually eat for lunch?"
                 android:textColor="@color/black"
-                android:textSize="28sp" />
+                android:textSize="26sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cuisinelist"
@@ -96,9 +96,9 @@
                             android:id="@+id/dishes"
                             android:layout_width="331dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
+                            android:layout_marginStart="25dp"
                             android:layout_marginTop="118dp"
-                            android:layout_marginEnd="30dp"
+                            android:layout_marginEnd="25dp"
                             android:overScrollMode="never"
                             android:scrollbars="none"
                             tools:itemCount="4" />
@@ -136,7 +136,7 @@
             android:fontFamily="@font/nb"
             android:text="NEXT"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
 

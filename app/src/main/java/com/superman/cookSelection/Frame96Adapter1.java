@@ -9,9 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sinaseyfi.advancedcardview.AdvancedCardView;
 import com.superman.R;
 import com.superman.UserPreference.Lang_FoodPOJO;
 import com.superman.utilities.CustomItemClickListener1;
@@ -48,9 +48,9 @@ public class Frame96Adapter1 extends RecyclerView.Adapter<Frame96Adapter1.ViewHo
     public void onBindViewHolder(@NonNull Frame96Adapter1.ViewHolder holder, int position) {
         Lang_FoodPOJO dish = dishes.get(position);
         if (dish.isSelected()) {
-            holder.background.setCardBackgroundColor(mContext.getColor(R.color.yellow));
+            holder.background.setBackground_Color(mContext.getColor(R.color.yellow));
         } else {
-            holder.background.setCardBackgroundColor(mContext.getColor(R.color.white));
+            holder.background.setBackground_Color(mContext.getColor(R.color.white));
         }
         holder.dishes1.setOnClickListener(v -> {
             int clickedPosition = position;
@@ -106,7 +106,7 @@ public class Frame96Adapter1 extends RecyclerView.Adapter<Frame96Adapter1.ViewHo
         public final View view;
         private final ImageView dishimg;
         private final TextView dishtxt;
-        private final CardView background;
+        private final AdvancedCardView background;
         private final RelativeLayout dishes1;
 
         public ViewHolder(@NonNull View itemView) {

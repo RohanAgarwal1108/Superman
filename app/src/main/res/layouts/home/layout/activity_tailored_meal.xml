@@ -19,8 +19,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/backtailored"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="34dp"
                 app:cardBackgroundColor="@color/secondaryblue"
@@ -46,7 +46,7 @@
                 android:fontFamily="@font/nb"
                 android:text="Your tailored meal plan looks like"
                 android:textColor="@color/black"
-                android:textSize="28sp" />
+                android:textSize="26sp" />
 
             <com.sinaseyfi.advancedcardview.AdvancedCardView
                 android:layout_width="match_parent"
@@ -286,8 +286,63 @@
             android:fontFamily="@font/nb"
             android:text="CONFIRM"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/confirmation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="65dp"
+                    android:src="@drawable/ic_clock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/nb"
+                    android:text="We are all set!"
+                    android:textColor="@color/black"
+                    android:textSize="26sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginBottom="65dp"
+                    android:fontFamily="@font/nl"
+                    android:text="Thank you for making those\nefforts, now it's all to us, welcome\nto SORTED life."
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -9,8 +9,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/back38"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="34dp"
         app:cardBackgroundColor="@color/secondaryblue"
@@ -217,7 +217,7 @@
         android:id="@+id/next38"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
@@ -232,7 +232,7 @@
             android:fontFamily="@font/nb"
             android:text="NEXT"
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
 

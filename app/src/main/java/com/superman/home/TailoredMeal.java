@@ -2,6 +2,7 @@ package com.superman.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
@@ -120,6 +121,7 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
         binding.add3.setOnClickListener(this);
         binding.backtailored.setOnClickListener(this);
         binding.confirm.setOnClickListener(this);
+        binding.confirmation.setOnClickListener(this);
     }
 
     private void makeMeals() {
@@ -197,9 +199,15 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
                                 Intent intent = new Intent(TailoredMeal.this, Reconnect.class);
                                 startActivity(intent);
                             } else {
-                                Intent intent = new Intent(TailoredMeal.this, Frame101.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                                binding.confirmation.setVisibility(View.VISIBLE);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent = new Intent(TailoredMeal.this, Frame101.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                    }
+                                }, 3000);
                             }
                         });
             } catch (GeneralSecurityException | IOException e) {

@@ -14,11 +14,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/backuserprof"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="34dp"
             app:cardBackgroundColor="@color/secondaryblue"
@@ -73,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nb"
                     android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     tools:text="Amy Santiago" />
 
                 <TextView
@@ -438,7 +437,7 @@
                         android:fontFamily="@font/nb"
                         android:text="Log out"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="20sp" />
 
                 </androidx.cardview.widget.CardView>
 

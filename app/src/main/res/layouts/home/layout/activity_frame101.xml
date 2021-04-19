@@ -381,7 +381,7 @@
                         android:fontFamily="@font/nb"
                         android:text="START NOW"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="20sp" />
 
                 </androidx.cardview.widget.CardView>
 

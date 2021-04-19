@@ -13,8 +13,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/back47"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="34dp"
             app:cardBackgroundColor="@color/secondaryblue"
@@ -61,7 +61,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/photocard"
@@ -294,9 +294,9 @@
                         android:id="@+id/next47"
                         android:layout_width="match_parent"
                         android:layout_below="@+id/pincode"
-                        android:layout_height="55dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="32dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
                         app:cardBackgroundColor="@color/black"
@@ -310,7 +310,7 @@
                             android:fontFamily="@font/nb"
                             android:text="NEXT"
                             android:textColor="@color/white"
-                            android:textSize="24sp" />
+                            android:textSize="20sp" />
 
                     </androidx.cardview.widget.CardView>
 

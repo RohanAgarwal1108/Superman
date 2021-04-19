@@ -272,7 +272,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/next35"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -289,7 +289,7 @@
             android:fontFamily="@font/nb"
             android:text="NEXT"
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
 
