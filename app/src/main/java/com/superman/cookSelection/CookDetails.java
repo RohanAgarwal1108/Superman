@@ -18,6 +18,8 @@ public class CookDetails {
     private String from;
     private List<String> foodPictureURL;
     private String cookID;
+    private long hiredate;
+    private long firedate;
 
     public CookDetails(String city, String cookPic, String cookGender, int rating, String bio, List<String> cuisine, List<String> canSpeak, String mealtype, String charges, String background,
                        String name, String from, List<String> foodPictureURL, String cookID, List<String> booked) {
@@ -53,6 +55,22 @@ public class CookDetails {
 
     public void setCuisine(List<String> cuisine) {
         this.cuisine = cuisine;
+    }
+
+    public long getFiredate() {
+        return firedate;
+    }
+
+    public void setFiredate(long firedate) {
+        this.firedate = firedate;
+    }
+
+    public long getHiredate() {
+        return hiredate;
+    }
+
+    public void setHiredate(long hiredate) {
+        this.hiredate = hiredate;
     }
 
     public String getMealtype() {

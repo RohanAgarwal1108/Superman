@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.superman.databinding.ActivityFrame23Binding;
+import com.superman.home.MyCooks;
 
 public class Frame23 extends AppCompatActivity implements View.OnClickListener {
     private ActivityFrame23Binding binding;
@@ -32,7 +33,15 @@ public class Frame23 extends AppCompatActivity implements View.OnClickListener {
         binding = ActivityFrame23Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         extras = getIntent().getExtras();
-        cookDetails = frame21.cookDetails.get(extras.getInt("index"));
+        if (extras.containsKey("Mycooks")) {
+            if (extras.getString("Mycooks").equals("true")) {
+                cookDetails = MyCooks.cookDetails.get(extras.getInt("index"));
+            } else {
+                cookDetails = MyCooks.currentCook;
+            }
+        } else {
+            cookDetails = frame21.cookDetails.get(extras.getInt("index"));
+        }
         if (extras.containsKey("normal")) {
             activityOpenNormally();
         } else {

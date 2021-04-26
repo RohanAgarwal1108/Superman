@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.superman.R;
 import com.superman.utilities.CustomItemClickListener;
 
@@ -44,8 +45,7 @@ public class Frame28Adapter extends RecyclerView.Adapter<Frame28Adapter.ViewHold
         } else {
             holder.langcard.setCardBackgroundColor(context.getColor(R.color.white));
         }
-        //todo
-        holder.langsrc.setImageResource(R.drawable.hindi);
+        Picasso.get().load(langFoodPOJO.getUrl()).placeholder(R.drawable.langdef).into(holder.langsrc);
         holder.lang.setText(langFoodPOJO.getLanguage());
     }
 

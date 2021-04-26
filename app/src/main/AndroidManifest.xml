@@ -12,88 +12,77 @@
         android:icon="@drawable/ic_supercooklogo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Superman">
-
+        android:theme="@style/Theme.Superman"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".common.OnBoarding"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.MyTrials"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.MyCooks"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".home.Frame116"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".home.Frame112"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".home.Frame111"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".home.TailoredMeal"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".home.Frame110"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".home.UserProfile"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".home.Frame101"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".common.Reconnect"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".cookSelection.Frame106"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".cookSelection.Frame96"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".common.Webview"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".cookSelection.Frame35"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".cookSelection.Frame34"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".cookSelection.Frame23"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".cookSelection.frame21"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".UserPreference.Frame19"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".UserPreference.Frame28"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".authentication.Frame47"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".authentication.Frame38"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".authentication.Frame39"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".common.MainActivity"
             android:screenOrientation="portrait">

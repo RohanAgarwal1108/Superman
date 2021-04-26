@@ -292,11 +292,29 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="0dp">
 
-                        <ImageView
-                            android:layout_width="43dp"
-                            android:layout_height="62dp"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_female" />
+                            android:orientation="vertical">
+
+                            <ImageView
+
+                                android:layout_width="43dp"
+                                android:layout_height="62dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_female" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/nb"
+                                android:text="Female"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -309,11 +327,28 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="0dp">
 
-                        <ImageView
-                            android:layout_width="43dp"
-                            android:layout_height="62dp"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_male" />
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="43dp"
+                                android:layout_height="62dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_male" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/nb"
+                                android:text="Male"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -326,11 +361,28 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="0dp">
 
-                        <ImageView
-                            android:layout_width="43dp"
-                            android:layout_height="62dp"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_cookany" />
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="43dp"
+                                android:layout_height="62dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_cookany" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="@font/nb"
+                                android:text="Any"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 

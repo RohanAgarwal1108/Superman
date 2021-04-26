@@ -2,6 +2,7 @@ package com.superman.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.github.islamkhsh.CardSliderViewPager;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
 import com.superman.R;
+import com.superman.authentication.User;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame101Binding;
@@ -33,6 +35,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Frame101 extends AppCompatActivity implements CustomItemClickListener2, CustomItemClickListener, View.OnClickListener, CustomItemClickListener3 {
     public static ActivityFrame101Binding binding;
@@ -42,6 +46,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
     private RecyclerView.Adapter mAdapter;
     private SliderLayoutManager sliderLayoutManager;
     private HashMap<String, Object> defaultmenu;
+    Timer timer;
     private String day;
     private RecyclerView breakrecycler;
     private RecyclerView.Adapter mAdapter1;
@@ -55,6 +60,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
     private RecyclerView.LayoutManager layoutManager3;
     private ArrayList<String> dow;
     private MyProgressDialog myProgressDialog;
+    private HashMap<String, Object> temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +149,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
 
     private void setHome() throws GeneralSecurityException, IOException {
         defaultmenu = new HashMap<>();
+
         getHome()
                 .addOnCompleteListener(task -> {
                     myProgressDialog.dismissDialog();
@@ -151,12 +158,16 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
                         if (e instanceof FirebaseFunctionsException) {
                             FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
                             FirebaseFunctionsException.Code code = ffe.getCode();
-                            Intent intent = new Intent(Frame101.this, Reconnect.class);
-                            startActivityForResult(intent, 0);
                         }
+                        Intent intent = new Intent(Frame101.this, Reconnect.class);
+                        intent.putExtra("refresh", "refresh");
+                        startActivityForResult(intent, 3);
                     } else {
                         HashMap<String, Object> result = task.getResult();
                         ArrayList<HashMap<String, Object>> cards = (ArrayList<HashMap<String, Object>>) result.get("cards");
+                        User.initUser();
+                        User.user.setName((String) result.get("userName"));
+                        User.user.setLocation(result.get("city") + ", " + result.get("state"));
                         for (int i = 0; i < cards.size(); i++) {
                             HashMap<String, Object> card = cards.get(i);
                             CardsPOJO cardPOJO = new CardsPOJO((int) card.get("cta"), (String) card.get("color"), (String) card.get("details"), (String) card.get("title"));
@@ -207,31 +218,20 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
                 });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
-            makeHome();
-        }
-    }
-
     private void setUpMealsRecyclers() {
         breakrecycler = binding.breakrecycler;
-        breakrecycler.setHasFixedSize(true);
         layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         breakrecycler.setLayoutManager(layoutManager1);
         mAdapter1 = new MealAdapter(0, this, defaultmenu, day, this);
         breakrecycler.setAdapter(mAdapter1);
 
         lunchrecycler = binding.lunchrecycler;
-        lunchrecycler.setHasFixedSize(true);
         layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         lunchrecycler.setLayoutManager(layoutManager2);
         mAdapter2 = new MealAdapter(1, this, defaultmenu, day, this);
         lunchrecycler.setAdapter(mAdapter2);
 
         dinnerrecycler = binding.dinnerrecycler;
-        dinnerrecycler.setHasFixedSize(true);
         layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         dinnerrecycler.setLayoutManager(layoutManager3);
         mAdapter3 = new MealAdapter(2, this, defaultmenu, day, this);
@@ -287,7 +287,171 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
 
     @Override
     public void onCustomItemClick(int index, int i, boolean add) {
+        if (index != -1) {
+            String whichmeal = i == 0 ? "Breakfast" : i == 1 ? "Lunch" : "Dinner";
+            String whichQuantity = whichmeal + "Quantity";
+            String quants = ((HashMap<String, String>) defaultmenu.get(day)).get(whichQuantity);
+            String[] quantsarray = quants.split(",");
+            int quantity = Integer.parseInt(quantsarray[index].trim());
+            if (add) {
+                if (quantity < 5) {
+                    quantity++;
+                    quantsarray[index] = String.valueOf(quantity);
+                    makeDeepCopy();
+                    ((HashMap<String, String>) defaultmenu.get(day)).put(whichQuantity, join(quantsarray));
+                    sendRequest();
+                    (i == 0 ? mAdapter1 : i == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
+                }
+            } else {
+                if (quantity != 1) {
+                    quantity--;
+                    quantsarray[index] = String.valueOf(quantity);
+                    makeDeepCopy();
+                    ((HashMap<String, String>) defaultmenu.get(day)).put(whichQuantity, join(quantsarray));
+                    sendRequest();
+                } else {
+                    String meals = ((HashMap<String, String>) defaultmenu.get(day)).get(whichmeal);
+                    String[] mealarrays = meals.split(",");
+                    mealarrays = remove(mealarrays, index);
+                    makeDeepCopy();
+                    ((HashMap<String, String>) defaultmenu.get(day)).put(whichmeal, join(mealarrays));
+                    ((HashMap<String, String>) defaultmenu.get(day)).put(whichQuantity, getQuantity(quantsarray, index));
+                    sendRequest();
+                }
+                (i == 0 ? mAdapter1 : i == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
+            }
+        } else {
+            add(i);
+        }
+    }
 
+    private void sendRequest() {
+        if (timer != null) {
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    setDefaultMeals()
+                            .addOnCompleteListener(task -> {
+                                Log.e("hih", "jij");
+                                if (!task.isSuccessful()) {
+                                    defaultmenu = DeepClone.deepClone(temp);
+                                    ((MealAdapter) mAdapter1).dataChanger(defaultmenu);
+                                    ((MealAdapter) mAdapter2).dataChanger(defaultmenu);
+                                    ((MealAdapter) mAdapter3).dataChanger(defaultmenu);
+                                }
+                                temp = null;
+                            });
+                } catch (GeneralSecurityException | IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 3000);
+    }
+
+    private Task<HashMap<String, Object>> setDefaultMeals() throws GeneralSecurityException, IOException {
+        Map<String, Object> data = new HashMap<>();
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        for (int i = 1; i <= 7; i++) {
+            String day = Frame101.getDayOfWeek(i);
+            data.put(day, defaultmenu.get(day));
+        }
+        return MainActivity.mFunctions
+                .getHttpsCallable("setDefaultMeals")
+                .call(data)
+                .continueWith(task -> (HashMap<String, Object>) task.getResult().getData());
+    }
+
+    private void makeDeepCopy() {
+        if (temp == null) {
+            temp = new HashMap<>();
+            temp = DeepClone.deepClone(defaultmenu);
+        }
+    }
+
+    private String getQuantity(String[] quantsarray, int index) {
+        String str = "";
+        for (int i = 0; i < quantsarray.length; i++) {
+            if (i == index) {
+                continue;
+            }
+            str += quantsarray[i] + ",";
+        }
+        if (str.isEmpty()) {
+            return "";
+        }
+        return str.substring(0, str.length() - 1);
+    }
+
+    private String[] remove(String[] mealarrays, int index) {
+        String[] str = new String[mealarrays.length - 1];
+        int counter = 0;
+        for (int i = 0; i < mealarrays.length; i++) {
+            if (i == index) {
+                continue;
+            }
+            str[counter] = mealarrays[i];
+            counter++;
+        }
+        return str;
+    }
+
+    private String join(String[] array) {
+        String str = "";
+        for (int i = 0; i < array.length; i++) {
+            str += array[i] + ",";
+        }
+        if (str.isEmpty()) {
+            return "";
+        }
+        return str.substring(0, str.length() - 1);
+    }
+
+    private void add(int i) {
+        Intent intent = new Intent(Frame101.this, Frame116.class);
+        startActivityForResult(intent, i);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 0 || requestCode == 1 || requestCode == 2) {
+                String mealtime = requestCode == 0 ? "Breakfast" : requestCode == 1 ? "Lunch" : "Dinner";
+
+                String tc = ((HashMap<String, String>) defaultmenu.get(day)).get(mealtime);
+
+                String mealtoadd = data.getStringExtra("result");
+
+                if (!tc.contains(mealtoadd)) {
+                    String comma;
+                    if (tc.isEmpty()) {
+                        comma = "";
+                    } else {
+                        comma = ",";
+                    }
+                    makeDeepCopy();
+                    ((HashMap<String, String>) defaultmenu.get(day))
+                            .put(mealtime, tc + comma + mealtoadd);
+
+                    ((HashMap<String, String>) defaultmenu.get(day))
+                            .put(mealtime + "Quantity", ((HashMap<String, String>) defaultmenu.get(day))
+                                    .get(mealtime + "Quantity") + comma + "1");
+
+                    sendRequest();
+
+                    (requestCode == 0 ? mAdapter1 : requestCode == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
+                }
+            }
+        }
+        if (requestCode == 3) {
+            makeHome();
+        }
     }
 
     @Override

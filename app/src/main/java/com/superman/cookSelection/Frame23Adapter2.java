@@ -35,7 +35,7 @@ public class Frame23Adapter2 extends RecyclerView.Adapter<Frame23Adapter2.ViewHo
     @Override
     public void onBindViewHolder(@NonNull Frame23Adapter2.ViewHolder holder, int position) {
         String cookfood = mDataset.get(position);
-        Picasso.get().load(cookfood).into(holder.foodimg);
+        Picasso.get().load(cookfood).placeholder(R.drawable.ic_cookfood_placeholder).into(holder.foodimg);
     }
 
     @Override

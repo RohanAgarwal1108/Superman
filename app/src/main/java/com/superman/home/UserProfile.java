@@ -11,13 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.superman.R;
 import com.superman.authentication.Frame39;
-import com.superman.common.MainActivity;
+import com.superman.authentication.User;
 import com.superman.common.Webview;
 import com.superman.databinding.ActivityUserProfileBinding;
 import com.superman.utilities.ExtraUtils;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
     public static ActivityUserProfileBinding binding;
@@ -35,10 +32,13 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         binding.pp.setOnClickListener(this);
         binding.logout.setOnClickListener(this);
         binding.backuserprof.setOnClickListener(this);
+        binding.mc.setOnClickListener(this);
+        binding.mt.setOnClickListener(this);
 
         try {
-            binding.name.setText(MainActivity.getValue(UserProfile.this, MainActivity.ALIAS3));
-        } catch (GeneralSecurityException | IOException e) {
+            binding.name.setText(User.user.getName());
+            binding.location.setText(User.user.getLocation());
+        } catch (Exception e) {
             binding.name.setText("Guest");
         }
 
@@ -50,14 +50,13 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == binding.faq) {
-            startWebView("faq.eule.in", "FAQs");
+            startWebView("https://www.notion.so/FAQ-f3e302236d504ce6b90cecbae073b0a8", "FAQs");
         } else if (v == binding.au) {
-            startWebView("about.eule.in", "About Us");
+            startWebView("https://about.eule.in", "About Us");
         } else if (v == binding.tc) {
-            startWebView("tc.eule.in", "Terms and Conditions");
+            startWebView("https://tc.eule.in", "Terms and Conditions");
         } else if (v == binding.pp) {
-            startWebView("privacypolicy.eule.in", "Privacy Policy" +
-                    "");
+            startWebView("https://privacypolicy.eule.in", "Privacy Policy");
         } else if (v == binding.hc) {
             startWhatsapp("Hey I am facing trouble with <please put here>");
         } else if (v == binding.swf) {
@@ -67,6 +66,12 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             openDialog();
         } else if (v == binding.backuserprof) {
             this.onBackPressed();
+        } else if (v == binding.mc) {
+            Intent intent = new Intent(UserProfile.this, MyCooks.class);
+            startActivity(intent);
+        } else if (v == binding.mt) {
+            Intent intent = new Intent(UserProfile.this, MyTrials.class);
+            startActivity(intent);
         }
     }
 
@@ -103,7 +108,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private void startWebView(String str, String title) {
         Intent intent = new Intent(UserProfile.this, Webview.class);
         intent.putExtra("url", str);
-
         intent.putExtra("title", title);
         startActivity(intent);
     }

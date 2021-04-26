@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sinaseyfi.advancedcardview.AdvancedCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/prevcook"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginStart="30dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginEnd="30dp"
+    android:layout_marginBottom="12dp"
+    app:background_Color="@color/white"
+    app:cornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.sinaseyfi.advancedcardview.AdvancedCardView
+            android:id="@+id/previmgcard"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            app:cornerRadius="15dp">
+
+            <ImageView
+                android:id="@+id/previmg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@mipmap/ic_launcher" />
+
+        </com.sinaseyfi.advancedcardview.AdvancedCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/open"
+            android:layout_toEndOf="@id/previmgcard"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cookname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nb"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:text="Ichika Nakano" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nl"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                tools:text="March 19 - Oct 20" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_arrow" />
+
+    </RelativeLayout>
+
+</com.sinaseyfi.advancedcardview.AdvancedCardView>

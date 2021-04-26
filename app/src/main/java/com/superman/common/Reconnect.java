@@ -23,6 +23,13 @@ public class Reconnect extends AppCompatActivity {
             finish();
         });
 
-        binding.backreconn.setOnClickListener(v -> onBackPressed());
+        binding.backreconn.setOnClickListener(v -> {
+            if (getIntent().getExtras().containsKey("refresh")) {
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
+            onBackPressed();
+        });
     }
 }

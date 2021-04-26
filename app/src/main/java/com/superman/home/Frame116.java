@@ -48,7 +48,7 @@ public class Frame116 extends AppCompatActivity implements CustomItemClickListen
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new Frame96Adapter(this, this, TailoredMeal.breakfastdishes, 4);
+        mAdapter = new Frame96Adapter(this, this, mydishes, 4);
         recyclerView.setAdapter(mAdapter);
 
         recyclerView1 = findViewById(R.id.dishes);
@@ -82,7 +82,7 @@ public class Frame116 extends AppCompatActivity implements CustomItemClickListen
         dishes = new String[]{"Burger", "Sandwich", "French Toast", "Pancakes"};
         addEntries("American");
 
-        keys = TailoredMeal.breakfastdishes.keySet().toArray(new String[0]);
+        keys = mydishes.keySet().toArray(new String[0]);
     }
 
     private void addEntries(String cuisine) {

@@ -14,6 +14,7 @@ import androidx.security.crypto.MasterKeys;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.functions.FirebaseFunctions;
+import com.segment.analytics.Analytics;
 import com.superman.R;
 import com.superman.UserPreference.Frame28;
 import com.superman.authentication.Frame39;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public static String ALIAS4 = "Uid";
     public static String ALIAS1 = "phonenumber";
     public static String ALIAS2 = "status";
+    public static String ALIAS5 = "onboarding";
     static String masterKeyAlias = null;
     private static SharedPreferences sharedPreferences = null;
 
@@ -81,7 +83,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.mattblack));
         setContentView(R.layout.activity_main);
-        new Handler().postDelayed(this::checkSignedInUser, 3 * 1000);
+        initializeSegment();
+        new Handler().postDelayed(this::checkOnboarding, 3 * 1000);
+    }
+
+    private void initializeSegment() {
+        Analytics analytics = new Analytics.Builder(MainActivity.this, "U727ZBegynSOCrtZiQeyCqhgw5HhqJeZ")
+                .trackApplicationLifecycleEvents()
+                .recordScreenViews()
+                .build();
+        Analytics.setSingletonInstance(analytics);
+    }
+
+    private void checkOnboarding() {
+        try {
+            String string = getValue(MainActivity.this, ALIAS5);
+            if (string == null) {
+                putValues(ALIAS5, "true", MainActivity.this);
+                Intent intent = new Intent(MainActivity.this, OnBoarding.class);
+                startActivity(intent);
+            } else {
+                checkSignedInUser();
+            }
+        } catch (GeneralSecurityException | IOException e) {
+            checkSignedInUser();
+        }
     }
 
     private void checkSignedInUser() {

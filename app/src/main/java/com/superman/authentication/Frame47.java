@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -61,6 +62,7 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
     private ActivityFrame47Binding binding;
     private Bitmap bitmap;
     private MyProgressDialog myProgressDialog;
+    private String fcmToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,8 +181,21 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         }).addOnSuccessListener(taskSnapshot -> ppRef.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
                     photourl = uri.toString();
-                    createUser();
+                    getFcmToken();
                 }));
+    }
+
+    private void getFcmToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        myProgressDialog.dismissDialog();
+                        ExtraUtils.makeToast(Frame47.this, "Please check your internet connection and try again later!");
+                        return;
+                    }
+                    fcmToken = task.getResult();
+                    createUser();
+                });
     }
 
     private void createUser() {
@@ -197,7 +212,6 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
                             Intent intent = new Intent(Frame47.this, Reconnect.class);
                             startActivityForResult(intent, 3);
                         } else {
-                            //User.user.setCity(binding.city.getText().toString());
                             try {
                                 MainActivity.removeValue(getApplicationContext(), new String[]{MainActivity.ALIAS1});
                                 MainActivity.putValues(MainActivity.ALIAS2, "midpref", getApplicationContext());
@@ -217,14 +231,13 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
     private Task<HashMap<String, Object>> registerUser() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("pictureUrl", photourl);
         data.put("name", binding.nameedit.getText().toString());
         data.put("phoneNo", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS1));
         data.put("from", binding.state.getText().toString());
-        data.put("fcmToken", "");
+        data.put("fcmToken", fcmToken);
         data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
         data.put("preferences", false);
         data.put("city", binding.city.getText().toString());

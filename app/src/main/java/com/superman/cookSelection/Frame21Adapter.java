@@ -64,7 +64,7 @@ public class Frame21Adapter extends RecyclerView.Adapter<Frame21Adapter.ViewHold
         holder.currentCity.setText(cookDetails.getCity());
         holder.from.setText("From " + cookDetails.getFrom());
 
-        Picasso.get().load(cookDetails.getCookPic()).into(holder.cookpic);
+        Picasso.get().load(cookDetails.getCookPic()).placeholder(R.drawable.ic_cook_def).into(holder.cookpic);
         ViewCompat.setTransitionName(holder.cookpic, cookDetails.getCookID());
 
         holder.morecard.setOnClickListener(v -> cookItemClickListener.onCookItemClick(holder.getAdapterPosition(), cookDetails, holder.cookpic));

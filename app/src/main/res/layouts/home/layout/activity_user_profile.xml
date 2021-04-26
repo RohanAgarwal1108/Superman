@@ -76,6 +76,7 @@
                     tools:text="Amy Santiago" />
 
                 <TextView
+                    android:id="@+id/location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nl"

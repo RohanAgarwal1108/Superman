@@ -1,14 +1,20 @@
 package com.superman.UserPreference;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.superman.R;
 import com.superman.authentication.User;
 import com.superman.common.MainActivity;
@@ -19,7 +25,10 @@ import com.superman.utilities.LogoutDailog;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class Frame28 extends AppCompatActivity implements View.OnClickListener, CustomItemClickListener {
     private ActivityFrame28Binding binding;
@@ -29,6 +38,8 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Lang_FoodPOJO> languages;
+    FirebaseFirestore db;
+    int state = 0;
 
     /**
      * for later use
@@ -45,28 +56,46 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         binding = ActivityFrame28Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        db = FirebaseFirestore.getInstance();
+
+        if (getIntent().getExtras().containsKey("state")) {
+            state = 1;
+        }
         setUI();
         setListeners();
         setUpRecyler();
+
     }
 
     private void setUpRecyler() {
-        makeArrayList();
+        languages = new ArrayList<>();
         recyclerView = findViewById(R.id.speakrecycler);
         layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new Frame28Adapter(this, languages, this);
         recyclerView.setAdapter(mAdapter);
+        makeArrayList();
     }
 
     private void makeArrayList() {
-        languages = new ArrayList<>();
-        languages.add(new Lang_FoodPOJO("Bangla", false));
-        languages.add(new Lang_FoodPOJO("Hindi", false));
-        languages.add(new Lang_FoodPOJO("Punjabi", false));
-        languages.add(new Lang_FoodPOJO("Tamil", false));
-        languages.add(new Lang_FoodPOJO("Telugu", false));
-        languages.add(new Lang_FoodPOJO("Kannada", false));
+        DocumentReference documentReference = db.collection("AppData").document("Languages");
+        documentReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot snapshot = task.getResult();
+                HashMap<String, String> language = (HashMap<String, String>) snapshot.get("Language");
+                Log.e("lanugage", String.valueOf(language));
+
+                Iterator it = language.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                    languages.add(new Lang_FoodPOJO((String) pair.getKey(), false, (String) pair.getValue()));
+                    it.remove();
+                }
+                mAdapter.notifyDataSetChanged();
+            } else {
+                //todo add adapter
+            }
+        });
     }
 
     private void setListeners() {
@@ -132,7 +161,12 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
             }
             User.user.setLanguages(al);
             Intent intent = new Intent(Frame28.this, Frame19.class);
-            startActivity(intent);
+            if (state == 1) {
+                intent.putExtra("state", "1");
+                startActivityForResult(intent, 1);
+            } else {
+                startActivity(intent);
+            }
         }
     }
 
@@ -187,12 +221,26 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
 
     @Override
     public void onBackPressed() {
-        openDialog();
+        if (state == 1) {
+            super.onBackPressed();
+        } else {
+            openDialog();
+        }
     }
 
     private void openDialog() {
         LogoutDailog logoutDialog = new LogoutDailog();
         logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Intent returnIntent = new Intent();
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+        }
     }
 
     /*for later use*/

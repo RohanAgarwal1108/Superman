@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +43,6 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
     public static HashMap<String, ArrayList<Lang_FoodPOJO>> dinnerdishes;
     public static String[] keys;
     private static String[] dishes;
-    Toast toast;
     private ArrayList<String> dates;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -116,9 +114,6 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
     }
 
     private void setupListeners() {
-        binding.add1.setOnClickListener(this);
-        binding.add2.setOnClickListener(this);
-        binding.add3.setOnClickListener(this);
         binding.backtailored.setOnClickListener(this);
         binding.confirm.setOnClickListener(this);
         binding.confirmation.setOnClickListener(this);
@@ -215,18 +210,6 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
                 myProgressDialog.dismissDialog();
                 ExtraUtils.makeToast(TailoredMeal.this, "An Error occurred! Please try later.");
             }
-        } else if (v == binding.add1) {
-            if (binding.add1.getAlpha() == 1) {
-                add(0);
-            }
-        } else if (v == binding.add2) {
-            if (binding.add2.getAlpha() == 1) {
-                add(1);
-            }
-        } else if (v == binding.add3) {
-            if (binding.add3.getAlpha() == 1) {
-                add(2);
-            }
         } else if (v == binding.backtailored) {
             this.onBackPressed();
         }
@@ -249,31 +232,22 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
                 String mealtoadd = data.getStringExtra("result");
 
                 if (!tc.contains(mealtoadd)) {
+                    String comma;
+                    if (tc.isEmpty()) {
+                        comma = "";
+                    } else {
+                        comma = ",";
+                    }
                     ((HashMap<String, String>) defaultmenu.get(day))
-                            .put(mealtime, tc + "," + mealtoadd);
+                            .put(mealtime, tc + comma + mealtoadd);
 
                     ((HashMap<String, String>) defaultmenu.get(day))
                             .put(mealtime + "Quantity", ((HashMap<String, String>) defaultmenu.get(day))
-                                    .get(mealtime + "Quantity") + ",1");
+                                    .get(mealtime + "Quantity") + comma + "1");
 
                     (requestCode == 0 ? mAdapter1 : requestCode == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
-
-                    toggleAdd(requestCode, mealtime);
                 }
             }
-        }
-    }
-
-    private void toggleAdd(int requestCode, String mealtime) {
-        String[] number = ((HashMap<String, String>) defaultmenu.get(day)).get(mealtime + "Quantity").split(",");
-        if (requestCode < 0) {
-            if (number.length < 5) {
-                (requestCode == -1 ? binding.add1 : requestCode == -2 ? binding.add2 : binding.add3).setAlpha(1);
-            }
-            return;
-        }
-        if (number.length == 5) {
-            (requestCode == 0 ? binding.add1 : requestCode == 1 ? binding.add2 : binding.add3).setAlpha(0.5f);
         }
     }
 
@@ -292,21 +266,18 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
 
     private void setUpMealsRecyclers() {
         breakrecycler = binding.breakrecycler;
-        breakrecycler.setHasFixedSize(true);
         layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         breakrecycler.setLayoutManager(layoutManager1);
         mAdapter1 = new MealAdapter(0, this, defaultmenu, day, this);
         breakrecycler.setAdapter(mAdapter1);
 
         lunchrecycler = binding.lunchrecycler;
-        lunchrecycler.setHasFixedSize(true);
         layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         lunchrecycler.setLayoutManager(layoutManager2);
         mAdapter2 = new MealAdapter(1, this, defaultmenu, day, this);
         lunchrecycler.setAdapter(mAdapter2);
 
         dinnerrecycler = binding.dinnerrecycler;
-        dinnerrecycler.setHasFixedSize(true);
         layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         dinnerrecycler.setLayoutManager(layoutManager3);
         mAdapter3 = new MealAdapter(2, this, defaultmenu, day, this);
@@ -338,37 +309,35 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
 
     @Override
     public void onCustomItemClick(int index, int i, boolean add) {
-        String whichmeal = i == 0 ? "Breakfast" : i == 1 ? "Lunch" : "Dinner";
-        String whichQuantity = whichmeal + "Quantity";
-        String quants = ((HashMap<String, String>) defaultmenu.get(day)).get(whichQuantity);
-        String[] quantsarray = quants.split(",");
-        int quantity = Integer.parseInt(quantsarray[index].trim());
-        if (add) {
-            if (quantity < 5) {
-                quantity++;
-                quantsarray[index] = String.valueOf(quantity);
-                ((HashMap<String, String>) defaultmenu.get(day)).put(whichQuantity, join(quantsarray));
-                (i == 0 ? mAdapter1 : i == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
-            }
-        } else {
-            if (quantity != 1) {
-                quantity--;
-                quantsarray[index] = String.valueOf(quantity);
-                ((HashMap<String, String>) defaultmenu.get(day)).put(whichQuantity, join(quantsarray));
-                (i == 0 ? mAdapter1 : i == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
+        if (index != -1) {
+            String whichmeal = i == 0 ? "Breakfast" : i == 1 ? "Lunch" : "Dinner";
+            String whichQuantity = whichmeal + "Quantity";
+            String quants = ((HashMap<String, String>) defaultmenu.get(day)).get(whichQuantity);
+            String[] quantsarray = quants.split(",");
+            int quantity = Integer.parseInt(quantsarray[index].trim());
+            if (add) {
+                if (quantity < 5) {
+                    quantity++;
+                    quantsarray[index] = String.valueOf(quantity);
+                    ((HashMap<String, String>) defaultmenu.get(day)).put(whichQuantity, join(quantsarray));
+                    (i == 0 ? mAdapter1 : i == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
+                }
             } else {
-                String meals = ((HashMap<String, String>) defaultmenu.get(day)).get(whichmeal);
-                String[] mealarrays = meals.split(",");
-                if (mealarrays.length == 1) {
-                    makeToast("At least one dish is required!");
+                if (quantity != 1) {
+                    quantity--;
+                    quantsarray[index] = String.valueOf(quantity);
+                    ((HashMap<String, String>) defaultmenu.get(day)).put(whichQuantity, join(quantsarray));
                 } else {
+                    String meals = ((HashMap<String, String>) defaultmenu.get(day)).get(whichmeal);
+                    String[] mealarrays = meals.split(",");
                     mealarrays = remove(mealarrays, index);
                     ((HashMap<String, String>) defaultmenu.get(day)).put(whichmeal, join(mealarrays));
                     ((HashMap<String, String>) defaultmenu.get(day)).put(whichQuantity, getQuantity(quantsarray, index));
-                    (i == 0 ? mAdapter1 : i == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
                 }
+                (i == 0 ? mAdapter1 : i == 1 ? mAdapter2 : mAdapter3).notifyDataSetChanged();
             }
-            toggleAdd((i * -1) - 1, whichmeal);
+        } else {
+            add(i);
         }
     }
 
@@ -390,6 +359,9 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
         for (int i = 0; i < array.length; i++) {
             str += array[i] + ",";
         }
+        if (str.isEmpty()) {
+            return "";
+        }
         return str.substring(0, str.length() - 1);
     }
 
@@ -401,14 +373,9 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
             }
             str += quantsarray[i] + ",";
         }
-        return str.substring(0, str.length() - 1);
-    }
-
-    private void makeToast(String str) {
-        if (toast != null) {
-            toast.cancel();
+        if (str.isEmpty()) {
+            return "";
         }
-        toast = Toast.makeText(TailoredMeal.this, str, Toast.LENGTH_SHORT);
-        toast.show();
+        return str.substring(0, str.length() - 1);
     }
 }

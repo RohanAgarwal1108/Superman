@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryblue"
+    tools:context=".home.MyCooks">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/backcooks"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="34dp"
+        app:cardBackgroundColor="@color/secondaryblue"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/backcooks"
+        android:layout_alignBottom="@id/backcooks"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/nb"
+        android:gravity="center_vertical"
+        android:text="My Cooks"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
+    <RelativeLayout
+        android:id="@+id/bookedcooks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/backcooks"
+        android:layout_marginTop="40dp">
+
+        <RelativeLayout
+            android:id="@+id/presentdetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/presentcook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cookimg"
+                    android:layout_width="109dp"
+                    android:layout_height="109dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="50dp"
+                    app:cardCornerRadius="54.5dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:id="@+id/currentimg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        tools:src="@mipmap/ic_launcher" />
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_toEndOf="@id/cookimg"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/currentname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nb"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        tools:text="Uesugi Futaro" />
+
+                    <TextView
+                        android:id="@+id/currentid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/nl"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        tools:text="#superef33r4cr4r4" />
+
+                    <TextView
+                        android:id="@+id/currentduration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/nl"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        tools:text="Nov 20 - Present" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/presentcook"
+                android:layout_marginTop="18sp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24sp"
+                    android:fontFamily="@font/nb"
+                    android:text="Looking for a change\nor more?"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/book"
+                    android:layout_width="85dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="24dp"
+                    app:cardBackgroundColor="@color/black"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="83dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        app:cardBackgroundColor="@color/primaryblue"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/nb"
+                            android:text="Book a trial"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/previouscook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/presentdetails"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/nb"
+            android:text="Previous Cooks"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <com.sinaseyfi.advancedcardview.AdvancedCardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/previouscook"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="14dp"
+            app:background_Color="#F9F9F9"
+            app:cornerRadius_TopLeft="60dp"
+            app:cornerRadius_TopRight="60dp">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:visibility="invisible" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/prevrecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:overScrollMode="never"
+                        android:scrollbars="none" />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </com.sinaseyfi.advancedcardview.AdvancedCardView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/backcooks"
+        android:layout_marginTop="30dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/nb"
+            android:text="You look lonely!"
+            android:textColor="@color/black"
+            android:textSize="28sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="285dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_lonely" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="33dp"
+                android:fontFamily="@font/nb"
+                android:text="Looks like you havent found your just match yet."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="33dp"
+                android:fontFamily="@font/nl"
+                android:text="Let’s explore and book a trail to get started"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bookcook"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/black"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nb"
+                android:text="FIND COOKS NOW"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

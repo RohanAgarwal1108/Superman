@@ -4,11 +4,11 @@ import java.util.List;
 
 public class User {
     public static User user;
-    private String number;
-    private String uid;
     private String mealtype;
     private String cookgender;
     private List<String> languages;
+    private String name;
+    private String location;
 
     public static void initUser() {
         user = new User();
@@ -36,5 +36,21 @@ public class User {
 
     public void setLanguages(List<String> languages) {
         this.languages = languages;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

@@ -1,5 +1,6 @@
 package com.superman.UserPreference;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -56,7 +57,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
 
     private void makeArrayList() {
         cuisines = new ArrayList<>();
-        String[] cuisinesarray = {"North Indian", "South Indian", "North Eastern", "Gujarati", "Maharashtrian", "Chinese", "Italian", "American", "Naga", "Bengali"};
+        String[] cuisinesarray = {"North Indian", "South Indian", "North Eastern", "Maharashtrian", "Chinese", "Italian", "American"};
         for (String cuisine : cuisinesarray) {
             cuisines.add(new Lang_FoodPOJO(cuisine, false));
         }
@@ -103,8 +104,14 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
                             ExtraUtils.makeToast(Frame19.this, "An Error occurred! Please try again.");
                             return;
                         }
-                        Intent intent = new Intent(Frame19.this, frame21.class);
-                        startActivityForResult(intent, 1);
+                        if (getIntent().getExtras().containsKey("state")) {
+                            Intent returnIntent = new Intent();
+                            setResult(Activity.RESULT_OK, returnIntent);
+                            finish();
+                        } else {
+                            Intent intent = new Intent(Frame19.this, frame21.class);
+                            startActivityForResult(intent, 1);
+                        }
                     }
                 });
     }

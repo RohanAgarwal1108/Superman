@@ -104,11 +104,11 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
     public void onClick(View v) {
         if (v == binding.tac) {
             Intent intent = new Intent(Frame39.this, Webview.class);
-            intent.putExtra("url", "www.tandc.eule.in");
+            intent.putExtra("url", "http:/tandc.eule.in");
             startActivity(intent);
         } else if (v == binding.pp) {
             Intent intent = new Intent(Frame39.this, Webview.class);
-            intent.putExtra("url", "www.privacypolicies.eule.in");
+            intent.putExtra("url", "http://privacypolicies.eule.in");
             startActivity(intent);
         } else if (v == binding.nh) {
             String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Supercook! I need help!";

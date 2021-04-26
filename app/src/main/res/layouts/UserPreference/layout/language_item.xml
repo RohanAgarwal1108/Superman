@@ -21,10 +21,10 @@
         <ImageView
             android:id="@+id/langsrc"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:src="@drawable/hindi" />
+            android:src="@drawable/langdef" />
 
         <TextView
             android:id="@+id/lang"
@@ -34,7 +34,6 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nb"
             android:textColor="@color/black"
-            android:textSize="12sp"
             tools:text="Hindi" />
 
     </LinearLayout>

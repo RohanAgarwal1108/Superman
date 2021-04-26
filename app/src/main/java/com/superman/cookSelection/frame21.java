@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.superman.UserPreference.Frame28;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame21Binding;
@@ -38,12 +39,18 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private MyProgressDialog myProgressDialog;
+    public int state = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityFrame21Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (getIntent().getExtras().containsKey("Source")) {
+            state = 1;
+        }
+        setUi();
         setListeners();
         setUpRecyler();
         try {
@@ -51,6 +58,12 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
             myProgressDialog.dismissDialog();
+        }
+    }
+
+    private void setUi() {
+        if (state == 1) {
+            binding.skip.setVisibility(View.GONE);
         }
     }
 
@@ -133,6 +146,8 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
             }
         } else if (requestCode == 1 && resultCode != RESULT_OK) {
             finish();
+        } else if (requestCode == 2 && resultCode == RESULT_OK) {
+            recreate();
         }
     }
 
@@ -185,9 +200,15 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     @Override
     public void onClick(View v) {
         if (v == binding.changepref) {
-            Intent intent = new Intent();
-            setResult(Activity.RESULT_OK, intent);
-            finish();
+            if (state == 1) {
+                Intent intent = new Intent(frame21.this, Frame28.class);
+                intent.putExtra("state", "1");
+                startActivityForResult(intent, 2);
+            } else {
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
         } else if (v == binding.skip) {
             Intent intent = new Intent(frame21.this, Frame101.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

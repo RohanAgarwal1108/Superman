@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primaryblue"
     tools:context=".common.Webview">
 
     <RelativeLayout
@@ -45,6 +46,7 @@
     </RelativeLayout>
 
     <WebView
+        android:overScrollMode="never"
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

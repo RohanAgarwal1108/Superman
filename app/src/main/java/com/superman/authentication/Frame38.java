@@ -22,12 +22,14 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.superman.R;
 import com.superman.UserPreference.Frame28;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame38Binding;
 import com.superman.home.Frame101;
+import com.superman.utilities.ExtraUtils;
 import com.superman.utilities.GenericKeyEvent;
 import com.superman.utilities.GenericTextWatcher;
 import com.superman.utilities.KeyboardUtil;
@@ -53,6 +55,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     private int flag = 1;
     private MyProgressDialog myProgressDialog;
     private PhoneAuthCredential credential;
+    private String fcmToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,13 +116,26 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                     if (task.isSuccessful()) {
                         FirebaseUser user = task.getResult().getUser();
                         Uid = user.getUid();
-                        getUserbyPhone();
+                        getFcmToken();
                     } else {
                         myProgressDialog.dismissDialog();
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             makeToast("Invalid credentials!", Toast.LENGTH_SHORT);
                         }
                     }
+                });
+    }
+
+    private void getFcmToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        myProgressDialog.dismissDialog();
+                        ExtraUtils.makeToast(Frame38.this, "Please check your internet connection and try again later!");
+                        return;
+                    }
+                    fcmToken = task.getResult();
+                    getUserbyPhone();
                 });
     }
 
@@ -335,7 +351,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     private Task<HashMap<String, Object>> checkPhone(String text) {
         Map<String, Object> data = new HashMap<>();
         data.put("phoneNo", text);
-        Log.e("data", String.valueOf(data));
+        data.put("fcm", fcmToken);
         return MainActivity.mFunctions
                 .getHttpsCallable("checkPhone")
                 .call(data)

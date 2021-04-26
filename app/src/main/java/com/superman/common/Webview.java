@@ -2,6 +2,7 @@ package com.superman.common;
 
 import android.os.Bundle;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,8 +29,16 @@ public class Webview extends AppCompatActivity {
         }
 
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(url);
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.loadUrl("www.google.com");
 
         binding.backweb.setOnClickListener(v -> onBackPressed());
+    }
+
+    private static class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return false;
+        }
     }
 }
