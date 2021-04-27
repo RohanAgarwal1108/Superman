@@ -1,12 +1,15 @@
 package com.superman.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +18,7 @@ import com.google.firebase.functions.FirebaseFunctionsException;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
 import com.superman.cookSelection.CookDetails;
+import com.superman.cookSelection.Frame23;
 import com.superman.cookSelection.frame21;
 import com.superman.databinding.ActivityMyTrialsBinding;
 import com.superman.utilities.CookItemClickListener1;
@@ -55,6 +59,21 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
             intent.putExtra("Source", "Mycooks");
             startActivity(intent);
         });
+
+        binding.help.setOnClickListener(v -> {
+            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Supercook! I am facing trouble booking trials.";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            i.setPackage("com.whatsapp");
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            } else {
+                i.setPackage(null);
+            }
+            startActivity(i);
+        });
+
+        binding.backtrials.setOnClickListener(v -> onBackPressed());
     }
 
     private void setUpRecylers() {
@@ -160,7 +179,7 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
                             }
                         }
                     }
-
+                    toggleRecyclers();
                     mAdapter1.notifyDataSetChanged();
                     mAdapter.notifyDataSetChanged();
                 }
@@ -169,6 +188,17 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
             myProgressDialog.dismissDialog();
             ExtraUtils.makeToast(MyTrials.this, "An error occured! Try again later.");
             this.onBackPressed();
+        }
+    }
+
+    private void toggleRecyclers() {
+        if (currentTrials.size() == 0) {
+            binding.ongoingrecycler.setVisibility(View.GONE);
+            binding.ongoingrel.setVisibility(View.GONE);
+        }
+        if (cookDetails.size() == 0) {
+            binding.card.setVisibility(View.GONE);
+            binding.previouscook.setVisibility(View.GONE);
         }
     }
 
@@ -182,21 +212,15 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
     }
 
     @Override
-    public void onCookItemClick(int position, CookDetails cookDetails, ImageView cookpic, boolean isOngoing, boolean isClickDetail) {
-
-    }
-
-    /*@Override
-    public void onCookItemClick(int position, CookDetails cookDetails, ImageView cookpic) {
+    public void onCookItemClick(int position, CookDetails cookDetails, ImageView cookpic, boolean isOngoing) {
         Intent intent = new Intent(MyTrials.this, Frame23.class);
         intent.putExtra("index", position);
-        //todo
-        intent.putExtra("MyTrials", "true");
+        intent.putExtra("MyTrials", String.valueOf(isOngoing));
         intent.putExtra(EXTRA_COOK_IMAGE_TRANSITION_NAME, ViewCompat.getTransitionName(cookpic));
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
                 cookpic,
                 ViewCompat.getTransitionName(cookpic));
         startActivity(intent, options.toBundle());
-    }*/
+    }
 }

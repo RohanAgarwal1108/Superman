@@ -2,6 +2,7 @@ package com.superman.home;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +20,13 @@ import com.superman.R;
 import com.superman.authentication.User;
 import com.superman.common.MainActivity;
 import com.superman.common.Reconnect;
+import com.superman.common.Webview;
+import com.superman.cookSelection.frame21;
 import com.superman.databinding.ActivityFrame101Binding;
 import com.superman.utilities.CustomItemClickListener;
 import com.superman.utilities.CustomItemClickListener2;
 import com.superman.utilities.CustomItemClickListener3;
+import com.superman.utilities.CustomItemClickListener4;
 import com.superman.utilities.ExtraUtils;
 import com.superman.utilities.LogoutDailog;
 import com.superman.utilities.MyProgressDialog;
@@ -39,7 +43,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Frame101 extends AppCompatActivity implements CustomItemClickListener2, CustomItemClickListener, View.OnClickListener, CustomItemClickListener3 {
+public class Frame101 extends AppCompatActivity implements CustomItemClickListener2, CustomItemClickListener, View.OnClickListener, CustomItemClickListener3, CustomItemClickListener4 {
     public static ActivityFrame101Binding binding;
     private ArrayList<CardsPOJO> cardsPOJOS;
     private Frame101Adapter adapter;
@@ -90,6 +94,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
     private void setListeners() {
         binding.startnow.setOnClickListener(this);
         binding.ppcard.setOnClickListener(this);
+        binding.hey.setOnClickListener(this);
         binding.noclick.setOnClickListener(this);
         binding.breaktime.setOnClickListener(this);
         binding.lunchtime.setOnClickListener(this);
@@ -131,7 +136,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
     private void setupMainCard() {
         CardSliderViewPager cardSliderViewPager = binding.cards;
         cardsPOJOS = new ArrayList<>();
-        adapter = new Frame101Adapter(cardsPOJOS, this);
+        adapter = new Frame101Adapter(cardsPOJOS, this, this);
         cardSliderViewPager.setAdapter(adapter);
     }
 
@@ -167,13 +172,16 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
                         startActivityForResult(intent, 3);
                     } else {
                         HashMap<String, Object> result = task.getResult();
-                        ArrayList<HashMap<String, Object>> cards = (ArrayList<HashMap<String, Object>>) result.get("cards");
+                        HashMap<String, Object> cards1 = (HashMap<String, Object>) result.get("cards");
+                        ArrayList<HashMap<String, Object>> cards = (ArrayList<HashMap<String, Object>>) cards1.get("cardsArray");
                         User.initUser();
                         User.user.setName((String) result.get("userName"));
+                        int k = User.user.getName().indexOf(" ") == -1 ? User.user.getName().length() - 1 : User.user.getName().indexOf(" ");
+                        binding.hey.setText("Hey, " + User.user.getName().substring(0, k) + " \uD83C\uDF7F");
                         User.user.setLocation(result.get("city") + ", " + result.get("state"));
                         for (int i = 0; i < cards.size(); i++) {
                             HashMap<String, Object> card = cards.get(i);
-                            CardsPOJO cardPOJO = new CardsPOJO((int) card.get("cta"), (String) card.get("color"), (String) card.get("details"), (String) card.get("title"));
+                            CardsPOJO cardPOJO = new CardsPOJO(Integer.parseInt((String) card.get("cta")), (String) card.get("color"), (String) card.get("details"), (String) card.get("title"), (String) card.get("icon"), (String) card.get("url"));
                             cardsPOJOS.add(cardPOJO);
                         }
                         try {
@@ -255,7 +263,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
 
     @Override
     public void onClick(View v) {
-        if (v == binding.ppcard) {
+        if (v == binding.ppcard || v == binding.hey) {
             Intent intent = new Intent(Frame101.this, UserProfile.class);
             startActivity(intent);
         } else if (v == binding.startnow) {
@@ -474,5 +482,34 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
     public void onBackPressed() {
         LogoutDailog logoutDialog = new LogoutDailog();
         logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+    }
+
+    @Override
+    public void onCustomItemClick4(int index) {
+        CardsPOJO cardsPOJO = cardsPOJOS.get(index);
+        int i = cardsPOJO.getCta();
+        if (i == 1) {
+            Intent intent = new Intent(Frame101.this, frame21.class);
+            intent.putExtra("Source", "Mycooks");
+            startActivity(intent);
+        } else if (i == 2) {
+            Intent intent = new Intent(Frame101.this, MyTrials.class);
+            startActivity(intent);
+        } else if (i == 3) {
+            String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey, Supercook" + cardsPOJO.getUrl();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            intent.setPackage("com.whatsapp");
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                intent.setPackage(null);
+            }
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(Frame101.this, Webview.class);
+            intent.putExtra("url", cardsPOJO.getUrl());
+            startActivity(intent);
+        }
     }
 }

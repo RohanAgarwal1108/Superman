@@ -25,6 +25,7 @@
             app:cardElevation="0dp" />
 
         <ImageView
+            android:id="@+id/icon"
             android:layout_width="27dp"
             android:layout_height="27dp"
             android:layout_alignStart="@id/imgcard"
@@ -69,6 +70,7 @@
             app:cornerRadius="34dp" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/buttoncard"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignStart="@id/buttonsupercard"
@@ -80,12 +82,14 @@
             app:cardElevation="0dp">
 
             <TextView
+                android:id="@+id/buttontxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/nb"
                 android:textColor="@color/yellow"
                 android:textSize="14sp"
+                android:textAlignment="center"
                 tools:text="go" />
 
         </androidx.cardview.widget.CardView>

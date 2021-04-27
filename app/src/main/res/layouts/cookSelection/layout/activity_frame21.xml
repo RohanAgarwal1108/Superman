@@ -74,40 +74,89 @@
         app:cornerRadius_TopLeft="60dp"
         app:cornerRadius_TopRight="60dp">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/scroll"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:scrollbars="none">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/nocook"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginBottom="76dp"
+                android:visibility="gone">
 
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="14dp"
-                    android:visibility="invisible" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/cookrecycler"
+                    <ImageView
+                        android:layout_width="280dp"
+                        android:layout_height="280dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_nocook" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:fontFamily="@font/nb"
+                        android:text="There is no supercook around you.\nTry changing preferences to see more."
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/nl"
+                        android:text="Or we don't serve your city yet\nas we are just getting started."
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="17dp"
-                    android:layout_marginEnd="17dp"
-                    android:overScrollMode="never"
-                    android:scrollbars="none" />
+                    android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:visibility="invisible" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp"
+                        android:visibility="invisible" />
 
-            </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cookrecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="17dp"
+                        android:layout_marginEnd="17dp"
+                        android:overScrollMode="never"
+                        android:scrollbars="none" />
 
-        </androidx.core.widget.NestedScrollView>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </RelativeLayout>
 
     </com.sinaseyfi.advancedcardview.AdvancedCardView>
 

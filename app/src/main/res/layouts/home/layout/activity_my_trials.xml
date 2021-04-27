@@ -37,7 +37,22 @@
         android:textColor="@color/black"
         android:textSize="22sp" />
 
+    <TextView
+        android:id="@+id/help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/backtrials"
+        android:layout_alignBottom="@id/backtrials"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nb"
+        android:gravity="center_vertical"
+        android:text="Help?"
+        android:textColor="#979797"
+        android:textSize="16sp" />
+
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/bookedtrials"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,7 +67,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <RelativeLayout
                     android:id="@+id/ongoingrel"
@@ -71,37 +86,6 @@
                         android:textColor="@color/black"
                         android:textSize="22sp" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/help"
-                        android:layout_width="85dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        app:cardBackgroundColor="@color/black"
-                        app:cardCornerRadius="4dp"
-                        app:cardElevation="0dp">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="83dp"
-                            android:layout_height="28dp"
-                            android:layout_gravity="center"
-                            app:cardBackgroundColor="@color/primaryblue"
-                            app:cardCornerRadius="3dp"
-                            app:cardElevation="0dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/nb"
-                                android:text="Help?"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </androidx.cardview.widget.CardView>
-
-                    </androidx.cardview.widget.CardView>
-
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -117,44 +101,43 @@
 
                 <TextView
                     android:id="@+id/previouscook"
-            android:layout_width="wrap_content"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ongoingrecycler"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/nb"
-            android:text="Previous Trials"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
+                    android:text="Previous Trials"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
 
-        <com.sinaseyfi.advancedcardview.AdvancedCardView
-            android:id="@+id/card"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/previouscook"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="14dp"
-            app:background_Color="#F9F9F9"
-            app:cornerRadius_TopLeft="60dp"
-            app:cornerRadius_TopRight="60dp">
-
-                <LinearLayout
+                <com.sinaseyfi.advancedcardview.AdvancedCardView
+                    android:id="@+id/card"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_below="@id/previouscook"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="14dp"
+                    app:background_Color="#F9F9F9"
+                    app:cornerRadius="60dp">
 
-                    <View
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="28dp"
-                        android:visibility="invisible" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="28dp"
+                            android:visibility="invisible" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/prevrecycler"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_marginBottom="30dp"
                         android:overScrollMode="never"
-                        android:layout_marginBottom="15dp"
                         android:scrollbars="none" />
 
                 </LinearLayout>
@@ -172,8 +155,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/backtrials"
-        android:layout_marginTop="20dp"
-        android:visibility="gone">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"

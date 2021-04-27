@@ -81,6 +81,8 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                             FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
                             FirebaseFunctionsException.Code code = ffe.getCode();
                             if (code == FirebaseFunctionsException.Code.NOT_FOUND) {
+                                binding.scroll.setVisibility(View.GONE);
+                                binding.nocook.setVisibility(View.VISIBLE);
                                 //todo
                                 //com.superman E/bijb: com.google.firebase.functions.FirebaseFunctionsException: No cooks found that matches your preference try changing something.
                             } else {
@@ -93,6 +95,8 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                             startActivityForResult(intent, 1);
                         }
                     } else {
+                        binding.scroll.setVisibility(View.VISIBLE);
+                        binding.nocook.setVisibility(View.GONE);
                         List<HashMap<String, Object>> results = task.getResult();
                         try {
                             int size = results.size();

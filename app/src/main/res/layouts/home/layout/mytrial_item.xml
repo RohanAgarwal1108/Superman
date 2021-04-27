@@ -22,10 +22,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="18.5dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="6dp"
             android:layout_marginBottom="18.5dp">
 
             <RelativeLayout
+                android:id="@+id/cookdets"
+                android:layout_centerVertical="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/right">
@@ -69,6 +71,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:layout_gravity="center_vertical"
                     android:id="@+id/supercode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,13 +98,14 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
                     android:src="@drawable/ic_downarrow" />
 
             </LinearLayout>
@@ -110,6 +114,7 @@
 
         <com.sinaseyfi.advancedcardview.AdvancedCardView
             android:id="@+id/circle1"
+            android:visibility="gone"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_below="@id/cookdet"
@@ -123,6 +128,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_below="@id/cookdet"
+            android:visibility="gone"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="-12.5dp"
             android:layout_marginEnd="-12.5dp"
@@ -130,6 +136,8 @@
             app:cornerRadius="12.5dp" />
 
         <RelativeLayout
+            android:id="@+id/expandedets"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cookdet">
@@ -153,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nl"
-                    android:text="Meals"
+                    android:text="Meal"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

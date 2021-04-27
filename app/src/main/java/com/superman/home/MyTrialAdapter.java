@@ -5,15 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sinaseyfi.advancedcardview.AdvancedCardView;
 import com.squareup.picasso.Picasso;
 import com.superman.R;
 import com.superman.cookSelection.CookDetails;
+import com.superman.utilities.Animations;
 import com.superman.utilities.CookItemClickListener1;
 
 import java.util.ArrayList;
@@ -45,10 +48,36 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
         CookDetails cookDetail = cookDetails.get(position);
         holder.cookname.setText(cookDetail.getName());
         holder.cooksupercode.setText(cookDetail.getSuperCode());
-        holder.meals.setText(getFormattedMeal(cookDetail));
+        String str = getFormattedMeal(cookDetail);
+        if (str.equals("No meals selected.")) {
+            holder.meal.setVisibility(View.GONE);
+        } else {
+            holder.meal.setVisibility(View.VISIBLE);
+        }
+        holder.meals.setText(str);
         holder.slotbooked.setText(getSlot(cookDetail));
         holder.address.setText(cookDetail.getAddress());
         Picasso.get().load(cookDetail.getCookPic()).placeholder(R.drawable.ic_cook_def).into(holder.trialimg);
+        holder.button.setOnClickListener(v -> {
+            boolean show = toggleLayout(!cookDetail.isExpanded(), v, holder.layoutExpand, holder.circle1, holder.circle2);
+            cookDetails.get(position).setExpanded(show);
+        });
+        ViewCompat.setTransitionName(holder.trialimg, cookDetail.getCookID());
+        holder.cookdets.setOnClickListener(v -> listener1.onCookItemClick(holder.getAdapterPosition(), cookDetail, holder.trialimg, isOngoing));
+    }
+
+    private boolean toggleLayout(boolean isExpanded, View v, RelativeLayout layoutExpand, AdvancedCardView card1, AdvancedCardView card2) {
+        Animations.toggleArrow(v, isExpanded);
+        if (isExpanded) {
+            Animations.expand(layoutExpand);
+            card1.setVisibility(View.VISIBLE);
+            card2.setVisibility(View.VISIBLE);
+        } else {
+            Animations.collapse(layoutExpand);
+            card1.setVisibility(View.GONE);
+            card2.setVisibility(View.GONE);
+        }
+        return isExpanded;
     }
 
     private String getSlot(CookDetails cookDetail) {
@@ -62,7 +91,7 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
 
     private String getFormattedMeal(CookDetails cookDetail) {
         if (cookDetail.getQuantity() == null || cookDetail.getQuantity().trim().isEmpty()) {
-            return "";
+            return "No meals selected.";
         }
         String[] meals = cookDetail.getMeal().split(",");
         String[] quantity = cookDetail.getQuantity().split(",");
@@ -87,9 +116,11 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View view;
         public final ImageView trialimg;
+        public final ImageView button;
         public final TextView cookname;
         public final TextView cooksupercode;
         public final TextView meals;
+        public final TextView meal;
         public final TextView slotbooked;
         public final TextView address;
         public final View line1;
@@ -98,6 +129,8 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
         public final AdvancedCardView circle2;
         public final AdvancedCardView circle3;
         public final AdvancedCardView circle4;
+        public final RelativeLayout layoutExpand;
+        public final RelativeLayout cookdets;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -106,14 +139,18 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
             cookname = view.findViewById(R.id.cookname);
             cooksupercode = view.findViewById(R.id.cooksupercode);
             meals = view.findViewById(R.id.meal);
+            meal = view.findViewById(R.id.meals);
             slotbooked = view.findViewById(R.id.slotbooked);
             address = view.findViewById(R.id.address);
+            layoutExpand = view.findViewById(R.id.expandedets);
             line1 = view.findViewById(R.id.line1);
             line2 = view.findViewById(R.id.line2);
             circle1 = view.findViewById(R.id.circle1);
             circle2 = view.findViewById(R.id.circle2);
             circle3 = view.findViewById(R.id.circle3);
             circle4 = view.findViewById(R.id.circle4);
+            cookdets = view.findViewById(R.id.cookdets);
+            button = view.findViewById(R.id.button);
             if (isOngoing) {
                 circle1.setBackground_Color(context.getColor(R.color.primaryblue));
                 circle2.setBackground_Color(context.getColor(R.color.primaryblue));

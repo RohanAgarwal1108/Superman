@@ -12,6 +12,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.superman.databinding.ActivityFrame23Binding;
 import com.superman.home.MyCooks;
+import com.superman.home.MyTrials;
 
 public class Frame23 extends AppCompatActivity implements View.OnClickListener {
     private ActivityFrame23Binding binding;
@@ -38,6 +39,12 @@ public class Frame23 extends AppCompatActivity implements View.OnClickListener {
                 cookDetails = MyCooks.cookDetails.get(extras.getInt("index"));
             } else {
                 cookDetails = MyCooks.currentCook;
+            }
+        } else if (extras.containsKey("MyTrials")) {
+            if (extras.getString("MyTrials").equals("true")) {
+                cookDetails = MyTrials.currentTrials.get(extras.getInt("index"));
+            } else {
+                cookDetails = MyTrials.cookDetails.get(extras.getInt("index"));
             }
         } else {
             cookDetails = frame21.cookDetails.get(extras.getInt("index"));
