@@ -19,6 +19,7 @@ import com.superman.home.Frame111;
 import com.superman.home.Frame112;
 import com.superman.home.Frame116;
 import com.superman.utilities.CustomItemClickListener;
+import com.superman.utilities.ExtraUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +55,8 @@ public class Frame96Adapter extends RecyclerView.Adapter<Frame96Adapter.ViewHold
             holder.background.setCardBackgroundColor(mContext.getColor(R.color.white));
         }
         holder.cuisinetxt.setText(cuisine);
-        //todo image
+        int id = mContext.getResources().getIdentifier("drawable/" + ExtraUtils.nameFormatter(cuisine), null, mContext.getPackageName());
+        holder.cuisineimg.setImageResource(id == 0 ? R.drawable.ic_dishplaceholder : id);
     }
 
     @Override

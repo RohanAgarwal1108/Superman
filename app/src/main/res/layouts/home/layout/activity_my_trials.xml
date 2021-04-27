@@ -12,7 +12,7 @@
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="24dp"
         app:cardBackgroundColor="@color/secondaryblue"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp">
@@ -38,240 +38,91 @@
         android:textSize="22sp" />
 
     <RelativeLayout
+        android:id="@+id/bookedtrials"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/backtrials"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="22dp">
 
-        <TextView
-            android:id="@+id/ongoing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:fontFamily="@font/nb"
-            android:text="Ongoing"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <com.sinaseyfi.advancedcardview.AdvancedCardView
-            android:id="@+id/ongoingtrial"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ongoing"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
-            app:cornerRadius="15dp">
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
-                    android:id="@+id/cookdet"
+                    android:id="@+id/ongoingrel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="6dp">
-
-                    <com.sinaseyfi.advancedcardview.AdvancedCardView
-                        android:id="@+id/trialimgcard"
-                        android:layout_width="33dp"
-                        android:layout_height="33dp"
-                        android:layout_centerVertical="true"
-                        app:cornerRadius="16.5dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            tools:src="@mipmap/ic_launcher" />
-
-                    </com.sinaseyfi.advancedcardview.AdvancedCardView>
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="30dp">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_toStartOf="@id/supercode"
-                        android:layout_toEndOf="@id/trialimgcard"
-                        android:fontFamily="@font/nb"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        tools:text="Yotsuba Nakano" />
-
-                    <LinearLayout
-                        android:id="@+id/supercode"
+                        android:id="@+id/ongoing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/nb"
+                        android:text="Ongoing"
+                        android:textColor="@color/black"
+                        android:textSize="22sp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/help"
+                        android:layout_width="85dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:orientation="vertical">
+                        app:cardBackgroundColor="@color/black"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/nl"
-                            android:text="Super-Code"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="83dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center"
+                            app:cardBackgroundColor="@color/primaryblue"
+                            app:cardCornerRadius="3dp"
+                            app:cardElevation="0dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:fontFamily="@font/nb"
-                            android:textColor="@color/yellow"
-                            android:textSize="16sp"
-                            tools:text="4567" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/nb"
+                                android:text="Help?"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
 
-                    </LinearLayout>
+                        </androidx.cardview.widget.CardView>
 
-                </RelativeLayout>
-
-                <com.sinaseyfi.advancedcardview.AdvancedCardView
-                    android:id="@+id/circle"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_below="@id/cookdet"
-                    android:layout_marginStart="-12.5dp"
-                    app:background_Color="@color/primaryblue"
-                    app:cornerRadius="12.5dp" />
-
-                <com.sinaseyfi.advancedcardview.AdvancedCardView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_below="@id/cookdet"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="-12.5dp"
-                    app:background_Color="@color/primaryblue"
-                    app:cornerRadius="12.5dp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@id/cookdet"
-                    android:layout_marginTop="12.5dp"
-                    android:background="@color/primaryblue" />
-
-                <RelativeLayout
-                    android:id="@+id/order"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/circle"
-                    android:layout_marginStart="42dp"
-                    android:layout_marginEnd="42dp">
-
-                    <TextView
-                        android:id="@+id/meals"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nl"
-                        android:text="Meals"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/meals"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginBottom="16dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/nl"
-                            android:lineSpacingExtra="6dp"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            tools:text="Panner Chilli x 2\nPanner Chilli x 2\nPanner Chilli x 2" />
-
-                    </FrameLayout>
+                    </androidx.cardview.widget.CardView>
 
                 </RelativeLayout>
 
-                <com.sinaseyfi.advancedcardview.AdvancedCardView
-                    android:id="@+id/circle1"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_below="@id/order"
-                    android:layout_marginStart="-12.5dp"
-                    app:background_Color="@color/primaryblue"
-                    app:cornerRadius="12.5dp" />
-
-                <com.sinaseyfi.advancedcardview.AdvancedCardView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_below="@id/order"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="-12.5dp"
-                    app:background_Color="@color/primaryblue"
-                    app:cornerRadius="12.5dp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@id/order"
-                    android:layout_marginTop="12.5dp"
-                    android:background="@color/primaryblue" />
-
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ongoingrecycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/circle1"
-                    android:layout_marginStart="42dp"
-                    android:layout_marginEnd="42dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="16dp"
+                    android:layout_below="@id/ongoingrel"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="14dp"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nl"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        tools:text="25th March  12:30 PM" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:fontFamily="@font/nl"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        tools:text="Estancia 1420, Chennai" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </com.sinaseyfi.advancedcardview.AdvancedCardView>
-
-        <TextView
-            android:id="@+id/help"
+                <TextView
+                    android:id="@+id/previouscook"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ongoingtrial"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/nb"
-            android:text="Need Help?"
-            android:textColor="#c4c4c4"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/previouscook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/help"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="28dp"
-            android:fontFamily="@font/nb"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ongoingrecycler"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/nb"
             android:text="Previous Trials"
             android:textColor="@color/black"
             android:textSize="22sp" />
@@ -288,12 +139,6 @@
             app:cornerRadius_TopLeft="60dp"
             app:cornerRadius_TopRight="60dp">
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never"
-                android:scrollbars="none">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -305,20 +150,25 @@
                         android:visibility="invisible" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/prevrecycler"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:overScrollMode="never"
+                        android:layout_marginBottom="15dp"
                         android:scrollbars="none" />
 
                 </LinearLayout>
 
-            </androidx.core.widget.NestedScrollView>
-
         </com.sinaseyfi.advancedcardview.AdvancedCardView>
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/booknow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/backtrials"
@@ -374,7 +224,7 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/next110"
+            android:id="@+id/book"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"

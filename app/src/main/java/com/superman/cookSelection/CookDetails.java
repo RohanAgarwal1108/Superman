@@ -3,7 +3,7 @@ package com.superman.cookSelection;
 import java.util.List;
 
 public class CookDetails {
-    private final List<String> booked;
+    private List<String> booked;
     private String city;
     private String cookPic;
     private String cookGender;
@@ -20,6 +20,12 @@ public class CookDetails {
     private String cookID;
     private long hiredate;
     private long firedate;
+    private String quantity;
+    private String superCode;
+    private String slotbooked;
+    private String meal;
+    private String address;
+    private boolean isExpanded;
 
     public CookDetails(String city, String cookPic, String cookGender, int rating, String bio, List<String> cuisine, List<String> canSpeak, String mealtype, String charges, String background,
                        String name, String from, List<String> foodPictureURL, String cookID, List<String> booked) {
@@ -38,7 +44,77 @@ public class CookDetails {
         this.name = name;
         this.cookID = cookID;
         this.booked = booked;
+    }
 
+    public CookDetails(String city, String cookPic, String cookGender, int rating, String bio, List<String> cuisine, List<String> canSpeak, String mealtype, String charges, String background,
+                       String name, String from, List<String> foodPictureURL, String cookID, List<String> booked, boolean isExpanded) {
+        this.background = background;
+        this.bio = bio;
+        this.canSpeak = canSpeak;
+        this.charges = charges;
+        this.city = city;
+        this.cookGender = cookGender;
+        this.cookPic = cookPic;
+        this.cuisine = cuisine;
+        this.foodPictureURL = foodPictureURL;
+        this.from = from;
+        this.mealtype = mealtype;
+        this.rating = rating;
+        this.name = name;
+        this.cookID = cookID;
+        this.booked = booked;
+        this.isExpanded = isExpanded;
+    }
+
+    public CookDetails() {
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
+    }
+
+    public String getMeal() {
+        return meal;
+    }
+
+    public void setMeal(String meal) {
+        this.meal = meal;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getSlotbooked() {
+        return slotbooked;
+    }
+
+    public void setSlotbooked(String slotbooked) {
+        this.slotbooked = slotbooked;
+    }
+
+    public String getSuperCode() {
+        return superCode;
+    }
+
+    public void setSuperCode(String superCode) {
+        this.superCode = superCode;
     }
 
     public int getRating() {

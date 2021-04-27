@@ -12,15 +12,16 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.superman.R;
 import com.superman.authentication.User;
 import com.superman.common.MainActivity;
+import com.superman.common.Reconnect;
 import com.superman.databinding.ActivityFrame28Binding;
 import com.superman.utilities.CustomItemClickListener;
 import com.superman.utilities.LogoutDailog;
+import com.superman.utilities.MyProgressDialog;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -78,24 +79,36 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void makeArrayList() {
-        DocumentReference documentReference = db.collection("AppData").document("Languages");
-        documentReference.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot snapshot = task.getResult();
-                HashMap<String, String> language = (HashMap<String, String>) snapshot.get("Language");
-                Log.e("lanugage", String.valueOf(language));
+        MyProgressDialog myProgressDialog = new MyProgressDialog();
+        myProgressDialog.showDialog(Frame28.this);
+        getLanguages()
+                .addOnCompleteListener(task -> {
+                    myProgressDialog.dismissDialog();
+                    if (task.isSuccessful()) {
+                        HashMap<String, String> language = (HashMap<String, String>) task.getResult().get("Language");
+                        Log.e("lanugage", String.valueOf(language));
 
-                Iterator it = language.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry pair = (Map.Entry) it.next();
-                    languages.add(new Lang_FoodPOJO((String) pair.getKey(), false, (String) pair.getValue()));
-                    it.remove();
-                }
-                mAdapter.notifyDataSetChanged();
-            } else {
-                //todo add adapter
-            }
-        });
+                        Iterator it = language.entrySet().iterator();
+                        while (it.hasNext()) {
+                            Map.Entry pair = (Map.Entry) it.next();
+                            languages.add(new Lang_FoodPOJO((String) pair.getKey(), false, (String) pair.getValue()));
+                            it.remove();
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    } else {
+                        Intent intent = new Intent(Frame28.this, Reconnect.class);
+                        startActivityForResult(intent, 2);
+                    }
+                });
+    }
+
+    private Task<HashMap<String, Object>> getLanguages() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("req", "Languages");
+        return MainActivity.mFunctions
+                .getHttpsCallable("getAppData")
+                .call(data)
+                .continueWith(task -> (HashMap<String, Object>) task.getResult().getData());
     }
 
     private void setListeners() {
@@ -240,6 +253,13 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
             Intent returnIntent = new Intent();
             setResult(Activity.RESULT_OK, returnIntent);
             finish();
+        }
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                makeArrayList();
+            } else {
+                this.onBackPressed();
+            }
         }
     }
 

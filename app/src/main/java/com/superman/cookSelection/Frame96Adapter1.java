@@ -15,6 +15,7 @@ import com.sinaseyfi.advancedcardview.AdvancedCardView;
 import com.superman.R;
 import com.superman.UserPreference.Lang_FoodPOJO;
 import com.superman.utilities.CustomItemClickListener1;
+import com.superman.utilities.ExtraUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,8 @@ public class Frame96Adapter1 extends RecyclerView.Adapter<Frame96Adapter1.ViewHo
             }
         });
         holder.dishtxt.setText(dish.getLanguage());
-        //todo image
+        int id = mContext.getResources().getIdentifier("drawable/" + ExtraUtils.nameFormatter(dish.getLanguage()), null, mContext.getPackageName());
+        holder.dishimg.setImageResource(id == 0 ? R.drawable.ic_dishplaceholder : id);
     }
 
     public void datachanger(ArrayList<Lang_FoodPOJO> newdishes) {

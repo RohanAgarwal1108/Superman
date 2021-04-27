@@ -7,6 +7,7 @@
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSurface">@color/secondaryblue</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/black</item>
@@ -43,6 +44,14 @@
     <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:fontFamily">@font/nb</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/nb</item>
+        <item name="android:textColor">@color/yellow</item>
     </style>
 
 </resources>

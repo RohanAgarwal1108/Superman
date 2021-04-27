@@ -24,7 +24,7 @@ public class Reconnect extends AppCompatActivity {
         });
 
         binding.backreconn.setOnClickListener(v -> {
-            if (getIntent().getExtras().containsKey("refresh")) {
+            if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("refresh")) {
                 Intent intent = new Intent();
                 setResult(Activity.RESULT_OK, intent);
                 finish();

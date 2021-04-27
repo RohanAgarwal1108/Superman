@@ -16,34 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_supercooklogo" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="14dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nb"
-                android:letterSpacing="-0.12"
-                android:text="Super"
-                android:textColor="@color/white"
-                android:textSize="22sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nb"
-                android:letterSpacing="-0.12"
-                android:text="Cook"
-                android:textColor="@color/yellow"
-                android:textSize="22sp" />
-
-        </LinearLayout>
+            android:src="@drawable/logo2" />
 
     </LinearLayout>
 

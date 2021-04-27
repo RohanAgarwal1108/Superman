@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
 import com.superman.utilities.CustomItemClickListener;
+import com.superman.utilities.ExtraUtils;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,8 @@ public class Frame19Adapter extends RecyclerView.Adapter<Frame19Adapter.ViewHold
         } else {
             holder.cuisinecard.setCardBackgroundColor(context.getColor(R.color.white));
         }
-        holder.cuisineimg.setImageResource(R.drawable.ic_launcher_background);
+        int id = context.getResources().getIdentifier("drawable/" + ExtraUtils.nameFormatter(lang_foodPOJO.getLanguage()), null, context.getPackageName());
+        holder.cuisineimg.setImageResource(id == 0 ? R.drawable.ic_dishplaceholder : id);
     }
 
     @Override

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
+import com.superman.utilities.ExtraUtils;
 
 public class Frame96Adapter2 extends RecyclerView.Adapter<Frame96Adapter2.ViewHolder> {
     private final Context mContext;
@@ -48,7 +49,8 @@ public class Frame96Adapter2 extends RecyclerView.Adapter<Frame96Adapter2.ViewHo
             }
         });
 
-        //todo img
+        int id = mContext.getResources().getIdentifier("drawable/" + ExtraUtils.nameFormatter(selectedDish.getName()), null, mContext.getPackageName());
+        holder.quantimg.setImageResource(id == 0 ? R.drawable.ic_dishplaceholder : id);
     }
 
     @Override

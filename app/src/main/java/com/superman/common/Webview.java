@@ -30,7 +30,7 @@ public class Webview extends AppCompatActivity {
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl("www.google.com");
+        webView.loadUrl(url);
 
         binding.backweb.setOnClickListener(v -> onBackPressed());
     }

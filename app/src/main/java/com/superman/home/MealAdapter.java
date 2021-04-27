@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
 import com.superman.utilities.CustomItemClickListener3;
+import com.superman.utilities.ExtraUtils;
 
 import java.util.HashMap;
 
@@ -67,6 +68,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
                 }
                 holder.item.setVisibility(View.GONE);
             } else {
+                int id = context.getResources().getIdentifier("drawable/" + ExtraUtils.nameFormatter(mealsarray[position].trim()), null, context.getPackageName());
+                holder.mealimg.setImageResource(id == 0 ? R.drawable.ic_dishplaceholder : id);
                 holder.addmeal.setVisibility(View.GONE);
                 holder.item.setVisibility(View.VISIBLE);
                 holder.mealtxt.setText(mealsarray[position].trim());

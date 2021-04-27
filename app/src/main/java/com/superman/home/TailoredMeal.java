@@ -70,26 +70,27 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
         } else {
             dinnerdishes = new HashMap<>();
         }
-        dishes = new String[]{"Aalo Gobi", "Bhindi Masala", "Aalo Paratha", "Rajma Masal Curry", "Maila Kofta", "Dum Aalo", "Chole", "Daal",
-                "Daal Makhani", "Pav Bhaji", "Kadhai Panner", "Matar Paneer", "Fried Chicken", "Chole Bhatoore"};
+
+        dishes = new String[]{"Aloo Gobi", "Bhindi", "Aloo Paratha", "Rajma Chawal", "Malai Kofta", "Dum Aloo", "Chole", "Dal",
+                "Dal Makhani", "Pav Bhaji", "Kadhai Panner", "Paneer Tikka", "Fried Chicken", "Chole Bhature"};
         addEntries("North Indian", i);
 
-        dishes = new String[]{"Idli Sambhar", "Dosa Sambhar", "Sambhar Rice", "Sambhar Vada", "Dahi Vada", "Veg Kurma", "Biryani", "Upma", "Uthapam"};
+        dishes = new String[]{"Idli", "Dosa", "Sambar Rice", "Vada Sambar", "Dahi Vada", "Biryani", "Upma", "Uttapam"};
         addEntries("South Indian", i);
 
-        dishes = new String[]{"Khandvi", "Dhokla", "Thepla", "Dal Dhokli", "Handvi", "Fafda", "Shrikhand"};
+        dishes = new String[]{"Khandvi", "Dhokla", "Thepla", "Dal Dhokli", "Handvo", "Shrikhand"};
         addEntries("North Eastern", i);
 
-        dishes = new String[]{"Vada pav", "Misal Pav", "Puran Poli", "Pav Bhaji", "Sabudana Khichdi", "Poha", "Basundi", "Bharli Bhindi", "Poori Bhaji", "Veg Kolhapuri"};
+        dishes = new String[]{"Vada pav", "Misal Pav", "Pooran Poli", "Pav Bhaji", "Sabudana Khichdi", "Poha", "Basundi", "Poori Bhaji", "Veg Kolhapuri"};
         addEntries("Maharashtrian", i);
 
-        dishes = new String[]{"Chow Mein", "Fried Rice", "Chilli potato", "Chilli Paneer"};
+        dishes = new String[]{"Chow mein", "Fried Rice", "Chilli Potato", "Chilli Paneer"};
         addEntries("Chinese", i);
 
         dishes = new String[]{"Pasta", "Pizza"};
         addEntries("Italian", i);
 
-        dishes = new String[]{"Burger", "Sandwich", "French Toast", "Pancakes"};
+        dishes = new String[]{"Burger", "Sandwich", "French Loaf", "Pancake"};
         addEntries("American", i);
 
         keys = TailoredMeal.breakfastdishes.keySet().toArray(new String[0]);

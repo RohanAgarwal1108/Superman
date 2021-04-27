@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
+import com.superman.utilities.ExtraUtils;
 
 import java.util.List;
 
@@ -36,8 +37,8 @@ public class Frame23Adapter1 extends RecyclerView.Adapter<Frame23Adapter1.ViewHo
     public void onBindViewHolder(@NonNull Frame23Adapter1.ViewHolder holder, int position) {
         String cancook = mDataset.get(position);
         holder.cuisinetxt.setText(cancook);
-        //todo
-        holder.foodimg.setImageResource(R.drawable.ic_launcher_background);
+        int id = context.getResources().getIdentifier("drawable/" + ExtraUtils.nameFormatter(cancook), null, context.getPackageName());
+        holder.foodimg.setImageResource(id == 0 ? R.drawable.ic_dishplaceholder : id);
     }
 
     @Override

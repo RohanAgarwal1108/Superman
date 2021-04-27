@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -161,12 +160,10 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                                 Intent intent = new Intent(Frame38.this, Frame47.class);
                                 startActivity(intent);
                             } else {
-                                Log.e("uguh", "jguh");
                                 Intent intent = new Intent(Frame38.this, Reconnect.class);
                                 startActivity(intent);
                             }
                         } else {
-                            Log.e("ugujbkjh", "jguh");
                             Intent intent = new Intent(Frame38.this, Reconnect.class);
                             startActivity(intent);
                         }

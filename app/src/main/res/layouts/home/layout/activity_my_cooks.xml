@@ -12,7 +12,7 @@
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="24dp"
         app:cardBackgroundColor="@color/secondaryblue"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp">
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/backcooks"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="24dp">
 
         <RelativeLayout
             android:id="@+id/presentdetails"
@@ -221,6 +221,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/booknow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/backcooks"

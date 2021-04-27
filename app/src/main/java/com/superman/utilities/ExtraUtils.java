@@ -68,5 +68,11 @@ public class ExtraUtils {
         return "images/ProfilePic_" + str + ".jpeg";
     }
 
+    public static String nameFormatter(String str) {
+        str = str.toLowerCase();
+        str = str.replaceAll("\\s", "");
+        return str;
+    }
+
 
 }

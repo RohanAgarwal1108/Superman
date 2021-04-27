@@ -57,8 +57,6 @@
                 android:textColor="#C4C4C4"
                 android:textSize="14sp" />
 
-            <!--Todo src-->
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"

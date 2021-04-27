@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.superman.R;
+import com.superman.utilities.ExtraUtils;
 
 import java.util.List;
 
@@ -35,7 +36,8 @@ public class Frame23Adapter extends RecyclerView.Adapter<Frame23Adapter.ViewHold
     public void onBindViewHolder(@NonNull Frame23Adapter.ViewHolder holder, int position) {
         String language = mDataset.get(position);
         //lang
-        holder.langsrc.setImageResource(R.drawable.ic_launcher_background);
+        int id = context.getResources().getIdentifier("drawable/" + ExtraUtils.nameFormatter(language), null, context.getPackageName());
+        holder.langsrc.setImageResource(id == 0 ? R.drawable.langdef : id);
     }
 
     @Override

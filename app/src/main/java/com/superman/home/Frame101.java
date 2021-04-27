@@ -1,5 +1,6 @@
 package com.superman.home;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -90,6 +91,9 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
         binding.startnow.setOnClickListener(this);
         binding.ppcard.setOnClickListener(this);
         binding.noclick.setOnClickListener(this);
+        binding.breaktime.setOnClickListener(this);
+        binding.lunchtime.setOnClickListener(this);
+        binding.dinnertime.setOnClickListener(this);
     }
 
     private void setupWeekRecycler() {
@@ -149,7 +153,6 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
 
     private void setHome() throws GeneralSecurityException, IOException {
         defaultmenu = new HashMap<>();
-
         getHome()
                 .addOnCompleteListener(task -> {
                     myProgressDialog.dismissDialog();
@@ -175,6 +178,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
                         }
                         try {
                             defaultmenu = (HashMap<String, Object>) result.get("defaultMeals");
+                            setTime();
                             if (defaultmenu == null) {
                                 throw new Exception("Exception");
                             }
@@ -182,36 +186,6 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
                             defaultmenu = null;
                             binding.noclick.setVisibility(View.VISIBLE);
                         }
-                        /*if(defaultMeals!=null || defaultMeals.size()!=0){
-                            for(int i=0;i<7;i++) {
-                                if (defaultMeals.containsKey(getDayOfWeek(i))) {
-                                    HashMap<String, String> mealdetails= (HashMap<String, String>) defaultMeals.get("Monday");
-                                    String breakfast=null;
-                                    String lunch=null;
-                                    String dinner=null;
-
-                                    if (mealdetails.containsKey("Breakfast")) {
-                                        breakfast = mealdetails.get("Breakfast");
-                                    }
-                                    if (mealdetails.containsKey("Lunch")) {
-                                        lunch = mealdetails.get("Lunch");
-                                    }
-                                    if (mealdetails.containsKey("Dinner")) {
-                                        dinner = mealdetails.get("Dinner");
-                                    }
-
-                                    ArrayList<String> daymenu=new ArrayList<>();
-                                    daymenu.add(breakfast);
-                                    daymenu.add(lunch);
-                                    daymenu.add(dinner);
-                                    daymenu.add(time);
-                                    defaultmenu.add(i, daymenu);
-                                }
-                                else{
-                                    defaultmenu.add(i, null);
-                                }
-                            }
-                        }*/
                         adapter.notifyDataSetChanged();
                         setUpMealsRecyclers();
                     }
@@ -272,6 +246,11 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
     }
 
     private void setTime() {
+        String str = ((HashMap<String, String>) defaultmenu.get(day)).get("time");
+        String[] timearr = str.split(",");
+        binding.breaktime.setText(timearr[0]);
+        binding.lunchtime.setText(timearr[1]);
+        binding.dinnertime.setText(timearr[2]);
     }
 
     @Override
@@ -282,6 +261,42 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
         } else if (v == binding.startnow) {
             Intent intent = new Intent(Frame101.this, Frame110.class);
             startActivity(intent);
+        } else if (v == binding.breaktime) {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.TimePickerTheme,
+                    (view, hourOfDay, minute) -> {
+                        String hr = String.valueOf(hourOfDay);
+                        String min = String.valueOf(minute);
+                        makeDeepCopy();
+                        binding.breaktime.setText(hr + ":" + min);
+                        String time = hr + ":" + min + "," + binding.lunchtime.getText().toString() + "," + binding.dinnertime.getText().toString();
+                        ((HashMap<String, String>) defaultmenu.get(day)).put("time", time);
+                        sendRequest();
+                    }, 12, 0, true);
+            timePickerDialog.show();
+        } else if (v == binding.lunchtime) {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.TimePickerTheme,
+                    (view, hourOfDay, minute) -> {
+                        String hr = String.valueOf(hourOfDay);
+                        String min = String.valueOf(minute);
+                        makeDeepCopy();
+                        binding.lunchtime.setText(hr + ":" + min);
+                        String time = binding.breaktime.getText().toString() + "," + hr + ":" + min + "," + binding.dinnertime.getText().toString();
+                        ((HashMap<String, String>) defaultmenu.get(day)).put("time", time);
+                        sendRequest();
+                    }, 12, 0, true);
+            timePickerDialog.show();
+        } else if (v == binding.dinnertime) {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.TimePickerTheme,
+                    (view, hourOfDay, minute) -> {
+                        String hr = String.valueOf(hourOfDay);
+                        String min = String.valueOf(minute);
+                        makeDeepCopy();
+                        binding.dinnertime.setText(hr + ":" + min);
+                        String time = binding.breaktime.getText().toString() + "," + binding.lunchtime.getText().toString() + "," + hr + ":" + min;
+                        ((HashMap<String, String>) defaultmenu.get(day)).put("time", time);
+                        sendRequest();
+                    }, 12, 0, true);
+            timePickerDialog.show();
         }
     }
 
@@ -344,6 +359,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
                                     ((MealAdapter) mAdapter1).dataChanger(defaultmenu);
                                     ((MealAdapter) mAdapter2).dataChanger(defaultmenu);
                                     ((MealAdapter) mAdapter3).dataChanger(defaultmenu);
+                                    setTime();
                                 }
                                 temp = null;
                             });

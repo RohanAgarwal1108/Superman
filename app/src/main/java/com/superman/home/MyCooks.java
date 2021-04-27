@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
@@ -78,6 +79,16 @@ public class MyCooks extends AppCompatActivity implements CookItemClickListener 
         recyclerView.setAdapter(mAdapter);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            getMyCooks();
+        } else {
+            this.onBackPressed();
+        }
+    }
+
     private void getMyCooks() {
         myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(MyCooks.this);
@@ -90,20 +101,18 @@ public class MyCooks extends AppCompatActivity implements CookItemClickListener 
                         FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
                         FirebaseFunctionsException.Code code = ffe.getCode();
                         if (code == FirebaseFunctionsException.Code.NOT_FOUND) {
-                            binding.backcooks.setVisibility(View.VISIBLE);
+                            binding.booknow.setVisibility(View.VISIBLE);
                             binding.bookedcooks.setVisibility(View.GONE);
                         } else {
-                            //todo
                             Intent intent = new Intent(MyCooks.this, Reconnect.class);
-                            startActivity(intent);
+                            startActivityForResult(intent, 1);
                         }
                     } else {
-                        //todo
                         Intent intent = new Intent(MyCooks.this, Reconnect.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                     }
                 } else {
-                    HashMap<String, Object> res = (HashMap<String, Object>) task.getResult();
+                    HashMap<String, Object> res = task.getResult();
                     List<HashMap<String, Object>> results = (List<HashMap<String, Object>>) res.get("details");
                     for (int i = 0; i < results.size(); i++) {
                         HashMap<String, Object> result = results.get(i);
@@ -141,16 +150,14 @@ public class MyCooks extends AppCompatActivity implements CookItemClickListener 
                                 if (date.get("firingDate") instanceof Integer) {
                                     currentCook = cookDetails.get(j);
                                     cookDetails.remove(j);
-                                    j--;
                                 } else {
                                     cookDetails.get(j).setFiredate((Long) date.get("firingDate"));
                                 }
                                 break;
                             }
-
                         }
-                        setCurrentCook();
                     }
+                    setCurrentCook();
                     mAdapter.notifyDataSetChanged();
                 }
             });
@@ -186,7 +193,7 @@ public class MyCooks extends AppCompatActivity implements CookItemClickListener 
                 intent.putExtra(EXTRA_COOK_IMAGE_TRANSITION_NAME, ViewCompat.getTransitionName(binding.currentimg));
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         MyCooks.this,
-                        ((View) binding.currentimg),
+                        binding.currentimg,
                         ViewCompat.getTransitionName(binding.currentimg));
                 startActivity(intent, options.toBundle());
             }
