@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.superman">
+    package="com.SuperCook">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -15,76 +15,76 @@
         android:theme="@style/Theme.Superman"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".common.OnBoarding"
+            android:name="com.SuperCook.common.OnBoarding"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.MyTrials"
+            android:name="com.SuperCook.home.MyTrials"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.MyCooks"
+            android:name="com.SuperCook.home.MyCooks"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.Frame116"
+            android:name="com.SuperCook.home.Frame116"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.Frame112"
+            android:name="com.SuperCook.home.Frame112"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.Frame111"
+            android:name="com.SuperCook.home.Frame111"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.TailoredMeal"
+            android:name="com.SuperCook.home.TailoredMeal"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.Frame110"
+            android:name="com.SuperCook.home.Frame110"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.UserProfile"
+            android:name="com.SuperCook.home.UserProfile"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.Frame101"
+            android:name="com.SuperCook.home.Frame101"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".common.Reconnect"
+            android:name="com.SuperCook.common.Reconnect"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cookSelection.Frame106"
+            android:name="com.SuperCook.cookSelection.Frame106"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cookSelection.Frame96"
+            android:name="com.SuperCook.cookSelection.Frame96"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".common.Webview"
+            android:name="com.SuperCook.common.Webview"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cookSelection.Frame35"
+            android:name="com.SuperCook.cookSelection.Frame35"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cookSelection.Frame34"
+            android:name="com.SuperCook.cookSelection.Frame34"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cookSelection.Frame23"
+            android:name="com.SuperCook.cookSelection.Frame23"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cookSelection.frame21"
+            android:name="com.SuperCook.cookSelection.frame21"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserPreference.Frame19"
+            android:name="com.SuperCook.UserPreference.Frame19"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserPreference.Frame28"
+            android:name="com.SuperCook.UserPreference.Frame28"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".authentication.Frame47"
+            android:name="com.SuperCook.authentication.Frame47"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".authentication.Frame38"
+            android:name="com.SuperCook.authentication.Frame38"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".authentication.Frame39"
+            android:name="com.SuperCook.authentication.Frame39"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".common.MainActivity"
+            android:name="com.SuperCook.common.MainActivity"
             android:screenOrientation="portrait">
 
         <intent-filter>

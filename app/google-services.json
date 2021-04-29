@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:807955642567:android:761e77704f193a43bca6e2",
+        "mobilesdk_app_id": "1:807955642567:android:e84c6c65da4dfcdabca6e2",
         "android_client_info": {
-          "package_name": "com.superman"
+          "package_name": "com.SuperCook"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "807955642567-vc8s33ib51lme10hmkf643v9gfga6qkj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SuperCook",
+            "certificate_hash": "16135416255e4bb1f6b59c74c52def52d1366c40"
+          }
+        },
         {
           "client_id": "807955642567-3vs2qe46lcj2p6cihiohvjbmo1c34m3j.apps.googleusercontent.com",
           "client_type": 3
