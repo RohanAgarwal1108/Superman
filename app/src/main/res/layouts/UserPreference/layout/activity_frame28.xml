@@ -7,30 +7,59 @@
     android:background="@color/primaryblue"
     tools:context=".UserPreference.Frame28">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/citycard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20sp"
         android:layout_marginTop="28dp"
-        android:orientation="horizontal">
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
 
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="18dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_pin" />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0.1dp"
+            android:layout_height="0.1dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:elevation="-2dp"
+            android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/city"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nb"
-            android:text="Chennai"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_pin" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nb"
+                android:text="Chennai"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_downarrow" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="226dp"

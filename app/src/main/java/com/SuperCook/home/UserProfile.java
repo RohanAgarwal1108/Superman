@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 
 import com.SuperCook.R;
 import com.SuperCook.authentication.Frame39;
@@ -15,6 +16,7 @@ import com.SuperCook.common.Webview;
 import com.SuperCook.databinding.ActivityUserProfileBinding;
 import com.SuperCook.utilities.ExtraUtils;
 import com.google.firebase.auth.FirebaseAuth;
+import com.segment.analytics.Analytics;
 
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
     public static ActivityUserProfileBinding binding;
@@ -60,8 +62,11 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         } else if (v == binding.hc) {
             startWhatsapp("Hey Team SuperCook! I need help.");
         } else if (v == binding.swf) {
-            //todo
-            startWhatsapp("");
+            ShareCompat.IntentBuilder.from(UserProfile.this)
+                    .setType("text/plain")
+                    .setChooserTitle("SuperCook")
+                    .setText("Want delicious food served to you staright from your kitchen? Download SuperCook now- https://play.google.com/store/apps/details?id=com.SuperCook")
+                    .startChooser();
         } else if (v == binding.logout) {
             openDialog();
         } else if (v == binding.backuserprof) {
@@ -80,13 +85,14 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         builder.setMessage("Are you sure you want to sign-out?")
                 .setPositiveButton("Yes", (dialog, which) -> {
                     FirebaseAuth.getInstance().signOut();
+                    Analytics.with(UserProfile.this).flush();
+                    Analytics.with(UserProfile.this).reset();
+                    Analytics.with(UserProfile.this).shutdown();
                     Intent intent = new Intent(UserProfile.this, Frame39.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 })
-                .setNegativeButton("No", ((dialog, which) -> {
-                    dialog.dismiss();
-                }));
+                .setNegativeButton("No", ((dialog, which) -> dialog.dismiss()));
         AlertDialog alert = builder.create();
         alert.setTitle("");
         alert.show();

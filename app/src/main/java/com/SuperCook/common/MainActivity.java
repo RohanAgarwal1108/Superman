@@ -19,7 +19,6 @@ import com.SuperCook.home.Frame101;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.functions.FirebaseFunctions;
-import com.segment.analytics.Analytics;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -83,16 +82,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.mattblack));
         setContentView(R.layout.activity_main);
-        initializeSegment();
         new Handler().postDelayed(this::checkOnboarding, 3 * 1000);
-    }
-
-    private void initializeSegment() {
-        Analytics analytics = new Analytics.Builder(MainActivity.this, "U727ZBegynSOCrtZiQeyCqhgw5HhqJeZ")
-                .trackApplicationLifecycleEvents()
-                .recordScreenViews()
-                .build();
-        Analytics.setSingletonInstance(analytics);
     }
 
     private void checkOnboarding() {

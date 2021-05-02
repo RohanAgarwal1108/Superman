@@ -211,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="65dp"
-                    android:src="@drawable/ic_clock" />
+                    android:src="@drawable/ic_tick" />
 
                 <TextView
                     android:layout_width="wrap_content"

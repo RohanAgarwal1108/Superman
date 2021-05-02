@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.SuperCook.authentication.User;
 import com.SuperCook.common.MainActivity;
 import com.SuperCook.common.Reconnect;
 import com.SuperCook.cookSelection.CookDetails;
@@ -82,7 +83,7 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MyTrialAdapter(cookDetails, this, false, this);
+        mAdapter = new MyTrialAdapter1(cookDetails, this, false, this);
         recyclerView.setAdapter(mAdapter);
 
         currentTrials = new ArrayList<>();
@@ -127,13 +128,25 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
                         startActivityForResult(intent, 1);
                     }
                 } else {
-                    binding.booknow.setVisibility(View.GONE);
-                    binding.bookedtrials.setVisibility(View.VISIBLE);
                     HashMap<String, Object> res = task.getResult();
 
                     List<HashMap<String, Object>> results = (List<HashMap<String, Object>>) res.get("cookDetails");
                     for (int i = 0; i < results.size(); i++) {
                         HashMap<String, Object> result = results.get(i);
+                        String cookID = (String) result.get("cookID");
+                        int flag = 0;
+                        if (User.user.getCooks() != null) {
+                            for (int j = 0; j < User.user.getCooks().size(); j++) {
+                                String id = User.user.getCooks().get(j);
+                                if (cookID.equals(id)) {
+                                    flag = 1;
+                                    break;
+                                }
+                            }
+                            if (flag == 1) {
+                                continue;
+                            }
+                        }
                         String city = (String) result.get("city");
                         String cookPic = (String) result.get("pictureURL");
                         String cookGender = (String) result.get("sex");
@@ -146,7 +159,6 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
                         String background = (String) result.get("background");
                         String name = (String) result.get("name");
                         String from = (String) result.get("from");
-                        String cookID = (String) result.get("cookID");
                         List<String> booked = new ArrayList<>();
                         if (result.get("slotBooked") != null) {
                             booked.addAll((List<String>) result.get("slotBooked"));
@@ -171,7 +183,7 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
                                 cookDetails.get(j).setMeal((String) trial.get("meal"));
                                 cookDetails.get(j).setQuantity((String) trial.get("quantity"));
                                 cookDetails.get(j).setAddress((String) trial.get("address"));
-                                if (trial.get("status").equals("ongoing")) {
+                                if (!trial.containsKey("status") || trial.get("status").equals("ongoing")) {
                                     currentTrials.add(cookDetails.get(j));
                                     cookDetails.remove(j);
                                 }
@@ -179,7 +191,7 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
                             }
                         }
                     }
-                    toggleRecyclers();
+                    toggleLayout();
                     mAdapter1.notifyDataSetChanged();
                     mAdapter.notifyDataSetChanged();
                 }
@@ -191,14 +203,24 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
         }
     }
 
-    private void toggleRecyclers() {
+    private void toggleLayout() {
+        int c = 0;
         if (currentTrials.size() == 0) {
             binding.ongoingrecycler.setVisibility(View.GONE);
             binding.ongoingrel.setVisibility(View.GONE);
+            ++c;
         }
         if (cookDetails.size() == 0) {
             binding.card.setVisibility(View.GONE);
             binding.previouscook.setVisibility(View.GONE);
+            ++c;
+        }
+        if (c == 2) {
+            binding.booknow.setVisibility(View.VISIBLE);
+            binding.bookedtrials.setVisibility(View.GONE);
+        } else {
+            binding.booknow.setVisibility(View.GONE);
+            binding.bookedtrials.setVisibility(View.VISIBLE);
         }
     }
 
@@ -213,14 +235,20 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
 
     @Override
     public void onCookItemClick(int position, CookDetails cookDetails, ImageView cookpic, boolean isOngoing) {
-        Intent intent = new Intent(MyTrials.this, Frame23.class);
-        intent.putExtra("index", position);
-        intent.putExtra("MyTrials", String.valueOf(isOngoing));
-        intent.putExtra(EXTRA_COOK_IMAGE_TRANSITION_NAME, ViewCompat.getTransitionName(cookpic));
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this,
-                cookpic,
-                ViewCompat.getTransitionName(cookpic));
-        startActivity(intent, options.toBundle());
+        if (isOngoing) {
+            Intent intent = new Intent(MyTrials.this, Frame23.class);
+            intent.putExtra("index", position);
+            intent.putExtra("MyTrials", String.valueOf(true));
+            intent.putExtra(EXTRA_COOK_IMAGE_TRANSITION_NAME, ViewCompat.getTransitionName(cookpic));
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this,
+                    cookpic,
+                    ViewCompat.getTransitionName(cookpic));
+            startActivity(intent, options.toBundle());
+        } else {
+            Intent intent = new Intent(MyTrials.this, Frame102.class);
+            intent.putExtra("index", position);
+            startActivity(intent);
+        }
     }
 }

@@ -33,6 +33,8 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.functions.FirebaseFunctionsException;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Traits;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -154,9 +156,10 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                                     MainActivity.putValues(MainActivity.ALIAS4, Uid, getApplicationContext());
                                 } catch (GeneralSecurityException | IOException generalSecurityException) {
                                     generalSecurityException.printStackTrace();
-                                    makeToast("An Error occurred! Please try later.", Toast.LENGTH_SHORT);
                                     return;
                                 }
+                                initializeSegment();
+                                Analytics.with(Frame38.this).identify(new Traits().putValue("User ID", Uid));
                                 Intent intent = new Intent(Frame38.this, Frame47.class);
                                 startActivity(intent);
                             } else {
@@ -168,11 +171,13 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                             startActivity(intent);
                         }
                     } else {
+                        initializeSegment();
                         HashMap<String, Object> result = task.getResult();
                         HashMap<String, Object> data = (HashMap<String, Object>) result.get("data");
                         String uid = (String) data.get("uid");
                         String city = (String) data.get("city");
                         String name = (String) data.get("name");
+                        Analytics.with(Frame38.this).identify(new Traits().putValue("User ID", uid));
                         try {
                             MainActivity.putValues(MainActivity.ALIAS4, uid, getApplicationContext());
                             MainActivity.putValues(MainActivity.ALIAS3, name, getApplicationContext());
@@ -200,6 +205,14 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                         }
                     }
                 });
+    }
+
+    private void initializeSegment() {
+        Analytics analytics = new Analytics.Builder(getApplicationContext(), "U727ZBegynSOCrtZiQeyCqhgw5HhqJeZ")
+                .trackApplicationLifecycleEvents()
+                .recordScreenViews()
+                .build();
+        Analytics.setSingletonInstance(analytics);
     }
 
     /**

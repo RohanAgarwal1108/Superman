@@ -2,9 +2,15 @@ package com.SuperCook.UserPreference;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -40,6 +46,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     private ArrayList<Lang_FoodPOJO> languages;
     FirebaseFirestore db;
     int state = 0;
+    private String[] cities;
 
     /**
      * for later use
@@ -64,8 +71,41 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         setUI();
         setListeners();
         setUpRecyler();
-
     }
+
+    private void setSpinner() {
+        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, cities) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                Typeface externalFont = Typeface.createFromAsset(getAssets(), "fonts/nb.otf");
+                ((TextView) v).setTypeface(externalFont);
+                return v;
+            }
+
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View v = super.getDropDownView(position, convertView, parent);
+                Typeface externalFont = Typeface.createFromAsset(getAssets(), "fonts/nb.otf");
+                ((TextView) v).setTypeface(externalFont);
+                return v;
+            }
+        };
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinner.setAdapter(ad);
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                binding.city.setText(cities[position].trim());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
 
     private void setUpRecyler() {
         languages = new ArrayList<>();
@@ -93,6 +133,10 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
                             it.remove();
                         }
                         mAdapter.notifyDataSetChanged();
+                        ArrayList<String> citiesArrayList = (ArrayList<String>) task.getResult().get("Cities");
+                        assert citiesArrayList != null;
+                        cities = citiesArrayList.toArray(new String[0]);
+                        setSpinner();
                     } else {
                         Intent intent = new Intent(Frame28.this, Reconnect.class);
                         startActivityForResult(intent, 2);
@@ -102,7 +146,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
 
     private Task<HashMap<String, Object>> getLanguages() {
         Map<String, Object> data = new HashMap<>();
-        data.put("req", "Languages");
+        data.put("req", "Languages_and_Cities");
         return MainActivity.mFunctions
                 .getHttpsCallable("getAppData")
                 .call(data)
@@ -115,6 +159,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
             binding.whatlin.getChildAt(i).setOnClickListener(this);
         }
         binding.next28.setOnClickListener(this);
+        binding.citycard.setOnClickListener(this);
     }
 
     private void setUI() {
@@ -150,6 +195,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
             setCookGender(2);
         } else if (v == binding.next28 && binding.next28.getCardBackgroundColor() == getColorStateList(R.color.black)) {
             User.initUser();
+            User.user.setCity(binding.city.getText().toString());
             if (mealtype == 0) {
                 User.user.setMealtype("Veg");
             } else if (mealtype == 1) {
@@ -164,7 +210,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
             } else {
                 User.user.setCookgender("Any");
             }
-            List<String> al = new ArrayList<String>();
+            List<String> al = new ArrayList<>();
             for (Lang_FoodPOJO language : languages) {
                 if (language.isSelected()) {
                     al.add(language.getLanguage());
@@ -178,6 +224,8 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
             } else {
                 startActivity(intent);
             }
+        } else if (v == binding.citycard) {
+            binding.spinner.performClick();
         }
     }
 

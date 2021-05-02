@@ -1,5 +1,6 @@
 package com.SuperCook.authentication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -9,9 +10,19 @@ public class User {
     private List<String> languages;
     private String name;
     private String location;
+    private String city;
+    private ArrayList<String> cooks;
 
     public static void initUser() {
         user = new User();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCookgender() {
@@ -52,5 +63,13 @@ public class User {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public ArrayList<String> getCooks() {
+        return cooks;
+    }
+
+    public void setCooks(ArrayList<String> cooks) {
+        this.cooks = cooks;
     }
 }

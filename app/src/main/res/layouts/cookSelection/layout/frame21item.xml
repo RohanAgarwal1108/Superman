@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/match"
             android:layout_marginStart="34dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="34dp"
             android:fontFamily="@font/nb"
             android:textColor="@color/black"

@@ -83,8 +83,6 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                             if (code == FirebaseFunctionsException.Code.NOT_FOUND) {
                                 binding.scroll.setVisibility(View.GONE);
                                 binding.nocook.setVisibility(View.VISIBLE);
-                                //todo
-                                //com.superman E/bijb: com.google.firebase.functions.FirebaseFunctionsException: No cooks found that matches your preference try changing something.
                             } else {
                                 Intent intent = new Intent(frame21.this, Reconnect.class);
                                 startActivityForResult(intent, 1);

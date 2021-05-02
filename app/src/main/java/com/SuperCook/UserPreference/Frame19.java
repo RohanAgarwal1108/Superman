@@ -127,7 +127,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
     private Task<HashMap<String, Object>> setPreferences() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
-        data.put("currentCity", "Chennai");
+        data.put("currentCity", User.user.getCity());
         data.put("cuisine", getCuisines());
         data.put("sex", User.user.getCookgender());
         data.put("cooks", User.user.getMealtype());

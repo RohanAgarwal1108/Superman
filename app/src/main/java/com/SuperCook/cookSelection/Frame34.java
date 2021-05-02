@@ -195,6 +195,7 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         data.put("notes", binding.notes.getText().toString());
         data.put("meal", getMeal());
         data.put("quantity", getQuantitiy());
+        data.put("status", "ongoing");
         return MainActivity.mFunctions
                 .getHttpsCallable("scheduleTrail")
                 .call(data)

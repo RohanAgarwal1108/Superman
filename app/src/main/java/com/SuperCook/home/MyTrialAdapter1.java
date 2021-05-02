@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.SuperCook.R;
@@ -21,13 +20,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHolder> {
+public class MyTrialAdapter1 extends RecyclerView.Adapter<MyTrialAdapter1.ViewHolder> {
     private final ArrayList<CookDetails> cookDetails;
     private final CookItemClickListener1 listener1;
     private final boolean isOngoing;
     private final Context context;
 
-    public MyTrialAdapter(ArrayList<CookDetails> cookDetails, CookItemClickListener1 listener, boolean isOngoing, Context context) {
+    public MyTrialAdapter1(ArrayList<CookDetails> cookDetails, CookItemClickListener1 listener, boolean isOngoing, Context context) {
         this.cookDetails = cookDetails;
         this.listener1 = listener;
         this.context = context;
@@ -36,18 +35,17 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
 
     @NonNull
     @Override
-    public MyTrialAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyTrialAdapter1.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.mytrial_item, parent, false);
-        MyTrialAdapter.ViewHolder viewHolder = new MyTrialAdapter.ViewHolder(v);
+                .inflate(R.layout.mytrial_item1, parent, false);
+        MyTrialAdapter1.ViewHolder viewHolder = new MyTrialAdapter1.ViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyTrialAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyTrialAdapter1.ViewHolder holder, int position) {
         CookDetails cookDetail = cookDetails.get(position);
         holder.cookname.setText(cookDetail.getName());
-        holder.cooksupercode.setText(cookDetail.getSuperCode());
         String str = getFormattedMeal(cookDetail);
         if (str.equals("No meals selected.")) {
             holder.meal.setVisibility(View.GONE);
@@ -58,12 +56,11 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
         holder.slotbooked.setText(getSlot(cookDetail));
         holder.address.setText(cookDetail.getAddress());
         Picasso.get().load(cookDetail.getCookPic()).placeholder(R.drawable.ic_cook_def).into(holder.trialimg);
-        holder.button.setOnClickListener(v -> {
+        holder.view.setOnClickListener(v -> {
             boolean show = toggleLayout(!cookDetail.isExpanded(), v, holder.layoutExpand, holder.circle1, holder.circle2);
             cookDetails.get(position).setExpanded(show);
         });
-        ViewCompat.setTransitionName(holder.trialimg, cookDetail.getCookID());
-        holder.cookdets.setOnClickListener(v -> listener1.onCookItemClick(holder.getAdapterPosition(), cookDetail, holder.trialimg, isOngoing));
+        holder.hire.setOnClickListener(v -> listener1.onCookItemClick(holder.getAdapterPosition(), cookDetail, holder.trialimg, isOngoing));
     }
 
     private boolean toggleLayout(boolean isExpanded, View v, RelativeLayout layoutExpand, AdvancedCardView card1, AdvancedCardView card2) {
@@ -116,9 +113,7 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View view;
         public final ImageView trialimg;
-        public final ImageView button;
         public final TextView cookname;
-        public final TextView cooksupercode;
         public final TextView meals;
         public final TextView meal;
         public final TextView slotbooked;
@@ -130,14 +125,13 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
         public final AdvancedCardView circle3;
         public final AdvancedCardView circle4;
         public final RelativeLayout layoutExpand;
-        public final RelativeLayout cookdets;
+        public final TextView hire;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
             trialimg = view.findViewById(R.id.trialimg);
             cookname = view.findViewById(R.id.cookname);
-            cooksupercode = view.findViewById(R.id.cooksupercode);
             meals = view.findViewById(R.id.meal);
             meal = view.findViewById(R.id.meals);
             slotbooked = view.findViewById(R.id.slotbooked);
@@ -149,14 +143,13 @@ public class MyTrialAdapter extends RecyclerView.Adapter<MyTrialAdapter.ViewHold
             circle2 = view.findViewById(R.id.circle2);
             circle3 = view.findViewById(R.id.circle3);
             circle4 = view.findViewById(R.id.circle4);
-            cookdets = view.findViewById(R.id.cookdets);
-            button = view.findViewById(R.id.button);
-            circle1.setBackground_Color(context.getColor(R.color.primaryblue));
-            circle2.setBackground_Color(context.getColor(R.color.primaryblue));
-            circle3.setBackground_Color(context.getColor(R.color.primaryblue));
-            circle4.setBackground_Color(context.getColor(R.color.primaryblue));
-            line1.setBackgroundColor(context.getColor(R.color.primaryblue));
-            line2.setBackgroundColor(context.getColor(R.color.primaryblue));
+            hire = view.findViewById(R.id.hire);
+            circle1.setBackground_Color(context.getColor(R.color.secondaryblue));
+            circle2.setBackground_Color(context.getColor(R.color.secondaryblue));
+            circle3.setBackground_Color(context.getColor(R.color.secondaryblue));
+            circle4.setBackground_Color(context.getColor(R.color.secondaryblue));
+            line1.setBackgroundColor(context.getColor(R.color.secondaryblue));
+            line2.setBackgroundColor(context.getColor(R.color.secondaryblue));
         }
     }
 }

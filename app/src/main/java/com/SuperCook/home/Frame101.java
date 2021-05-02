@@ -175,6 +175,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
                         ArrayList<HashMap<String, Object>> cards = (ArrayList<HashMap<String, Object>>) cards1.get("cardsArray");
                         User.initUser();
                         User.user.setName((String) result.get("userName"));
+                        User.user.setCooks((ArrayList<String>) result.get("cooks"));
                         int k = User.user.getName().indexOf(" ") == -1 ? User.user.getName().length() - 1 : User.user.getName().indexOf(" ");
                         binding.hey.setText("Hey, " + User.user.getName().substring(0, k) + " \uD83C\uDF7F");
                         User.user.setLocation(result.get("city") + ", " + result.get("state"));

@@ -60,9 +60,9 @@ public class Frame35 extends AppCompatActivity implements View.OnClickListener {
                 str += "Meal\n\n";
             }
             if (i != 0 || i != SelectedDishes.selectedDishes.size() - 1) {
-                str += "  " + selectedDish.getName() + " x " + selectedDish.getQuantity();
-            } else {
                 str += "  " + selectedDish.getName() + " x " + selectedDish.getQuantity() + "\n";
+            } else {
+                str += "  " + selectedDish.getName() + " x " + selectedDish.getQuantity();
             }
         }
         return str;

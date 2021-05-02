@@ -147,7 +147,7 @@ public class MyCooks extends AppCompatActivity implements CookItemClickListener 
                         for (int j = 0; j < cookDetails.size(); j++) {
                             if (id.equals(cookDetails.get(j).getCookID())) {
                                 cookDetails.get(j).setHiredate((Long) date.get("hiringDate"));
-                                if (date.get("firingDate") instanceof Integer) {
+                                if (date.get("firingDate") instanceof Integer || date.get("firingDate").equals(date.get("hiringDate"))) {
                                     currentCook = cookDetails.get(j);
                                     cookDetails.remove(j);
                                 } else {

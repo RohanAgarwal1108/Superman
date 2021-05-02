@@ -23,7 +23,7 @@
         android:id="@+id/yo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="90dp"
         android:layout_marginEnd="17dp"
         android:fontFamily="@font/nb"
@@ -121,11 +121,12 @@
 
                                 <TextView
                                     android:id="@+id/superCode"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/nb"
                                     android:textColor="#FFC542"
-                                    android:textSize="28sp"
+                                    android:textAlignment="textEnd"
+                                    android:textSize="22sp"
                                     tools:text="2423" />
 
                             </LinearLayout>
@@ -154,7 +155,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/nb"
                                     android:textColor="@color/black"
-                                    android:textSize="20sp"
+                                    android:textSize="18sp"
                                     tools:text="Hinata Shoyo" />
 
                             </LinearLayout>
@@ -184,7 +185,7 @@
                             android:layout_marginEnd="18dp"
                             android:fontFamily="@font/nl"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             tools:text="25th July  12 : 30 PM" />
 
                         <TextView
