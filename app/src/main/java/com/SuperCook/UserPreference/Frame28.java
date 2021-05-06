@@ -27,6 +27,7 @@ import com.SuperCook.utilities.LogoutDailog;
 import com.SuperCook.utilities.MyProgressDialog;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.segment.analytics.Analytics;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -71,6 +72,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         setUI();
         setListeners();
         setUpRecyler();
+        Analytics.with(Frame28.this).screen("User Preferences", "Cook Preferences", null, null);
     }
 
     private void setSpinner() {

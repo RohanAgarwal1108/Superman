@@ -21,6 +21,8 @@ import com.SuperCook.utilities.ExtraUtils;
 import com.SuperCook.utilities.MyProgressDialog;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -97,6 +99,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
                         Intent intent = new Intent(Frame19.this, Reconnect.class);
                         startActivity(intent);
                     } else {
+                        sendAnalytics();
                         try {
                             MainActivity.putValues(MainActivity.ALIAS2, "preferences", getApplicationContext());
                         } catch (GeneralSecurityException | IOException e) {
@@ -114,6 +117,26 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
                         }
                     }
                 });
+    }
+
+    private void sendAnalytics() {
+        Analytics.with(Frame19.this).screen("User Preferences", "Food Preferences", getProperties(), null);
+    }
+
+    private Properties getProperties() {
+        Properties properties = new Properties();
+        try {
+            properties.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+            properties.put("currentCity", User.user.getCity());
+            properties.put("cuisine", getCuisines());
+            properties.put("sex", User.user.getCookgender());
+            properties.put("cooks", User.user.getMealtype());
+            properties.put("canSpeak", User.user.getLanguages());
+            return properties;
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

@@ -213,6 +213,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/nb"
                     android:text="Schedule Trial"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

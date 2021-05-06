@@ -23,6 +23,7 @@ import com.SuperCook.utilities.ExtraUtils;
 import com.SuperCook.utilities.KeyboardUtil;
 import com.SuperCook.utilities.MyProgressDialog;
 import com.google.android.gms.tasks.Task;
+import com.segment.analytics.Analytics;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -61,6 +62,12 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         SelectedDishes.initSelectedDishes();
 
         setTimeforUser(getTimeplus2());
+
+        setAnalytics();
+    }
+
+    private void setAnalytics() {
+        Analytics.with(Frame34.this).screen("Trial Booking", "Trial Details", null, null);
     }
 
     private String getTimeplus2() {
@@ -159,8 +166,12 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
                 .addOnCompleteListener(task -> {
                     myProgressDialog.dismissDialog();
                     if (!task.isSuccessful()) {
-                        Intent intent = new Intent(Frame34.this, Reconnect.class);
-                        startActivity(intent);
+                        if (task.getException().toString().equals("Slot already booked")) {
+                            ExtraUtils.makeToast(Frame34.this, "Slot already booked! Please re-schedule you trial.");
+                        } else {
+                            Intent intent = new Intent(Frame34.this, Reconnect.class);
+                            startActivity(intent);
+                        }
                     } else {
                         try {
                             HashMap<String, Object> data = task.getResult();

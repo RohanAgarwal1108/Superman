@@ -13,6 +13,7 @@ import com.SuperCook.R;
 import com.SuperCook.databinding.ActivityFrame96Binding;
 import com.SuperCook.utilities.CustomItemClickListener;
 import com.SuperCook.utilities.CustomItemClickListener1;
+import com.segment.analytics.Analytics;
 import com.sinaseyfi.advancedcardview.AdvancedCardView;
 
 public class Frame96 extends AppCompatActivity implements CustomItemClickListener, CustomItemClickListener1, View.OnClickListener {
@@ -42,6 +43,11 @@ public class Frame96 extends AppCompatActivity implements CustomItemClickListene
         binding.buttonlin.setOnClickListener(this);
         findViewById(R.id.bottom_sheet).setOnClickListener(this);
         binding.back96.setOnClickListener(this);
+        setAnalytics();
+    }
+
+    private void setAnalytics() {
+        Analytics.with(Frame96.this).screen("Trial Booking", "Trial Meals", null, null);
     }
 
     private void toggleBottomSheet() {

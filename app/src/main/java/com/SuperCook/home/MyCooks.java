@@ -25,6 +25,8 @@ import com.SuperCook.utilities.ExtraUtils;
 import com.SuperCook.utilities.MyProgressDialog;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -57,16 +59,27 @@ public class MyCooks extends AppCompatActivity implements CookItemClickListener 
         binding.backcooks.setOnClickListener(v -> onBackPressed());
 
         binding.bookcook.setOnClickListener(v -> {
+            trackAnalytics();
             Intent intent = new Intent(MyCooks.this, frame21.class);
             intent.putExtra("Source", "Mycooks");
             startActivity(intent);
         });
 
         binding.book.setOnClickListener(v -> {
+            trackAnalytics();
             Intent intent = new Intent(MyCooks.this, frame21.class);
             intent.putExtra("Source", "Mycooks");
             startActivity(intent);
         });
+        setAnalytics();
+    }
+
+    private void trackAnalytics() {
+        Analytics.with(MyCooks.this).track("MyCooks", new Properties().putValue("Event", "Trial Booking"));
+    }
+
+    private void setAnalytics() {
+        Analytics.with(MyCooks.this).screen("Home", "MyCooks", null, null);
     }
 
     private void setUpRecyler() {

@@ -447,7 +447,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/nl"
-                    android:text="v 1.0.4"
+                    android:text="v 1.0.5"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

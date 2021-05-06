@@ -25,6 +25,8 @@ import com.SuperCook.utilities.ExtraUtils;
 import com.SuperCook.utilities.MyProgressDialog;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -56,6 +58,7 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
         getMyTrials();
 
         binding.book.setOnClickListener(v -> {
+            trackAnalytics();
             Intent intent = new Intent(MyTrials.this, frame21.class);
             intent.putExtra("Source", "Mycooks");
             startActivity(intent);
@@ -75,6 +78,10 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
         });
 
         binding.backtrials.setOnClickListener(v -> onBackPressed());
+    }
+
+    private void trackAnalytics() {
+        Analytics.with(MyTrials.this).track("MyTrials", new Properties().putValue("Event", "Trial Booking"));
     }
 
     private void setUpRecylers() {
@@ -163,7 +170,11 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
                         if (result.get("slotBooked") != null) {
                             booked.addAll((List<String>) result.get("slotBooked"));
                         }
-                        booked.addAll((List<String>) result.get("trailsBooked"));
+                        try {
+                            booked.addAll((List<String>) result.get("trailsBooked"));
+                        } catch (Exception e) {
+                            booked = new ArrayList<>();
+                        }
                         List<String> foodPictureURL = (List<String>) result.get("foodPictureURL");
                         cookDetails.add(new CookDetails(city, cookPic, cookGender, rating, bio, cuisine, canSpeak, mealtype, charges, background,
                                 name, from, foodPictureURL, cookID, booked, false));

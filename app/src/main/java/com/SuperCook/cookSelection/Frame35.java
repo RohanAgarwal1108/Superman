@@ -11,6 +11,7 @@ import com.SuperCook.databinding.ActivityFrame35Binding;
 import com.SuperCook.home.Frame101;
 import com.SuperCook.utilities.DateFormatter;
 import com.SuperCook.utilities.LogoutDailog;
+import com.segment.analytics.Analytics;
 import com.squareup.picasso.Picasso;
 
 public class Frame35 extends AppCompatActivity implements View.OnClickListener {
@@ -25,6 +26,11 @@ public class Frame35 extends AppCompatActivity implements View.OnClickListener {
 
         extras = getIntent().getExtras();
         setupUI();
+        setAnalytics();
+    }
+
+    private void setAnalytics() {
+        Analytics.with(Frame35.this).screen("Trial Booking", "Trial Booked Screen", null, null);
     }
 
     private void setupUI() {

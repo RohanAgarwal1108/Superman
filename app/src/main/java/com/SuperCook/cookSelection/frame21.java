@@ -23,6 +23,8 @@ import com.SuperCook.utilities.CustomItemClickListener1;
 import com.SuperCook.utilities.MyProgressDialog;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -181,6 +183,7 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
     @Override
     public void onCustomItemClick1(int index, int i) {
         if (i == 2) {
+            sendAnalytics(2);
             Intent intent = new Intent(frame21.this, Frame34.class);
             intent.putExtra("index", index);
             startActivity(intent);
@@ -189,6 +192,7 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
 
     @Override
     public void onCookItemClick(int position, CookDetails cookDetails, ImageView cookpic) {
+        Analytics.with(frame21.this).track("Cook Viewed", new Properties().putValue("CookID", cookDetails.getCookID()));
         Intent intent = new Intent(frame21.this, Frame23.class);
         intent.putExtra("index", position);
         intent.putExtra(EXTRA_ANIMAL_IMAGE_TRANSITION_NAME, ViewCompat.getTransitionName(cookpic));
@@ -212,11 +216,22 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                 finish();
             }
         } else if (v == binding.skip) {
+            sendAnalytics(1);
             Intent intent = new Intent(frame21.this, Frame101.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         } else if (v == binding.back21) {
             this.onBackPressed();
         }
+    }
+
+    private void sendAnalytics(int i) {
+        Properties properties = new Properties();
+        if (i == 1) {
+            properties.put("Clicked", "Skip");
+        } else {
+            properties.put("Clicked", "Scheduled Trial");
+        }
+        Analytics.with(frame21.this).screen("Trial Booking", "Query Cooks", properties, null);
     }
 }

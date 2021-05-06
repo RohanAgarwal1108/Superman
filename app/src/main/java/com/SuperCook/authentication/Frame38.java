@@ -210,7 +210,6 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
     private void initializeSegment() {
         Analytics analytics = new Analytics.Builder(getApplicationContext(), "U727ZBegynSOCrtZiQeyCqhgw5HhqJeZ")
                 .trackApplicationLifecycleEvents()
-                .recordScreenViews()
                 .build();
         Analytics.setSingletonInstance(analytics);
     }

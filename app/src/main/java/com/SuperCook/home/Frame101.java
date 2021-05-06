@@ -30,6 +30,7 @@ import com.SuperCook.utilities.ScreenUtils;
 import com.github.islamkhsh.CardSliderViewPager;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.functions.FirebaseFunctionsException;
+import com.segment.analytics.Analytics;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -77,6 +78,12 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
         makeHome();
         setListeners();
         ExtraUtils.getProfilePic(getApplicationContext());
+
+        setAnalytics();
+    }
+
+    private void setAnalytics() {
+        Analytics.with(Frame101.this).screen("Home", "Home", null, null);
     }
 
     private void makeHome() {
