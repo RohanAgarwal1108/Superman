@@ -39,7 +39,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="40dp"
                 android:fontFamily="@font/nb"
-                android:text="Your meal looks like"
+                android:text="Here's what your meal looks like:"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

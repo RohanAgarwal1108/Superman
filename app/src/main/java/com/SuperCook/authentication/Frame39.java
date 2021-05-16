@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.SuperCook.R;
 import com.SuperCook.common.MainActivity;
-import com.SuperCook.common.Webview;
 import com.SuperCook.databinding.ActivityFrame39Binding;
 import com.SuperCook.utilities.KeyboardUtil;
 import com.SuperCook.utilities.LogoutDailog;
@@ -103,13 +102,19 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
     @Override
     public void onClick(View v) {
         if (v == binding.tac) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http:/tandc.eule.in"));
+            startActivity(browserIntent);
+            /*
             Intent intent = new Intent(Frame39.this, Webview.class);
-            intent.putExtra("url", "http:/tandc.eule.in");
-            startActivity(intent);
+            intent.putExtra("url", "");
+            startActivity(intent);*/
         } else if (v == binding.pp) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://privacypolicies.eule.in"));
+            startActivity(browserIntent);
+            /*
             Intent intent = new Intent(Frame39.this, Webview.class);
             intent.putExtra("url", "http://privacypolicies.eule.in");
-            startActivity(intent);
+            startActivity(intent);*/
         } else if (v == binding.nh) {
             String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Supercook! I need help!";
             Intent i = new Intent(Intent.ACTION_VIEW);

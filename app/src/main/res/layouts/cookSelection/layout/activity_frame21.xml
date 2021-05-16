@@ -46,7 +46,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
         android:fontFamily="@font/nb"
-        android:text="Its your turn, make a move (be quick)"
+        android:text="It's your turn, make a  move (be quick) "
         android:textColor="@color/black"
         android:textSize="26sp" />
 

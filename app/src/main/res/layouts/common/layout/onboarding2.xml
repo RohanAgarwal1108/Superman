@@ -36,7 +36,7 @@
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/nb"
         android:lineSpacingExtra="10dp"
-        android:text="Forget about managing the\ncook forever."
+        android:text="Forget about managing the cook.\nForever."
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"

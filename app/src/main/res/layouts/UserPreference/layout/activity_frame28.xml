@@ -102,13 +102,13 @@
         android:id="@+id/hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="112dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/nb"
         android:textColor="@color/black"
         android:textSize="26sp"
-        tools:text="Hi Midoriya, so need a supercook that" />
+        tools:text="Please choose preferences for your SuperCook:" />
 
     <com.sinaseyfi.advancedcardview.AdvancedCardView
         android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="48dp"
                     android:fontFamily="@font/nb"
-                    android:text="Can cook"
+                    android:text="Preferred food:"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -300,7 +300,7 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/nb"
-                    android:text="Who is"
+                    android:text="Preferred gender:"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -426,7 +426,7 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/nb"
-                    android:text="Can Speak"
+                    android:text="Preferred language(s):"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 

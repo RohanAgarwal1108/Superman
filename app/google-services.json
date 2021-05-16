@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "807955642567-vc8s33ib51lme10hmkf643v9gfga6qkj.apps.googleusercontent.com",
+          "client_id": "807955642567-q64rn9hg5vqhl453ufn0rnm4e8573i5u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.SuperCook",
-            "certificate_hash": "16135416255e4bb1f6b59c74c52def52d1366c40"
+            "certificate_hash": "d29232a36d6b823eec9f5d67630671685f76b4a7"
           }
         },
         {

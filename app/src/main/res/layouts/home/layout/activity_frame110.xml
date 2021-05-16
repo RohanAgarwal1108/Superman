@@ -54,7 +54,7 @@
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="33dp"
                 android:fontFamily="@font/nb"
-                android:text="What do you usually eat for breakfast?"
+                android:text="What does your breakfast look like?"
                 android:textColor="@color/black"
                 android:textSize="26sp" />
 
