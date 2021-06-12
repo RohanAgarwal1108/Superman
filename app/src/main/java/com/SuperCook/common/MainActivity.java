@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
             createPrefInstance(context);
         }
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        for (int i = 0; i < alias.length; i++) {
-            if (sharedPreferences.contains(alias[i])) {
-                editor.remove(alias[i]);
+        for (String s : alias) {
+            if (sharedPreferences.contains(s)) {
+                editor.remove(s);
             }
         }
         editor.apply();
