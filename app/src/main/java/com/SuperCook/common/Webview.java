@@ -1,5 +1,6 @@
 package com.SuperCook.common;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -13,6 +14,7 @@ public class Webview extends AppCompatActivity {
     Bundle extras;
     ActivityWebviewBinding binding;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

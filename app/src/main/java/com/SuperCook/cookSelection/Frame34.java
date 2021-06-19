@@ -134,6 +134,7 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         binding.timedetails.setOnClickListener(this);
         binding.book34.setOnClickListener(this);
         binding.address.addTextChangedListener(this);
+        binding.notescard.setOnClickListener(this);
     }
 
     @Override
@@ -156,6 +157,8 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
                     myProgressDialog.dismissDialog();
                 }
             }
+        } else if (binding.notescard == v) {
+            binding.notes.performClick();
         }
     }
 

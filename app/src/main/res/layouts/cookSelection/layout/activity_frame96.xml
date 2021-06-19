@@ -58,7 +58,7 @@
                     android:layout_marginTop="26dp"
                     android:layout_marginEnd="33dp"
                     android:fontFamily="@font/nb"
-                    android:text="Lets pick a meal"
+                    android:text="Choose your meal:"
                     android:textColor="@color/black"
                     android:textSize="26sp" />
 

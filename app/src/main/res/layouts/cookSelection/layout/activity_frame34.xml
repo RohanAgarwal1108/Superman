@@ -49,286 +49,293 @@
         app:cornerRadius_TopLeft="60dp"
         app:cornerRadius_TopRight="60dp">
 
-        <androidx.core.widget.NestedScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:scrollbars="none">
+            android:layout_height="match_parent">
 
-            <RelativeLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tdhead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="28dp"
-                    android:fontFamily="@font/nb"
-                    android:text="Time and Date"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none">
 
                 <RelativeLayout
-                    android:id="@+id/timedetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tdhead"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="13dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="13dp">
-
-                    <TextView
-                        android:padding="2dp"
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="14dp"
-                        android:background="#FFC542"
-                        android:fontFamily="@font/nl"
-                        android:text=" Tue, 25th Jan 2021 "
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:padding="2dp"
-                        android:id="@+id/time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="14dp"
-                        android:layout_toEndOf="@id/date"
-                        android:background="#FFC542"
-                        android:fontFamily="@font/nl"
-                        android:text=" 10:20 "
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/ampm"
-                        android:padding="2dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/time"
-                        android:background="#FFC542"
-                        android:fontFamily="@font/nl"
-                        android:text=" AM "
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/whereshall"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/timedetails"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginEnd="28dp"
-                    android:fontFamily="@font/nb"
-                    android:text="Where shall we send our supercook?"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp"
-                    android:id="@+id/location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/whereshall"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginEnd="28dp">
+                    <TextView
+                        android:id="@+id/tdhead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginTop="28dp"
+                        android:fontFamily="@font/nb"
+                        android:text="Time and Date"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
+                        android:id="@+id/timedetails"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:padding="16dp">
+                        android:layout_below="@id/tdhead"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="13dp">
 
-                        <ImageView
-                            android:id="@+id/gps"
+                        <TextView
+                            android:id="@+id/date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_gps" />
-
-                        <EditText
-                            android:id="@+id/address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="20dp"
-                            android:layout_toStartOf="@id/gps"
+                            android:layout_marginEnd="14dp"
+                            android:background="#FFC542"
                             android:fontFamily="@font/nl"
-                            android:layout_centerVertical="true"
-                            android:background="@null"
-                            android:hint="Eg. Estancia Flat no. 420"
+                            android:padding="2dp"
+                            android:text=" Tue, 25th Jan 2021 "
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="14dp"
+                            android:layout_toEndOf="@id/date"
+                            android:background="#FFC542"
+                            android:fontFamily="@font/nl"
+                            android:padding="2dp"
+                            android:text=" 10:20 "
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/ampm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/time"
+                            android:background="#FFC542"
+                            android:fontFamily="@font/nl"
+                            android:padding="2dp"
+                            android:text=" AM "
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
 
                     </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:id="@+id/howhead"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/location"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginEnd="28dp"
-                    android:fontFamily="@font/nb"
-                    android:text="This is how your meal looks like"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <LinearLayout
-                    android:id="@+id/pickmeals"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/howhead"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:overScrollMode="never"
-                        android:scrollbars="none"
-                        android:id="@+id/finalizedrecycler"
+                    <TextView
+                        android:id="@+id/whereshall"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/timedetails"
                         android:layout_marginStart="28dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="28sp"
-                        android:visibility="gone" />
+                        android:layout_marginTop="23dp"
+                        android:layout_marginEnd="28dp"
+                        android:fontFamily="@font/nb"
+                        android:text="Your place (doy)?"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/whereshall"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginEnd="28dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:id="@+id/gps"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_gps" />
+
+                            <EditText
+                                android:id="@+id/address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="20dp"
+                                android:layout_toStartOf="@id/gps"
+                                android:background="@null"
+                                android:fontFamily="@font/nl"
+                                android:hint="Eg. Estancia Flat no. 420"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/howhead"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/location"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginEnd="28dp"
+                        android:fontFamily="@font/nb"
+                        android:text="This is how your meal looks like"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
 
                     <LinearLayout
-                        android:id="@+id/nofinalized"
+                        android:id="@+id/pickmeals"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/howhead"
                         android:layout_marginTop="8dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/havent"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/finalizedrecycler"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="28dp"
+                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="28sp"
-                            android:fontFamily="@font/nl"
-                            android:text="You haven’t picked aynting yet, let pick something."
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:overScrollMode="never"
+                            android:scrollbars="none"
+                            android:visibility="gone" />
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/choose"
-                            android:layout_width="188dp"
-                            android:layout_height="36dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="30dp"
-                            app:cardBackgroundColor="#FFC542"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="0dp">
+                        <LinearLayout
+                            android:id="@+id/nofinalized"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/havent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="28dp"
+                                android:layout_marginEnd="28sp"
+                                android:fontFamily="@font/nl"
+                                android:text="You haven't picked anything yet. Select the 'choose meal' button to get started."
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="186dp"
-                                android:layout_height="34dp"
-                                android:layout_gravity="center"
-                                app:cardBackgroundColor="@color/white"
+                                android:id="@+id/choose"
+                                android:layout_width="188dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="30dp"
+                                app:cardBackgroundColor="#FFC542"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="0dp">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="186dp"
+                                    android:layout_height="34dp"
                                     android:layout_gravity="center"
-                                    android:fontFamily="@font/nl"
-                                    android:text="Choose Meal"
-                                    android:textColor="@color/black"
-                                    android:textSize="20sp" />
+                                    app:cardBackgroundColor="@color/white"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="0dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/nl"
+                                        android:text="Choose Meal"
+                                        android:textColor="@color/black"
+                                        android:textSize="20sp" />
+
+                                </androidx.cardview.widget.CardView>
 
                             </androidx.cardview.widget.CardView>
 
-                        </androidx.cardview.widget.CardView>
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/addnotes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/pickmeals"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginEnd="28dp"
-                    android:fontFamily="@font/nb"
-                    android:text="Add notes:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_below="@id/addnotes"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginEnd="28dp"
-                    android:layout_marginBottom="87dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp">
-
-                    <EditText
-                        android:id="@+id/notes"
+                    <TextView
+                        android:id="@+id/addnotes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@null"
+                        android:layout_below="@id/pickmeals"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginEnd="28dp"
                         android:fontFamily="@font/nb"
-                        android:hint="Yeah, even supercook needs instructions!"
+                        android:text="Add notes:"
                         android:textColor="@color/black"
-                        android:textColorHint="#C4C4C4"
-                        android:textSize="18sp" />
+                        android:textSize="20sp" />
 
-                </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/notescard"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_below="@id/addnotes"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginEnd="28dp"
+                        android:layout_marginBottom="87dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp">
 
-            </RelativeLayout>
+                        <EditText
+                            android:id="@+id/notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@null"
+                            android:fontFamily="@font/nb"
+                            android:hint="Yeah, the SuperCook needs instructions too!"
+                            android:textColor="@color/black"
+                            android:textColorHint="#C4C4C4"
+                            android:textSize="18sp" />
 
-        </androidx.core.widget.NestedScrollView>
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/book34"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/disabledbutton"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/nb"
+                    android:text="BOOK TRIAL"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
 
     </com.sinaseyfi.advancedcardview.AdvancedCardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/book34"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/disabledbutton"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="0dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/nb"
-            android:text="BOOK TRIAL"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

@@ -33,7 +33,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/nb"
-        android:text="What do you usually eat?"
+        android:text="What kinda food do you \nprefer?"
         android:textColor="@color/black"
         android:textSize="26sp" />
 

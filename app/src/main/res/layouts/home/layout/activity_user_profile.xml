@@ -171,7 +171,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="23dp"
                             android:fontFamily="@font/nb"
-                            android:text="My Cooks"
+                            android:text="SuperCook dashboard"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -208,7 +208,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="23dp"
                             android:fontFamily="@font/nb"
-                            android:text="My Trials"
+                            android:text="Trials"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -245,7 +245,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="23dp"
                             android:fontFamily="@font/nb"
-                            android:text="Share with Friends"
+                            android:text="Share with friends"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -329,7 +329,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="23dp"
                             android:fontFamily="@font/nb"
-                            android:text="About Us"
+                            android:text="About us"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -366,7 +366,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="23dp"
                             android:fontFamily="@font/nb"
-                            android:text="Terms and Conditions"
+                            android:text="Terms and conditions"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -404,7 +404,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="23dp"
                             android:fontFamily="@font/nb"
-                            android:text="Privacy Policy"
+                            android:text="Privacy policy"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -447,7 +447,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/nl"
-                    android:text="v 1.0.5"
+                    android:text="v 1.0.6"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

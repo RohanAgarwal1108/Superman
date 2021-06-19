@@ -54,7 +54,7 @@
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="33dp"
                 android:fontFamily="@font/nb"
-                android:text="Choose a dish to add"
+                android:text="Select a dish to add."
                 android:textColor="@color/black"
                 android:textSize="26sp" />
 

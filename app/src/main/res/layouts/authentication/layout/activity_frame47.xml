@@ -175,7 +175,7 @@
                             android:background="@android:color/transparent"
                             android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM "
                             android:fontFamily="@font/nb"
-                            android:hint="Jake Parolta"
+                            android:hint="Jake Peralta"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="#C4C4C4"

@@ -35,7 +35,7 @@
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/nb"
         android:lineSpacingExtra="10dp"
-        android:text="Find your type from 1200\ncooks in 30 secs."
+        android:text="Find your type from 1200\ncooks in less than 30 seconds."
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"

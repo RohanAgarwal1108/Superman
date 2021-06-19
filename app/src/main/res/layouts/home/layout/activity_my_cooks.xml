@@ -144,7 +144,7 @@
                         android:layout_width="83dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center"
-                        app:cardBackgroundColor="@color/primaryblue"
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="3dp"
                         app:cardElevation="0dp">
 
@@ -256,7 +256,7 @@
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="33dp"
                 android:fontFamily="@font/nb"
-                android:text="Looks like you havent found your just match yet."
+                android:text="Looks like you haven’t found your match, yet."
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
@@ -269,7 +269,7 @@
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="33dp"
                 android:fontFamily="@font/nl"
-                android:text="Let’s explore and book a trail to get started"
+                android:text="Let’s fix that and book a trial right away."
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="22sp" />

@@ -52,7 +52,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:fontFamily="@font/nl"
-        android:text="Looks like your are offline or something went wrong."
+        android:text="Dang it! Looks like someone spilled pasta sauce on the server again."
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp" />

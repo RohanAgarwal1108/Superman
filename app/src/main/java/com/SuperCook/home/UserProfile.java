@@ -12,7 +12,6 @@ import androidx.core.app.ShareCompat;
 import com.SuperCook.R;
 import com.SuperCook.authentication.Frame39;
 import com.SuperCook.authentication.User;
-import com.SuperCook.common.Webview;
 import com.SuperCook.databinding.ActivityUserProfileBinding;
 import com.SuperCook.utilities.ExtraUtils;
 import com.google.firebase.auth.FirebaseAuth;
@@ -118,9 +117,11 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     }
 
     private void startWebView(String str, String title) {
-        Intent intent = new Intent(UserProfile.this, Webview.class);
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(str));
+        startActivity(browserIntent);
+        /*Intent intent = new Intent(UserProfile.this, Webview.class);
         intent.putExtra("url", str);
         intent.putExtra("title", title);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 }
