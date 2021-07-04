@@ -75,20 +75,21 @@ repositories {
 
 dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'com.google.firebase:firebase-functions:19.2.0'
-    implementation 'com.google.firebase:firebase-auth:20.0.4'
+    implementation 'com.google.firebase:firebase-functions:20.0.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation "androidx.browser:browser:1.3.0"
     implementation 'com.cuberto:liquid-swipe:1.0.0'
     implementation 'com.archit.calendar:awesome-calendar:2.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
-    implementation 'com.google.firebase:firebase-storage:19.2.2'
-    implementation 'com.google.firebase:firebase-crashlytics:17.4.1'
-    implementation 'com.google.firebase:firebase-analytics:18.0.3'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.1.0'
+    implementation 'com.google.firebase:firebase-analytics:19.0.0'
+    //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-messaging:21.1.0'
-    implementation 'com.google.firebase:firebase-firestore:22.1.2'
+    implementation 'com.google.firebase:firebase-firestore:23.0.1'
     implementation 'com.segment.analytics.android:analytics:4.9.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -97,6 +98,7 @@ dependencies {
     implementation 'com.github.sina-seyfi:AdvancedCardView:1.0.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
+    //noinspection GradleDependency
     implementation "androidx.core:core-ktx:1.3.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
