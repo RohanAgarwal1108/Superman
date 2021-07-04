@@ -33,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
     static String masterKeyAlias = null;
     private static SharedPreferences sharedPreferences = null;
 
+    /**
+     *to create a encrypted shared preference for Supercook app
+     * @param context takes in context of the activity to create a shared preference of app
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     private static void createPrefInstance(Context context) throws GeneralSecurityException, IOException {
         masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
         sharedPreferences = EncryptedSharedPreferences.create(
@@ -44,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    /**
+     * To create a key value pair for storing values in encrypted shared preference
+     * @param Alias to get the key of the value
+     * @param value to get the value for the corresponding key
+     * @param context
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public static void putValues(String Alias, String value, Context context) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {
             createPrefInstance(context);
@@ -53,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * TO get the value for a key
+     * @param context
+     * @param Alias to get the key for which value is needed
+     * @return the value for a key
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public static String getValue(Context context, String Alias) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {
             createPrefInstance(context);
@@ -64,6 +86,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * to delete a key value pair from shared preferences
+     * @param context
+     * @param alias takes in all the aliases that are to be deleted
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public static void removeValue(Context context, String[] alias) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {
             createPrefInstance(context);
