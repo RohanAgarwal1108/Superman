@@ -33,7 +33,13 @@ public class MainActivity extends AppCompatActivity {
     static String masterKeyAlias = null;
     private static SharedPreferences sharedPreferences = null;
 
-    //hello
+    /**
+     * To create a Encrypted Shared Preferences for Supercook
+     *
+     * @param context
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     private static void createPrefInstance(Context context) throws GeneralSecurityException, IOException {
         masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
         sharedPreferences = EncryptedSharedPreferences.create(
@@ -45,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    /**
+     * To store a key value pair in Encrypted Shared Preferences
+     *
+     * @param Alias   represents key for the value stored
+     * @param value   represents value for key stored
+     * @param context
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public static void putValues(String Alias, String value, Context context) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {
             createPrefInstance(context);
@@ -54,6 +69,15 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * To get the value of key from Encrypted Shared Preferences
+     *
+     * @param context
+     * @param Alias   represents key for which value is needed
+     * @return
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public static String getValue(Context context, String Alias) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {
             createPrefInstance(context);
@@ -65,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * To remove a key value pair from Encrypted Shared Preferences
+     *
+     * @param context
+     * @param alias   represents key of the value to be removed from Encrypted Shared Preferences
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public static void removeValue(Context context, String[] alias) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {
             createPrefInstance(context);
@@ -86,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(this::checkOnboarding, 3 * 1000);
     }
 
+    /**
+     * To check if the on-boarding screens where shown to user on first open
+     */
     private void checkOnboarding() {
         try {
             String string = getValue(MainActivity.this, ALIAS5);
@@ -101,6 +136,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * To check if user is signed-in or not
+     * If user is signed in toggle between details, preferences screen
+     * If not logged in take to phone authentication screen
+     */
     private void checkSignedInUser() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

@@ -29,20 +29,17 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
         super.onCreate(savedInstanceState);
         binding = ActivityFrame39Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.phoneedit.addTextChangedListener(this);
-        binding.next39.setOnClickListener(v -> {
-            if (binding.next39.getCardBackgroundColor() == getColorStateList(R.color.black) && isNumberCorrect()) {
-                Intent intent = new Intent(Frame39.this, Frame38.class);
-                intent.putExtra("phoneno", binding.phoneedit.getText().toString().trim());
-                startActivity(intent);
-            }
-        });
+        setListeners();
+        findViewById(android.R.id.content).setFocusableInTouchMode(true);
+        removeKeys();
+    }
 
+    private void setListeners() {
+        binding.phoneedit.addTextChangedListener(this);
+        binding.next39.setOnClickListener(this);
         binding.pp.setOnClickListener(this);
         binding.tac.setOnClickListener(this);
         binding.nh.setOnClickListener(this);
-        findViewById(android.R.id.content).setFocusableInTouchMode(true);
-        removeKeys();
     }
 
     private void removeKeys() {
@@ -126,6 +123,12 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
                 i.setPackage(null);
             }
             startActivity(i);
+        } else if (v == binding.next39) {
+            if (binding.next39.getCardBackgroundColor() == getColorStateList(R.color.black) && isNumberCorrect()) {
+                Intent intent = new Intent(Frame39.this, Frame38.class);
+                intent.putExtra("phoneno", binding.phoneedit.getText().toString().trim());
+                startActivity(intent);
+            }
         }
     }
 
