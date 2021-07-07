@@ -151,9 +151,9 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                             FirebaseFunctionsException.Code code = ffe.getCode();
                             if (code == FirebaseFunctionsException.Code.NOT_FOUND) {
                                 try {
-                                    MainActivity.putValues(MainActivity.ALIAS2, "details", getApplicationContext());
-                                    MainActivity.putValues(MainActivity.ALIAS1, phno, getApplicationContext());
-                                    MainActivity.putValues(MainActivity.ALIAS4, Uid, getApplicationContext());
+                                    MainActivity.putValues(MainActivity.ALIAS_STATUS, "details", getApplicationContext());
+                                    MainActivity.putValues(MainActivity.ALIAS_PHONENUMBER, phno, getApplicationContext());
+                                    MainActivity.putValues(MainActivity.ALIAS_UID, Uid, getApplicationContext());
                                 } catch (GeneralSecurityException | IOException generalSecurityException) {
                                     generalSecurityException.printStackTrace();
                                     return;
@@ -179,9 +179,9 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                         String name = (String) data.get("name");
                         Analytics.with(Frame38.this).identify(new Traits().putValue("User ID", uid));
                         try {
-                            MainActivity.putValues(MainActivity.ALIAS4, uid, getApplicationContext());
-                            MainActivity.putValues(MainActivity.ALIAS3, name, getApplicationContext());
-                            MainActivity.putValues(MainActivity.ALIAS1, phno, getApplicationContext());
+                            MainActivity.putValues(MainActivity.ALIAS_UID, uid, getApplicationContext());
+                            MainActivity.putValues(MainActivity.ALIAS_NAME, name, getApplicationContext());
+                            MainActivity.putValues(MainActivity.ALIAS_PHONENUMBER, phno, getApplicationContext());
                         } catch (GeneralSecurityException | IOException e) {
                             e.printStackTrace();
                             makeToast("An Error occurred! Please try again.", Toast.LENGTH_SHORT);
@@ -190,7 +190,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                         boolean preferences = (boolean) data.get("preferences");
                         if (preferences) {
                             try {
-                                MainActivity.putValues(MainActivity.ALIAS2, "preferences", getApplicationContext());
+                                MainActivity.putValues(MainActivity.ALIAS_STATUS, "preferences", getApplicationContext());
                             } catch (GeneralSecurityException | IOException e) {
                                 e.printStackTrace();
                                 makeToast("An Error occurred! Please try again.", Toast.LENGTH_SHORT);

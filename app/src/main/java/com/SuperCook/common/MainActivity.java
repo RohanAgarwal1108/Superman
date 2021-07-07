@@ -25,11 +25,11 @@ import java.security.GeneralSecurityException;
 
 public class MainActivity extends AppCompatActivity {
     public static FirebaseFunctions mFunctions = FirebaseFunctions.getInstance("us-central1");
-    public static String ALIAS3 = "name";
-    public static String ALIAS4 = "Uid";
-    public static String ALIAS1 = "phonenumber";
-    public static String ALIAS2 = "status";
-    public static String ALIAS5 = "onboarding";
+    public static String ALIAS_NAME = "name";
+    public static String ALIAS_UID = "Uid";
+    public static String ALIAS_PHONENUMBER = "phonenumber";
+    public static String ALIAS_STATUS = "status";
+    public static String ALIAS_ONBOARDING = "onboarding";
     static String masterKeyAlias = null;
     private static SharedPreferences sharedPreferences = null;
 
@@ -123,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void checkOnboarding() {
         try {
-            String string = getValue(MainActivity.this, ALIAS5);
+            String string = getValue(MainActivity.this, ALIAS_ONBOARDING);
             if (string == null) {
-                putValues(ALIAS5, "true", MainActivity.this);
+                putValues(ALIAS_ONBOARDING, "true", MainActivity.this);
                 Intent intent = new Intent(MainActivity.this, OnBoarding.class);
                 startActivity(intent);
             } else {
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             try {
-                String str = getValue(MainActivity.this, ALIAS2);
+                String str = getValue(MainActivity.this, ALIAS_STATUS);
                 if (str == null) {
                     Intent intent = new Intent(MainActivity.this, Frame47.class);
                     startActivity(intent);

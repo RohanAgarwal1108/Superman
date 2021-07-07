@@ -23,8 +23,8 @@ import com.SuperCook.utilities.CustomItemClickListener;
 import com.SuperCook.utilities.CustomItemClickListener2;
 import com.SuperCook.utilities.CustomItemClickListener3;
 import com.SuperCook.utilities.CustomItemClickListener4;
+import com.SuperCook.utilities.ExitDailog;
 import com.SuperCook.utilities.ExtraUtils;
-import com.SuperCook.utilities.LogoutDailog;
 import com.SuperCook.utilities.MyProgressDialog;
 import com.SuperCook.utilities.ScreenUtils;
 import com.github.islamkhsh.CardSliderViewPager;
@@ -233,7 +233,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
 
     private Task<HashMap<String, Object>> getHome() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
         return MainActivity.mFunctions
                 .getHttpsCallable("getHome")
                 .call(data)
@@ -386,7 +386,7 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
 
     private Task<HashMap<String, Object>> setDefaultMeals() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
         for (int i = 1; i <= 7; i++) {
             String day = Frame101.getDayOfWeek(i);
             data.put(day, defaultmenu.get(day));
@@ -486,8 +486,8 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
 
     @Override
     public void onBackPressed() {
-        LogoutDailog logoutDialog = new LogoutDailog();
-        logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+        ExitDailog exitDailog = new ExitDailog();
+        exitDailog.show(getSupportFragmentManager(), "Exit dialog");
     }
 
     @Override

@@ -254,7 +254,7 @@ public class TailoredMeal extends AppCompatActivity implements CustomItemClickLi
 
     private Task<HashMap<String, Object>> setDefaultMeals() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
         for (int i = 1; i <= 7; i++) {
             String day = Frame101.getDayOfWeek(i);
             data.put(day, defaultmenu.get(day));

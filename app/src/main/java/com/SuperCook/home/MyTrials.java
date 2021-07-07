@@ -237,7 +237,7 @@ public class MyTrials extends AppCompatActivity implements CookItemClickListener
 
     private Task<HashMap<String, Object>> getTrials() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
         return MainActivity.mFunctions
                 .getHttpsCallable("getMyTrails")
                 .call(data)

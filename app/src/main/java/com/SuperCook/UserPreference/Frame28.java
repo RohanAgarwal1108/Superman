@@ -23,7 +23,7 @@ import com.SuperCook.common.MainActivity;
 import com.SuperCook.common.Reconnect;
 import com.SuperCook.databinding.ActivityFrame28Binding;
 import com.SuperCook.utilities.CustomItemClickListener;
-import com.SuperCook.utilities.LogoutDailog;
+import com.SuperCook.utilities.ExitDailog;
 import com.SuperCook.utilities.MyProgressDialog;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -170,7 +170,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         //nl = Typeface.createFromAsset(getAssets(), "fonts/nl.otf");
         String fullname;
         try {
-            fullname = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS3);
+            fullname = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_NAME);
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
             fullname = "Guest";
@@ -290,8 +290,8 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void openDialog() {
-        LogoutDailog logoutDialog = new LogoutDailog();
-        logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+        ExitDailog exitDailog = new ExitDailog();
+        exitDailog.show(getSupportFragmentManager(), "Exit dialog");
     }
 
     @Override

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.SuperCook.databinding.ActivityFrame35Binding;
 import com.SuperCook.home.Frame101;
 import com.SuperCook.utilities.DateFormatter;
-import com.SuperCook.utilities.LogoutDailog;
+import com.SuperCook.utilities.ExitDailog;
 import com.segment.analytics.Analytics;
 import com.squareup.picasso.Picasso;
 
@@ -80,8 +80,8 @@ public class Frame35 extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void openDialog() {
-        LogoutDailog logoutDialog = new LogoutDailog();
-        logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+        ExitDailog exitDailog = new ExitDailog();
+        exitDailog.show(getSupportFragmentManager(), "Exit dialog");
     }
 
     @Override

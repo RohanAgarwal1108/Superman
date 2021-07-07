@@ -96,7 +96,7 @@ public class Frame102 extends AppCompatActivity implements View.OnClickListener 
 
     private Task<HashMap<String, Object>> hireCook() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
         data.put("paymentStatus", false);
         data.put("hiringDate", System.currentTimeMillis());
         data.put("firingDate", 0);

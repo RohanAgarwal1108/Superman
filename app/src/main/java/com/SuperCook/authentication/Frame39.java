@@ -7,33 +7,36 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.SuperCook.R;
 import com.SuperCook.common.MainActivity;
 import com.SuperCook.databinding.ActivityFrame39Binding;
+import com.SuperCook.utilities.ExitDailog;
+import com.SuperCook.utilities.ExtraUtils;
 import com.SuperCook.utilities.KeyboardUtil;
-import com.SuperCook.utilities.LogoutDailog;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnClickListener {
     private ActivityFrame39Binding binding;
-    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityFrame39Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         setListeners();
         findViewById(android.R.id.content).setFocusableInTouchMode(true);
-        removeKeys();
+        removeOldUserKeys();
     }
 
+    /**
+     * To set the click listeners for all clickables on screen
+     */
     private void setListeners() {
         binding.phoneedit.addTextChangedListener(this);
         binding.next39.setOnClickListener(this);
@@ -42,31 +45,31 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
         binding.nh.setOnClickListener(this);
     }
 
-    private void removeKeys() {
+    /**
+     * To remove old key value pairs from Encrypted Shared Preferences to avoid confusion
+     */
+    private void removeOldUserKeys() {
         try {
-            MainActivity.removeValue(Frame39.this, new String[]{MainActivity.ALIAS1, MainActivity.ALIAS2, MainActivity.ALIAS3});
+            MainActivity.removeValue(Frame39.this, new String[]{MainActivity.ALIAS_PHONENUMBER, MainActivity.ALIAS_STATUS, MainActivity.ALIAS_NAME});
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
             finishAffinity();
         }
     }
 
+    /**
+     * Check if the phone number meets Indian standards
+     *
+     * @return true and false based on correctness of number
+     */
     private boolean isNumberCorrect() {
         String number = binding.phoneedit.getText().toString().trim();
         if (number.length() == 10 && (number.charAt(0) >= '5' && number.charAt(0) <= '9')) {
             return true;
         } else {
-            showToast();
+            ExtraUtils.makeToast(Frame39.this, "Please enter a valid mobile number!");
             return false;
         }
-    }
-
-    private void showToast() {
-        if (toast != null) {
-            toast.cancel();
-        }
-        toast = Toast.makeText(Frame39.this, "Please enter a valid mobile number!", Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     @Override
@@ -138,8 +141,8 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
     }
 
     private void openDialog() {
-        LogoutDailog logoutDialog = new LogoutDailog();
-        logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+        ExitDailog exitDailog = new ExitDailog();
+        exitDailog.show(getSupportFragmentManager(), "Exit dialog");
     }
 
     @Override

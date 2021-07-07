@@ -83,7 +83,7 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
     }
 
     private String getRefforImage() throws GeneralSecurityException, IOException {
-        String str = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4);
+        String str = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID);
         return "images/ProfilePic_" + str + ".jpeg";
     }
 
@@ -213,9 +213,9 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
                             startActivityForResult(intent, 3);
                         } else {
                             try {
-                                MainActivity.removeValue(getApplicationContext(), new String[]{MainActivity.ALIAS1});
-                                MainActivity.putValues(MainActivity.ALIAS2, "midpref", getApplicationContext());
-                                MainActivity.putValues(MainActivity.ALIAS3, binding.nameedit.getText().toString().trim(), getApplicationContext());
+                                MainActivity.removeValue(getApplicationContext(), new String[]{MainActivity.ALIAS_PHONENUMBER});
+                                MainActivity.putValues(MainActivity.ALIAS_STATUS, "midpref", getApplicationContext());
+                                MainActivity.putValues(MainActivity.ALIAS_NAME, binding.nameedit.getText().toString().trim(), getApplicationContext());
                             } catch (GeneralSecurityException | IOException e) {
                                 e.printStackTrace();
                             }
@@ -235,10 +235,10 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         Map<String, Object> data = new HashMap<>();
         data.put("pictureUrl", photourl);
         data.put("name", binding.nameedit.getText().toString());
-        data.put("phoneNo", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS1));
+        data.put("phoneNo", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_PHONENUMBER));
         data.put("from", binding.state.getText().toString());
         data.put("fcmToken", fcmToken);
-        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
         data.put("preferences", false);
         data.put("city", binding.city.getText().toString());
         return MainActivity.mFunctions

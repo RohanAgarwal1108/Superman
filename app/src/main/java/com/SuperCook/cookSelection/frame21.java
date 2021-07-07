@@ -157,7 +157,7 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
 
     private Task<List<HashMap<String, Object>>> getCooks() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
         return MainActivity.mFunctions
                 .getHttpsCallable("getCooks")
                 .call(data)

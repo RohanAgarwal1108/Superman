@@ -64,7 +64,7 @@ public class ExtraUtils {
     }
 
     private static String getRefforImage(Context context) throws GeneralSecurityException, IOException {
-        String str = MainActivity.getValue(context, MainActivity.ALIAS4);
+        String str = MainActivity.getValue(context, MainActivity.ALIAS_UID);
         return "images/ProfilePic_" + str + ".jpeg";
     }
 

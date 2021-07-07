@@ -10,10 +10,10 @@ import androidx.fragment.app.DialogFragment;
 
 import com.SuperCook.R;
 
-public class LogoutDailog extends DialogFragment {
+public class ExitDailog extends DialogFragment {
 
     /**
-     * Ta create "login again" dialog in case re-authentication fails
+     * To confirm if user wants to exit app
      */
     @NonNull
     @Override

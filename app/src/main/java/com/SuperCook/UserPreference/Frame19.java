@@ -101,7 +101,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
                     } else {
                         sendAnalytics();
                         try {
-                            MainActivity.putValues(MainActivity.ALIAS2, "preferences", getApplicationContext());
+                            MainActivity.putValues(MainActivity.ALIAS_STATUS, "preferences", getApplicationContext());
                         } catch (GeneralSecurityException | IOException e) {
                             e.printStackTrace();
                             ExtraUtils.makeToast(Frame19.this, "An Error occurred! Please try again.");
@@ -126,7 +126,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
     private Properties getProperties() {
         Properties properties = new Properties();
         try {
-            properties.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+            properties.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
             properties.put("currentCity", User.user.getCity());
             properties.put("cuisine", getCuisines());
             properties.put("sex", User.user.getCookgender());
@@ -149,7 +149,7 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
 
     private Task<HashMap<String, Object>> setPreferences() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS4));
+        data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
         data.put("currentCity", User.user.getCity());
         data.put("cuisine", getCuisines());
         data.put("sex", User.user.getCookgender());

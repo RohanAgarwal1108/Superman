@@ -8,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.SuperCook.R;
 import com.SuperCook.authentication.Frame39;
-import com.SuperCook.utilities.LogoutDailog;
+import com.SuperCook.utilities.ExitDailog;
 import com.cuberto.liquid_swipe.LiquidPager;
 
 public class OnBoarding extends AppCompatActivity {
     static Context context;
 
+    /**
+     * to go to authentication directly
+     */
     public static void skip() {
         Intent intent = new Intent(context, Frame39.class);
         context.startActivity(intent);
@@ -33,8 +36,11 @@ public class OnBoarding extends AppCompatActivity {
         openDialog();
     }
 
+    /**
+     * Open confirmation dialog if user wants to leave the app
+     */
     private void openDialog() {
-        LogoutDailog logoutDialog = new LogoutDailog();
-        logoutDialog.show(getSupportFragmentManager(), "Logout dialog");
+        ExitDailog exitDailog = new ExitDailog();
+        exitDailog.show(getSupportFragmentManager(), "Exit dialog");
     }
 }
