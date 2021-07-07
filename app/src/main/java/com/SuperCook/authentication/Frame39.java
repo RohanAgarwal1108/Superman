@@ -38,11 +38,11 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
      * To set the click listeners for all clickables on screen
      */
     private void setListeners() {
-        binding.phoneedit.addTextChangedListener(this);
+        binding.phoneeditext.addTextChangedListener(this);
         binding.next39.setOnClickListener(this);
-        binding.pp.setOnClickListener(this);
-        binding.tac.setOnClickListener(this);
-        binding.nh.setOnClickListener(this);
+        binding.privatepolicy.setOnClickListener(this);
+        binding.termsandcondition.setOnClickListener(this);
+        binding.needhelp.setOnClickListener(this);
     }
 
     /**
@@ -63,7 +63,7 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
      * @return true and false based on correctness of number
      */
     private boolean isNumberCorrect() {
-        String number = binding.phoneedit.getText().toString().trim();
+        String number = binding.phoneeditext.getText().toString().trim();
         if (number.length() == 10 && (number.charAt(0) >= '5' && number.charAt(0) <= '9')) {
             return true;
         } else {
@@ -72,6 +72,10 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
         }
     }
 
+
+    /**
+     * Overriding TextWatcher to disable/enable next button when somethong is added to phone number text
+     */
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -91,31 +95,42 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
         }
     }
 
+    /**
+     * To enable next button
+     */
     private void enableNext() {
         binding.next39.setCardBackgroundColor(getColor(R.color.black));
     }
 
+    /**
+     * To disable next button
+     */
     private void disableNext() {
         binding.next39.setCardBackgroundColor(getColor(R.color.disabledbutton));
     }
 
+    /**
+     * To handle clicks on views
+     *
+     * @param v to get the view clicked on
+     */
     @Override
     public void onClick(View v) {
-        if (v == binding.tac) {
+        if (v == binding.termsandcondition) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http:/tandc.eule.in"));
             startActivity(browserIntent);
             /*
             Intent intent = new Intent(Frame39.this, Webview.class);
             intent.putExtra("url", "");
             startActivity(intent);*/
-        } else if (v == binding.pp) {
+        } else if (v == binding.privatepolicy) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://privacypolicies.eule.in"));
             startActivity(browserIntent);
             /*
             Intent intent = new Intent(Frame39.this, Webview.class);
             intent.putExtra("url", "http://privacypolicies.eule.in");
             startActivity(intent);*/
-        } else if (v == binding.nh) {
+        } else if (v == binding.needhelp) {
             String url = "https://api.whatsapp.com/send?phone=+917972803790&text=Hey Supercook! I need help!";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
@@ -129,17 +144,23 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
         } else if (v == binding.next39) {
             if (binding.next39.getCardBackgroundColor() == getColorStateList(R.color.black) && isNumberCorrect()) {
                 Intent intent = new Intent(Frame39.this, Frame38.class);
-                intent.putExtra("phoneno", binding.phoneedit.getText().toString().trim());
+                intent.putExtra("phoneno", binding.phoneeditext.getText().toString().trim());
                 startActivity(intent);
             }
         }
     }
 
+    /**
+     * Overriding back functionality to ask user if the user wants to exit
+     */
     @Override
     public void onBackPressed() {
         openDialog();
     }
 
+    /**
+     * To open confirmation dialog
+     */
     private void openDialog() {
         ExitDailog exitDailog = new ExitDailog();
         exitDailog.show(getSupportFragmentManager(), "Exit dialog");
