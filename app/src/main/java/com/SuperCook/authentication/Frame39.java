@@ -120,6 +120,7 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http:/tandc.eule.in"));
             startActivity(browserIntent);
             /*
+           todo
             Intent intent = new Intent(Frame39.this, Webview.class);
             intent.putExtra("url", "");
             startActivity(intent);*/

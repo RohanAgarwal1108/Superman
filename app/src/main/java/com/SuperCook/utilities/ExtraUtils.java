@@ -1,8 +1,10 @@
 package com.SuperCook.utilities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.widget.Toast;
 
 import com.SuperCook.common.MainActivity;
@@ -74,4 +76,16 @@ public class ExtraUtils {
         return str;
     }
 
+    public static void openWhatsapp(String str, Context context) {
+        String url = "https://api.whatsapp.com/send?phone=+917972803790&text=" + str;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        i.setPackage("com.whatsapp");
+        if (i.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(i);
+        } else {
+            i.setPackage(null);
+        }
+        context.startActivity(i);
+    }
 }

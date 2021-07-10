@@ -9,6 +9,11 @@ def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def keysPropertiesFile = rootProject.file("keys.properties")
+def keysProperties = new Properties()
+keysProperties.load(new FileInputStream(keysPropertiesFile))
+
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -21,6 +26,8 @@ android {
         versionName "1.0.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SEGMENT_KEY", keysProperties['SEGMENT_KEY'])
     }
 
     signingConfigs {
