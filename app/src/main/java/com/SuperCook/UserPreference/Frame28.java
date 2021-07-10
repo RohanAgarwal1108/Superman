@@ -49,16 +49,6 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     int state = 0;
     private String[] cities;
 
-    /**
-     * for later use
-     */
-    /*
-    public static Location location = null;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private int i = 0;
-    private Typeface nb;
-    private Typeface nl;
-    private int tracker=0;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +59,16 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("state")) {
             state = 1;
         }
+
         setUI();
         setListeners();
-        setUpRecyler();
+        setUpRecycler();
         Analytics.with(Frame28.this).screen("User Preferences", "Cook Preferences", null, null);
     }
 
+    /**
+     * To set spinner to choose city of service
+     */
     private void setSpinner() {
         ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, cities) {
             @NonNull
@@ -108,8 +102,10 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         });
     }
 
-
-    private void setUpRecyler() {
+    /**
+     * To set up recyclerview to select languages
+     */
+    private void setUpRecycler() {
         languages = new ArrayList<>();
         recyclerView = findViewById(R.id.speakrecycler);
         layoutManager = new GridLayoutManager(this, 3);
@@ -119,6 +115,9 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         makeArrayList();
     }
 
+    /**
+     * To get the list of languages and cities to show
+     */
     private void makeArrayList() {
         MyProgressDialog myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(Frame28.this);
@@ -146,6 +145,11 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
                 });
     }
 
+    /**
+     * To call the cloud function to get languages and cities from firestore
+     *
+     * @return
+     */
     private Task<HashMap<String, Object>> getLanguages() {
         Map<String, Object> data = new HashMap<>();
         data.put("req", "Languages_and_Cities");
@@ -155,6 +159,9 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
                 .continueWith(task -> (HashMap<String, Object>) task.getResult().getData());
     }
 
+    /**
+     * To set up listeners for all clickables on screen
+     */
     private void setListeners() {
         for (int i = 0; i < 3; i++) {
             binding.type.getChildAt(i).setOnClickListener(this);
@@ -164,6 +171,9 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         binding.citycard.setOnClickListener(this);
     }
 
+    /**
+     * To set up basic UI of the screen
+     */
     private void setUI() {
         //for later use
         //nb = Typeface.createFromAsset(getAssets(), "fonts/nb.otf");
@@ -231,6 +241,11 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To handle clicks on gender of cooks
+     *
+     * @param i to get the cook gender clicked on
+     */
     private void setCookGender(int i) {
         if (cookgender != -1 && cookgender != i) {
             ((CardView) binding.whatlin.getChildAt(cookgender)).setCardBackgroundColor(getColor(R.color.white));
@@ -240,6 +255,9 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         toggleNext();
     }
 
+    /**
+     * To enable/disable next button if all items are selected
+     */
     private void toggleNext() {
         if (mealtype == -1 || cookgender == -1) {
             disableNext();
@@ -255,6 +273,11 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To handle clicks on types of meals
+     *
+     * @param i to get the type of meal clicked on
+     */
     private void setMealType(int i) {
         if (mealtype != -1 && mealtype != i) {
             ((CardView) binding.type.getChildAt(mealtype)).setCardBackgroundColor(getColor(R.color.white));
@@ -264,6 +287,11 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         toggleNext();
     }
 
+    /**
+     * handle clicks on language section of screen
+     *
+     * @param index
+     */
     @Override
     public void onCustomItemClick(int index) {
         languages.get(index).setSelected(!languages.get(index).isSelected());
@@ -271,12 +299,17 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         toggleNext();
     }
 
+    /**
+     * To disable next button
+     */
     private void disableNext() {
         binding.next28.setCardBackgroundColor(getColor(R.color.disabledbutton));
     }
 
+    /**
+     * To enable next button
+     */
     private void enableNext() {
-
         binding.next28.setCardBackgroundColor(getColor(R.color.black));
     }
 
@@ -289,6 +322,9 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To open dialog to ask if the user wants to quit app or not
+     */
     private void openDialog() {
         ExitDailog exitDailog = new ExitDailog();
         exitDailog.show(getSupportFragmentManager(), "Exit dialog");
@@ -312,7 +348,15 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     }
 
     /*for later use*/
-/*
+
+    /*
+    public static Location location = null;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private int i = 0;
+    private Typeface nb;
+    private Typeface nl;
+    private int tracker=0;
+
     private void getLocationPermission() {
         if (ContextCompat.checkSelfPermission(Frame28.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);

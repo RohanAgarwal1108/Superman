@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import com.SuperCook.common.MainActivity;
+import com.SuperCook.common.Reconnect;
 import com.SuperCook.home.Frame101;
 import com.SuperCook.home.UserProfile;
 import com.google.firebase.storage.FirebaseStorage;
@@ -87,5 +88,10 @@ public class ExtraUtils {
             i.setPackage(null);
         }
         context.startActivity(i);
+    }
+
+    public static void gotoReconnectScreen(Context context) {
+        Intent intent = new Intent(context, Reconnect.class);
+        context.startActivity(intent);
     }
 }

@@ -54,7 +54,6 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
             "Rajasthan                  ", "Sikkim                     ", "Tamil Nadu                 ", "Telangana                  ",
             "Tripura                    ", "Uttarakhand                ", "Uttar Pradesh              ", "West Bengal                "};
     Uri selectedImageUri;
-    StorageReference storageRef;
     StorageReference ppRef;
     byte[] imagebytes;
     String photourl;
@@ -69,24 +68,32 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         binding = ActivityFrame47Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        storageRef = FirebaseStorage.getInstance().getReference();
-        try {
-            ppRef = storageRef.child(getRefforImage());
-        } catch (GeneralSecurityException | IOException e) {
-            e.printStackTrace();
-            ExtraUtils.makeToast(Frame47.this, "An Error occurred! Please try again.");
-            finishAffinity();
-        }
+        ppRef = FirebaseStorage.getInstance().getReference().child(getRefforImage());
         setListeners();
         setSpinner();
         binding.state.setText("");
     }
 
-    private String getRefforImage() throws GeneralSecurityException, IOException {
-        String str = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID);
+    /**
+     * To get the root reference of storage where image will be stored
+     *
+     * @return
+     */
+    private String getRefforImage() {
+        String str = null;
+        try {
+            str = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID);
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+            ExtraUtils.makeToast(Frame47.this, "An Error occurred! Please try again later.");
+            finishAffinity();
+        }
         return "images/ProfilePic_" + str + ".jpeg";
     }
 
+    /**
+     * To set the state choose spinner
+     */
     private void setSpinner() {
         ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, states) {
             @NonNull
@@ -121,6 +128,9 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
+    /**
+     * To set listeners for clickables on screen
+     */
     private void setListeners() {
         binding.camcard.setOnClickListener(this);
         binding.photocard.setOnClickListener(this);
@@ -139,7 +149,7 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         } else if (v == binding.wherecard) {
             binding.spinner.performClick();
         } else if (isDetailFilled() && v == binding.next47) {
-            postUserData();
+            postUserImage();
         } else if (v == binding.back47) {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(Frame47.this, Frame39.class);
@@ -148,29 +158,29 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    /**
+     * To check if details are correctly filled in fields
+     *
+     * @return
+     */
     private boolean isDetailFilled() {
         if (binding.nameedit.getText().toString().isEmpty()) {
-            makeToast("Please enter your name!");
+            ExtraUtils.makeToast(Frame47.this, "Please enter your name!");
             return false;
         } else if (binding.city.getText().toString().isEmpty()) {
-            makeToast("Please enter you city!");
+            ExtraUtils.makeToast(Frame47.this, "Please enter you city!");
             return false;
         } else if (selectedImageUri == null) {
-            makeToast("Image is required. You can cat fish!");
+            ExtraUtils.makeToast(Frame47.this, "Image is required. You can cat fish!");
             return false;
         }
         return true;
     }
 
-    private void makeToast(String s) {
-        if (toast != null) {
-            toast.cancel();
-        }
-        toast = Toast.makeText(Frame47.this, s, Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
-    private void postUserData() {
+    /**
+     * To post user image to firebase
+     */
+    private void postUserImage() {
         myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(this);
         UploadTask uploadTask = ppRef.putBytes(imagebytes);
@@ -185,6 +195,9 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
                 }));
     }
 
+    /**
+     * To get firebase cloud messaging token for user
+     */
     private void getFcmToken() {
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(task -> {
@@ -198,6 +211,9 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
                 });
     }
 
+    /**
+     * To create user in firebase
+     */
     private void createUser() {
         try {
             registerUser()
@@ -227,10 +243,17 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
             myProgressDialog.dismissDialog();
-            makeToast("An Error occurred! Please try later.");
+            ExtraUtils.makeToast(Frame47.this, "An Error occurred! Please try later.");
         }
     }
 
+    /**
+     * To call the cloud function to save data in firebase
+     *
+     * @return
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     private Task<HashMap<String, Object>> registerUser() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("pictureUrl", photourl);
@@ -259,7 +282,7 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
             bitmap = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
             binding.dp.setImageBitmap(bitmap);
         } else if (requestCode == 2 && requestCode == RESULT_OK) {
-            postUserData();
+            postUserImage();
         } else if (requestCode == 3 && resultCode == RESULT_OK) {
             myProgressDialog.showDialog(this);
             createUser();
@@ -267,7 +290,7 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
     }
 
     /**
-     * To ge the bitmap from Uri provided by image picker intent
+     * To get the bitmap from Uri provided by image picker intent
      */
     private Bitmap getBitmap() {
         try {

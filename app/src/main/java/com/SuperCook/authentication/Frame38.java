@@ -14,7 +14,6 @@ import com.SuperCook.BuildConfig;
 import com.SuperCook.R;
 import com.SuperCook.UserPreference.Frame28;
 import com.SuperCook.common.MainActivity;
-import com.SuperCook.common.Reconnect;
 import com.SuperCook.databinding.ActivityFrame38Binding;
 import com.SuperCook.home.Frame101;
 import com.SuperCook.utilities.ExtraUtils;
@@ -173,10 +172,10 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                                 Intent intent = new Intent(Frame38.this, Frame47.class);
                                 startActivity(intent);
                             } else {
-                                gotoReconnectScreen();
+                                ExtraUtils.gotoReconnectScreen(Frame38.this);
                             }
                         } else {
-                            gotoReconnectScreen();
+                            ExtraUtils.gotoReconnectScreen(Frame38.this);
                         }
                     } else {
                         initializeSegment();
@@ -213,14 +212,6 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
             Intent intent = new Intent(this, Frame28.class);
             startActivity(intent);
         }
-    }
-
-    /**
-     * TO go to the reconnect screen in case of error
-     */
-    private void gotoReconnectScreen() {
-        Intent intent = new Intent(Frame38.this, Reconnect.class);
-        startActivity(intent);
     }
 
     /**
