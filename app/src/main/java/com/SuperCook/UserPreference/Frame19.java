@@ -48,6 +48,9 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         setUpRecyler();
     }
 
+    /**
+     * To set up recyclerview for types of cuisine
+     */
     private void setUpRecyler() {
         makeArrayList();
         recyclerView = findViewById(R.id.cuisinerecycler);
@@ -57,6 +60,9 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         recyclerView.setAdapter(mAdapter);
     }
 
+    /**
+     * To make a list of cuisines to display
+     */
     private void makeArrayList() {
         cuisines = new ArrayList<>();
         String[] cuisinesarray = {"North Indian", "South Indian", "North Eastern", "Maharashtrian", "Chinese", "Italian", "American"};
@@ -65,6 +71,9 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To set up listeners for clickables on screeen
+     */
     private void setListeners() {
         binding.back19.setOnClickListener(this);
         binding.next19.setOnClickListener(this);
@@ -84,6 +93,12 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * set preferences for user in backend
+     *
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     private void preferences() throws GeneralSecurityException, IOException {
         myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(this);
@@ -119,10 +134,18 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
                 });
     }
 
+    /**
+     * To send data to segment
+     */
     private void sendAnalytics() {
         Analytics.with(Frame19.this).screen("User Preferences", "Food Preferences", getProperties(), null);
     }
 
+    /**
+     * To get properyies to send to segment
+     *
+     * @return
+     */
     private Properties getProperties() {
         Properties properties = new Properties();
         try {
@@ -147,6 +170,13 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To create request to cloud function to save preferences
+     *
+     * @return
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     private Task<HashMap<String, Object>> setPreferences() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
@@ -161,8 +191,13 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
                 .continueWith(task -> (HashMap<String, Object>) task.getResult().getData());
     }
 
+    /**
+     * To get the list of selected cuisines
+     *
+     * @return
+     */
     private List<String> getCuisines() {
-        List<String> al = new ArrayList<String>();
+        List<String> al = new ArrayList<>();
         for (Lang_FoodPOJO cuisine : cuisines) {
             if (cuisine.isSelected()) {
                 al.add(cuisine.getLanguage());
@@ -171,6 +206,11 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         return al;
     }
 
+    /**
+     * handling clicks on cuisines
+     *
+     * @param index
+     */
     @Override
     public void onCustomItemClick(int index) {
         cuisines.get(index).setSelected(!cuisines.get(index).isSelected());
@@ -179,6 +219,9 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         changeSelected();
     }
 
+    /**
+     * To disable/enable next button on clicking cuisine item
+     */
     private void toggleNext() {
         for (Lang_FoodPOJO cuisine : cuisines) {
             if (cuisine.isSelected()) {
@@ -189,14 +232,23 @@ public class Frame19 extends AppCompatActivity implements View.OnClickListener, 
         disableNext();
     }
 
+    /**
+     * To disable next button
+     */
     private void disableNext() {
         binding.next19.setCardBackgroundColor(getColor(R.color.disabledbutton));
     }
 
+    /**
+     * To enable next button
+     */
     private void enableNext() {
         binding.next19.setCardBackgroundColor(getColor(R.color.black));
     }
 
+    /**
+     * To change the counter selected cuisines
+     */
     private void changeSelected() {
         int counter = 0;
         int total = cuisines.size();
