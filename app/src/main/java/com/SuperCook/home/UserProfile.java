@@ -45,6 +45,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
         if (ExtraUtils.profilepic != null) {
             binding.userimg.setImageBitmap(ExtraUtils.profilepic);
+        } else {
+            ExtraUtils.getProfilePic(getApplicationContext());
         }
 
         setAnalytics();

@@ -221,7 +221,6 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
      * @param phonenumber contains phone number of user
      * @param name        contains name of user
      * @param preferences checks if the user has set preferences or not
-     * @return
      */
     private int saveDetailsLocally(String Uid, String phonenumber, String name, boolean preferences) {
         try {
@@ -396,7 +395,6 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
      * Send request to server to find user by phone number
      *
      * @param phnumber to get the phone number to be checked
-     * @return
      */
     private Task<HashMap<String, Object>> checkPhone(String phnumber) {
         Map<String, Object> data = new HashMap<>();

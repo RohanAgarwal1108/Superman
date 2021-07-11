@@ -35,10 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * To create a Encrypted Shared Preferences for Supercook
-     *
-     * @param context
-     * @throws GeneralSecurityException
-     * @throws IOException
      */
     private static void createPrefInstance(Context context) throws GeneralSecurityException, IOException {
         masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
@@ -56,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param Alias   represents key for the value stored
      * @param value   represents value for key stored
-     * @param context
-     * @throws GeneralSecurityException
-     * @throws IOException
      */
     public static void putValues(String Alias, String value, Context context) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {
@@ -72,11 +65,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * To get the value of key from Encrypted Shared Preferences
      *
-     * @param context
      * @param Alias   represents key for which value is needed
-     * @return
-     * @throws GeneralSecurityException
-     * @throws IOException
      */
     public static String getValue(Context context, String Alias) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {
@@ -92,10 +81,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * To remove a key value pair from Encrypted Shared Preferences
      *
-     * @param context
      * @param alias   represents key of the value to be removed from Encrypted Shared Preferences
-     * @throws GeneralSecurityException
-     * @throws IOException
      */
     public static void removeValue(Context context, String[] alias) throws GeneralSecurityException, IOException {
         if (masterKeyAlias == null || sharedPreferences == null) {

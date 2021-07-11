@@ -5,6 +5,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
+/**
+ * Handles expanding and collapsing of view in My Trails section of app with aniamtions.
+ */
 public class Animations {
 
     public static boolean toggleArrow(View view, boolean isExpanded) {

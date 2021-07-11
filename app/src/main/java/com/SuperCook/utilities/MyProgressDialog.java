@@ -9,6 +9,11 @@ import android.widget.ProgressBar;
 public class MyProgressDialog {
     private ProgressDialog dialog;
 
+    /**
+     * To show the loading spinner on screen in case of network request
+     *
+     * @param context contains the activity on which the spinner needs to be displayed
+     */
     public void showDialog(Context context) {
         dialog = ProgressDialog.show(context, null, null);
         ProgressBar spinner = new android.widget.ProgressBar(context, null, android.R.attr.progressBarStyle);
@@ -19,6 +24,9 @@ public class MyProgressDialog {
         dialog.show();
     }
 
+    /**
+     * TO remove the dialog from screen
+     */
     public void dismissDialog() {
         if (dialog != null) {
             dialog.dismiss();

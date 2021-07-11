@@ -7,6 +7,13 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateFormatter {
+    /**
+     * Format date to a particular format
+     *
+     * @param inputFormat  to get the format of the date to be processed
+     * @param outputFormat to get the resulting format of the date
+     * @param inputDate    to get the date to be processed
+     */
     public static String formateDateFromstring(String inputFormat, String outputFormat, String inputDate) {
 
         Date parsed = null;
@@ -26,6 +33,9 @@ public class DateFormatter {
 
     }
 
+    /**
+     * TO get the calendar object from a string of date
+     */
     public static Calendar getCal(String string) {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);

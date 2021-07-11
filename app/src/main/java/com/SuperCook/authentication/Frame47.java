@@ -76,8 +76,6 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * To get the root reference of storage where image will be stored
-     *
-     * @return
      */
     private String getRefforImage() {
         String str = null;
@@ -160,8 +158,6 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * To check if details are correctly filled in fields
-     *
-     * @return
      */
     private boolean isDetailFilled() {
         if (binding.nameedit.getText().toString().isEmpty()) {
@@ -249,10 +245,6 @@ public class Frame47 extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * To call the cloud function to save data in firebase
-     *
-     * @return
-     * @throws GeneralSecurityException
-     * @throws IOException
      */
     private Task<HashMap<String, Object>> registerUser() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();

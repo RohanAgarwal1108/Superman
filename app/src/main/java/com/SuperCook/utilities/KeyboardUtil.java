@@ -36,7 +36,7 @@ public class KeyboardUtil {
 
     private void hideKeyboard(Activity activity) {
         activity.findViewById(android.R.id.content).clearFocus();
-        if (activity != null && activity.getWindow() != null) {
+        if (activity.getWindow() != null) {
             activity.getWindow().getDecorView();
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {

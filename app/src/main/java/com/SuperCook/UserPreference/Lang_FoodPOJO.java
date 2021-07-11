@@ -1,7 +1,7 @@
 package com.SuperCook.UserPreference;
 
 public class Lang_FoodPOJO {
-    private String language;
+    private final String language;
     private boolean isSelected;
     private String url;
 
@@ -20,10 +20,6 @@ public class Lang_FoodPOJO {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public boolean isSelected() {
         return isSelected;
     }
@@ -34,9 +30,5 @@ public class Lang_FoodPOJO {
 
     public String getUrl() {
         return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

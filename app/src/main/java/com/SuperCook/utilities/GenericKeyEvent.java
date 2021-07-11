@@ -33,13 +33,11 @@ public class GenericKeyEvent implements View.OnKeyListener {
      */
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-        //if the text is deleted
         if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && currentView.getId() != R.id.otp1 && currentView.getText().length() == 0) {
             previousView.setText(null);
             previousView.requestFocus();
             return true;
         }
-        //if a valid number is inputted
         else if (currentView.getId() != R.id.otp6 && currentView.getText().length() > 0) {
             nextView.requestFocus();
         }

@@ -77,9 +77,17 @@ public class Frame101 extends AppCompatActivity implements CustomItemClickListen
         setupWeekRecycler();
         makeHome();
         setListeners();
-        ExtraUtils.getProfilePic(getApplicationContext());
+        setupProfilePic();
 
         setAnalytics();
+    }
+
+    private void setupProfilePic() {
+        if (ExtraUtils.profilepic != null) {
+            binding.ppimg.setImageBitmap(ExtraUtils.profilepic);
+        } else {
+            ExtraUtils.getProfilePic(getApplicationContext());
+        }
     }
 
     private void setAnalytics() {

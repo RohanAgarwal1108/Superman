@@ -111,7 +111,6 @@ public class Frame39 extends AppCompatActivity implements TextWatcher, View.OnCl
 
     /**
      * To handle clicks on views
-     *
      * @param v to get the view clicked on
      */
     @Override
