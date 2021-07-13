@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Supercook</string>
-    <string name="analytics_write_key">U727ZBegynSOCrtZiQeyCqhgw5HhqJeZ</string>
     <string name="number_picker_formatter">%d</string>
 </resources>

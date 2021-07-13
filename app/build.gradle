@@ -22,8 +22,8 @@ android {
         applicationId "com.SuperCook"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 7
+        versionName "1.0.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -83,7 +83,7 @@ repositories {
 dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-functions:20.0.0'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
@@ -98,11 +98,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:23.0.1'
     implementation 'com.segment.analytics.android:analytics:4.9.3'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
     implementation 'com.github.sina-seyfi:AdvancedCardView:1.0.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
     implementation "androidx.core:core-ktx:1.3.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

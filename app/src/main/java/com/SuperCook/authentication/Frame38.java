@@ -69,8 +69,8 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
         setListeners();
         setOTPListeners();
 
-        sendOTP();
         initFireBaseCallbacks();
+        sendOTP();
     }
 
     /**
@@ -120,6 +120,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
      * Checking the otp with firebase
      */
     private void firebaseOTPCheck(PhoneAuthCredential credential) {
+        myProgressDialog.showDialog(this);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -270,8 +271,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
             }
 
             @Override
-            public void onCodeSent(String verificationId,
-                                   PhoneAuthProvider.ForceResendingToken token) {
+            public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
                 myProgressDialog.dismissDialog();
                 flag = 1;
                 ExtraUtils.makeToast(Frame38.this, "Code Sent");
@@ -340,7 +340,6 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
         } else if (v == binding.next38) {
             if (binding.next38.getCardBackgroundColor() == getColorStateList(R.color.black)) {
                 if (flag == 1) {
-                    myProgressDialog.showDialog(this);
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, etOtp);
                     firebaseOTPCheck(credential);
                 } else if (flag == 2) {
@@ -348,7 +347,7 @@ public class Frame38 extends AppCompatActivity implements View.OnClickListener, 
                 }
             }
         } else if (v == binding.needhelp) {
-            ExtraUtils.openWhatsapp("Hey Supercook! I need help!", Frame38.this);
+            ExtraUtils.openWhatsapp("Hey SuperCook! I need help!", Frame38.this);
         }
     }
 
