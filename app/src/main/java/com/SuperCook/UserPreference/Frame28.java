@@ -54,6 +54,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         super.onCreate(savedInstanceState);
         binding = ActivityFrame28Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         db = FirebaseFirestore.getInstance();
 
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("state")) {
@@ -63,6 +64,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         setUI();
         setListeners();
         setUpRecycler();
+
         Analytics.with(Frame28.this).screen("User Preferences", "Cook Preferences", null, null);
     }
 
@@ -121,7 +123,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
     private void makeArrayList() {
         MyProgressDialog myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(Frame28.this);
-        getLanguages()
+        getLanguagesandCities()
                 .addOnCompleteListener(task -> {
                     myProgressDialog.dismissDialog();
                     if (task.isSuccessful()) {
@@ -150,7 +152,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
      *
      * @return
      */
-    private Task<HashMap<String, Object>> getLanguages() {
+    private Task<HashMap<String, Object>> getLanguagesandCities() {
         Map<String, Object> data = new HashMap<>();
         data.put("req", "Languages_and_Cities");
         return MainActivity.mFunctions
@@ -175,9 +177,6 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
      * To set up basic UI of the screen
      */
     private void setUI() {
-        //for later use
-        //nb = Typeface.createFromAsset(getAssets(), "fonts/nb.otf");
-        //nl = Typeface.createFromAsset(getAssets(), "fonts/nl.otf");
         String fullname;
         try {
             fullname = MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_NAME);
@@ -187,7 +186,7 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         }
         int i = fullname.indexOf(' ');
         String name = i == -1 ? fullname : fullname.substring(0, i);
-        String str = "Hi " + name + ", so need a supercook that";
+        String str = "Hi " + name + ", lets get you a cook that";
         binding.hello.setText(str);
     }
 
@@ -206,38 +205,52 @@ public class Frame28 extends AppCompatActivity implements View.OnClickListener, 
         } else if (v == binding.whatlin.getChildAt(2)) {
             setCookGender(2);
         } else if (v == binding.next28 && binding.next28.getCardBackgroundColor() == getColorStateList(R.color.black)) {
-            User.initUser();
-            User.user.setCity(binding.city.getText().toString());
-            if (mealtype == 0) {
-                User.user.setMealtype("Veg");
-            } else if (mealtype == 1) {
-                User.user.setMealtype("Non-Veg");
-            } else {
-                User.user.setMealtype("Any");
-            }
-            if (cookgender == 0) {
-                User.user.setCookgender("Male");
-            } else if (cookgender == 1) {
-                User.user.setCookgender("Female");
-            } else {
-                User.user.setCookgender("Any");
-            }
-            List<String> al = new ArrayList<>();
-            for (Lang_FoodPOJO language : languages) {
-                if (language.isSelected()) {
-                    al.add(language.getLanguage());
-                }
-            }
-            User.user.setLanguages(al);
-            Intent intent = new Intent(Frame28.this, Frame19.class);
-            if (state == 1) {
-                intent.putExtra("state", "1");
-                startActivityForResult(intent, 1);
-            } else {
-                startActivity(intent);
-            }
+            storeUserPrefs();
+            gotoNext();
         } else if (v == binding.citycard) {
             binding.spinner.performClick();
+        }
+    }
+
+    /**
+     * TO save user preferences in global object for future use
+     */
+    private void storeUserPrefs() {
+        User.initUser();
+        User.user.setCity(binding.city.getText().toString());
+        if (mealtype == 0) {
+            User.user.setMealtype("Veg");
+        } else if (mealtype == 1) {
+            User.user.setMealtype("Non-Veg");
+        } else {
+            User.user.setMealtype("Any");
+        }
+        if (cookgender == 0) {
+            User.user.setCookgender("Male");
+        } else if (cookgender == 1) {
+            User.user.setCookgender("Female");
+        } else {
+            User.user.setCookgender("Any");
+        }
+        List<String> al = new ArrayList<>();
+        for (Lang_FoodPOJO language : languages) {
+            if (language.isSelected()) {
+                al.add(language.getLanguage());
+            }
+        }
+        User.user.setLanguages(al);
+    }
+
+    /**
+     * To redirect to next screen in case of User preference flow and cook selection flow
+     */
+    private void gotoNext() {
+        Intent intent = new Intent(Frame28.this, Frame19.class);
+        if (state == 1) {
+            intent.putExtra("state", "1");
+            startActivityForResult(intent, 1);
+        } else {
+            startActivity(intent);
         }
     }
 

@@ -49,12 +49,10 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
         binding = ActivityFrame21Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("Source")) {
-            state = 1;
-        }
-        setUi();
+        setUI();
         setListeners();
         setUpRecyler();
+
         try {
             queryCooks();
         } catch (GeneralSecurityException | IOException e) {
@@ -63,12 +61,19 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
         }
     }
 
-    private void setUi() {
-        if (state == 1) {
+    /**
+     * To remove skip button if user is redirected from profile section
+     */
+    private void setUI() {
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("Source")) {
+            state = 1;
             binding.skip.setVisibility(View.GONE);
         }
     }
 
+    /**
+     * To get the nearby available cooks
+     */
     private void queryCooks() throws GeneralSecurityException, IOException {
         myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(this);
@@ -86,13 +91,11 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                                 binding.scroll.setVisibility(View.GONE);
                                 binding.nocook.setVisibility(View.VISIBLE);
                             } else {
-                                Intent intent = new Intent(frame21.this, Reconnect.class);
-                                startActivityForResult(intent, 1);
+                                gotoReconnect();
                             }
                         }
                         if (flag == 0) {
-                            Intent intent = new Intent(frame21.this, Reconnect.class);
-                            startActivityForResult(intent, 1);
+                            gotoReconnect();
                         }
                     } else {
                         binding.scroll.setVisibility(View.VISIBLE);
@@ -139,6 +142,14 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                 });
     }
 
+    /**
+     * To redirect to reconnect screen
+     */
+    private void gotoReconnect() {
+        Intent intent = new Intent(frame21.this, Reconnect.class);
+        startActivityForResult(intent, 1);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -155,6 +166,9 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
         }
     }
 
+    /**
+     * To call the query cooks cloud function
+     */
     private Task<List<HashMap<String, Object>>> getCooks() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("uid", MainActivity.getValue(getApplicationContext(), MainActivity.ALIAS_UID));
@@ -164,6 +178,9 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
                 .continueWith(task -> (List<HashMap<String, Object>>) task.getResult().getData());
     }
 
+    /**
+     * To set up cook recycler
+     */
     private void setUpRecyler() {
         cookDetails = new ArrayList<>();
         recyclerView = binding.cookrecycler;
@@ -174,12 +191,21 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
         recyclerView.setAdapter(mAdapter);
     }
 
+    /**
+     * To set listeners for clickables on screen
+     */
     private void setListeners() {
         binding.changepref.setOnClickListener(this);
         binding.skip.setOnClickListener(this);
         binding.back21.setOnClickListener(this);
     }
 
+    /**
+     * To book a cook listener
+     *
+     * @param index to get the cook for which booking needs to be done
+     * @param i
+     */
     @Override
     public void onCustomItemClick1(int index, int i) {
         if (i == 2) {
@@ -190,6 +216,13 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
         }
     }
 
+    /**
+     * To open the activity with details of a cook with image transition
+     *
+     * @param position    to get the particular cook for which details are to be shown
+     * @param cookDetails to pass the cook details to details screen
+     * @param cookpic     to get the cook image for which transition is to happen
+     */
     @Override
     public void onCookItemClick(int position, CookDetails cookDetails, ImageView cookpic) {
         Analytics.with(frame21.this).track("Cook Viewed", new Properties().putValue("CookID", cookDetails.getCookID()));
@@ -225,6 +258,9 @@ public class frame21 extends AppCompatActivity implements CustomItemClickListene
         }
     }
 
+    /**
+     * To track user activity using segment
+     */
     private void sendAnalytics(int i) {
         Properties properties = new Properties();
         if (i == 1) {
