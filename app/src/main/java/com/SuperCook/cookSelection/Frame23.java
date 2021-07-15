@@ -33,7 +33,22 @@ public class Frame23 extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         binding = ActivityFrame23Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         extras = getIntent().getExtras();
+        getDetailsFromPrevActivity();
+        if (extras != null && extras.containsKey("normal")) {
+            activityOpenNormally();
+        } else {
+            specialActivityOpen();
+        }
+        setupUI();
+        binding.cross.setOnClickListener(this);
+    }
+
+    /**
+     * To get cook details from previous activity
+     */
+    private void getDetailsFromPrevActivity() {
         if (extras != null && extras.containsKey("Mycooks")) {
             if (extras.getString("Mycooks").equals("true")) {
                 cookDetails = MyCooks.cookDetails.get(extras.getInt("index"));
@@ -49,16 +64,11 @@ public class Frame23 extends AppCompatActivity implements View.OnClickListener {
         } else {
             cookDetails = frame21.cookDetails.get(extras.getInt("index"));
         }
-        if (extras != null && extras.containsKey("normal")) {
-            activityOpenNormally();
-        } else {
-            specialActivityOpen();
-        }
-        setupUI();
-
-        binding.cross.setOnClickListener(this);
     }
 
+    /**
+     * To set the recyclerview in the activity
+     */
     private void setupUI() {
         String name = cookDetails.getName();
         binding.name.setText(name.indexOf(' ') == -1 ? name : name.substring(0, name.indexOf(' ')));
@@ -87,6 +97,9 @@ public class Frame23 extends AppCompatActivity implements View.OnClickListener {
         recyclerView2.setAdapter(mAdapter2);
     }
 
+    /**
+     * To open activity without transition
+     */
     private void activityOpenNormally() {
         ImageView imageView = binding.cookpic23;
         String imageUrl = cookDetails.getCookPic();
@@ -96,6 +109,9 @@ public class Frame23 extends AppCompatActivity implements View.OnClickListener {
                 .into(imageView);
     }
 
+    /**
+     * To open activity with transition
+     */
     private void specialActivityOpen() {
         supportPostponeEnterTransition();
 
