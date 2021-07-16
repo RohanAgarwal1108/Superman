@@ -66,10 +66,18 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         setAnalytics();
     }
 
+    /**
+     * To send analytics to segment
+     */
     private void setAnalytics() {
         Analytics.with(Frame34.this).screen("Trial Booking", "Trial Details", null, null);
     }
 
+    /**
+     * To set the time to 2 hrs after the current time
+     *
+     * @return to return the time
+     */
     private String getTimeplus2() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR_OF_DAY, 2);
@@ -78,12 +86,20 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         return res;
     }
 
+    /**
+     * To set the time in the screen
+     *
+     * @param datetime to get the time to display on screen
+     */
     private void setTimeforUser(String datetime) {
         binding.date.setText(DateFormatter.formateDateFromstring("EEE MMM dd HH:mm:ss z yyyy", "EEE, dd MMM yyyy", datetime));
         binding.time.setText(DateFormatter.formateDateFromstring("EEE MMM dd HH:mm:ss z yyyy", "hh:mm", datetime));
         binding.ampm.setText(DateFormatter.formateDateFromstring("EEE MMM dd HH:mm:ss z yyyy", "a", datetime).toUpperCase());
     }
 
+    /**
+     * To set the recyclerview for showing selected meal for trial
+     */
     private void setupRecycler() {
         recyclerView = binding.finalizedrecycler;
         recyclerView.setHasFixedSize(true);
@@ -93,6 +109,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         recyclerView.setAdapter(mAdapter);
     }
 
+    /**
+     * To make the meals to select the dishes for trials
+     */
     private void makeAllDishes() {
         alldishes = new HashMap<>();
         dishes = new String[]{"Aloo Gobi", "Bhindi", "Aloo Paratha", "Rajma Chawal", "Malai Kofta", "Dum Aloo", "Chole", "Dal",
@@ -120,6 +139,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         keys = Frame34.alldishes.keySet().toArray(new String[0]);
     }
 
+    /**
+     * To form the Hashmap for dishes for trials
+     */
     private void addEntries(String cuisine) {
         ArrayList<Lang_FoodPOJO> arrayList = new ArrayList<>();
         for (String dish : dishes) {
@@ -128,6 +150,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         alldishes.put(cuisine, arrayList);
     }
 
+    /**
+     * To set listeners to clickables on screen
+     */
     private void setListeners() {
         binding.back34.setOnClickListener(this);
         binding.choose.setOnClickListener(this);
@@ -162,6 +187,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To book trial in backend
+     */
     private void bookTrial() throws GeneralSecurityException, IOException {
         myProgressDialog = new MyProgressDialog();
         myProgressDialog.showDialog(this);
@@ -200,6 +228,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
                 });
     }
 
+    /**
+     * To call the cloud function to book trial in backend
+     */
     private Task<HashMap<String, Object>> scheduleTrial() throws GeneralSecurityException, IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("cookID", frame21.cookDetails.get(index).getCookID());
@@ -216,6 +247,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
                 .continueWith(task -> (HashMap<String, Object>) task.getResult().getData());
     }
 
+    /**
+     * To get the quantity of dishes for trial
+     */
     private String getQuantitiy() {
         String res = "";
         if (SelectedDishes.selectedDishes != null) {
