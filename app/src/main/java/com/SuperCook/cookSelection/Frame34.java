@@ -260,6 +260,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         return res.substring(0, res.length() - 1 == -1 ? 0 : res.length() - 1);
     }
 
+    /**
+     * To get the selected meals for trial
+     */
     private String getMeal() {
         String res = "";
         if (SelectedDishes.selectedDishes != null) {
@@ -270,6 +273,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         return res.substring(0, res.length() - 1 == -1 ? 0 : res.length() - 1);
     }
 
+    /**
+     * To make a 1hr slot to send in backend
+     */
     private String getSlot() {
         String slotend = add1hr();
         String res = DateFormatter.formateDateFromstring("EEE MMM dd HH:mm:ss z yyyy", "dd/MM/yyyy/HH:mm", timeforslot);
@@ -277,12 +283,18 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         return res;
     }
 
+    /**
+     * To add 1hr to selected timeslot for trial
+     */
     private String add1hr() {
         Calendar calendar = DateFormatter.getCal(timeforslot);
         calendar.add(Calendar.HOUR_OF_DAY, 1);
         return calendar.getTime().toString();
     }
 
+    /**
+     * To show meals selected for trial on Resuming activity after closing screen for selecting meals
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -302,12 +314,18 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To hide meal selected components if no trial dishes are selected
+     */
     private void hideItems() {
         mAdapter.notifyDataSetChanged();
         binding.nofinalized.setVisibility(View.VISIBLE);
         binding.finalizedrecycler.setVisibility(View.GONE);
     }
 
+    /**
+     * To hide no meal selected components if trial dishes are selected
+     */
     private void showItems() {
         mAdapter.notifyDataSetChanged();
         binding.nofinalized.setVisibility(View.GONE);
@@ -330,6 +348,9 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To check if user has entered an address or not and toggling the next button accordingly
+     */
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -349,14 +370,23 @@ public class Frame34 extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
+    /**
+     * To enable book button
+     */
     private void enableBook() {
         binding.book34.setCardBackgroundColor(getColor(R.color.black));
     }
 
+    /**
+     * To disable book button
+     */
     private void disableBook() {
         binding.book34.setCardBackgroundColor(getColor(R.color.disabledbutton));
     }
 
+    /**
+     * To remove keyboard when tapped outside edittext
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         KeyboardUtil keyboardUtil = new KeyboardUtil(this, ev);
